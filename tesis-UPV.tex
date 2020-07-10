@@ -1,0 +1,1529 @@
+\documentclass[twoside,spanish,ESP,MSc]{plantillaLabUPV}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{0301}{ó}
+\DeclareUnicodeCharacter{0300}{ó}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{color}
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{amsmath}    
+\usepackage{amssymb}
+\usepackage[unicode=true,
+ bookmarks=true,
+ breaklinks=false,pdfborder={0 0 0},backref=false,colorlinks=true]
+ {hyperref}
+
+\hypersetup{pdftitle={tesis_idavila},
+ pdfauthor={Ismael Antonio Davila-Rodriguez},
+ pdfsubject={Tesis de Maestria},
+ pdfkeywords={tesis, maestria, upvictoria, upv},
+ linkcolor=darkblue, citecolor=darkblue, urlcolor=darkblue, linktoc=page}
+\usepackage{breakurl}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+
+%Maria Garcia
+\raggedbottom
+
+\@ifundefined{definecolor}
+ {\usepackage[usenames]{color}}{}
+\definecolor{darkblue}{rgb}{0.0, 0.4, 0.8}
+
+%\usepackage{subfigure}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\usepackage{subfig}
+\usepackage{ucs}
+%\usepackage{graphicx}
+
+\usepackage{latexsym}
+
+\usepackage{array}
+\usepackage{float}
+\usepackage{rotfloat}
+\usepackage{amsthm}
+
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+
+\usepackage{url}
+\theoremstyle{definition}
+\newtheorem{mydef}{Definition}
+\usepackage[withpage]{acronym}
+\usepackage{pdfpages}
+\captionsetup{labelsep = period}
+\usepackage{fancyhdr} 
+ 
+
+ 
+% \usepackage[printonlyused,withpage]{acronym}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\tabularnewline}{\\}
+\newcommand{\lyxdot}{.}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\floatname{algorithm}{Algoritmo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\titleen	{Clasificador de naranjas por tamaño y color implementado en FPGA usando aprendizaje supervisado}
+\title	{CLASIFICADOR DE NARANJAS POR TAMAÑO  Y COLOR IMPLEMENTADO EN FPGA USANDO APRENDIZAJE SUPERVISADO}
+\titleMary    	{Citrus fruit classifier by size and color FPGA implemented using supervised machine learning}
+
+\author      	{Ismael Antonio Dávila Rodríguez}
+\department	{ Maestr\'{i}a en Ingenier\'{i}a}
+\departmenten	{ }
+\degreein       	{Ingeniería en Mecatrónica}
+\degreeinen     	{ }
+\city           		{Cd. Victoria, Tamaulipas, M\'{e}xico}
+\date           	{\today}
+\degreeday     	 {7}
+\degreeyear     	{2020}
+\degreemonth   	 {Octubre}
+\degreemonthen  	{Octubre}
+
+%\acknowledgmenttoproject {
+%Esta investigación fue parcialmente financiada mediante el proyecto ...
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chair       	{DR. MARCO AURELIO NUÑO MAGANDA}
+\chair         	{DR. YAHIR HERNÁNDEZ MIER}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\dedication  {
+\large
+Este trabajo de tanto esfuerzo lo dedico enteramente a mis padres por su amor incondicional en todos mis años de estudio. A mi familia por siempre confiar en mi.
+
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\abstract{
+\vspace{-.5cm}
+AL FINAL
+}
+
+\abstracten{
+\vspace{-.5cm}
+AL FINAL
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\publication{
+ 
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\acknowledgments {
+\bigskip{}
+\begin{itemize}
+\begin{doublespace}
+
+\item  CONACYT 
+
+ 
+%
+\end{doublespace}
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\nomenclature {
+\begin{acronym}[AAAAA]
+
+
+%%\acro{RC}	 {Rafael Cricri}
+\acro{ADD} {Árbol de decisión}
+\acro{FAO}  {Food and Agriculture Organization}
+\acro{ML}	 {Machine Learning}
+\acro{RNA}	 {Red Neuronal Artificial}
+\acro{ARFF}	 {Attribute-Relation File Format}
+\acro{FPGA} {Field Programmable Gate Array}
+   
+
+\end{acronym}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+
+\newcommand{\f}{FPGA }
+\newcommand{\fs}{FPGAs }
+
+\newenvironment*{bloc}{}{}
+
+\begin{document}
+
+\makeintropages
+
+
+
+\chapter{Introducción} \label{chap:intro}
+
+\section{Antecedentes}
+
+Desde la antigüedad los cítricos han sido parte fundamental de los alimentos, teniendo su origen desde las regiones tropicales y subtropicales del sureste de Asia y el archipiélago Malayo y esparcirse a todo el mundo. Partiendo históricamente por la planta del cidro vista por primera vez en Europa en 300 a.C. el cuál se utilizaba para el injerto y generación de especies híbridas de plantas y frutas, esto siendo una particularidad de los cítricos, ya que presentan mutaciones con mucha frecuencia incluso entre miembros de la misma especie \cite{anticidi}.\\
+
+Desde el siglo XVI, los cítricos fueron ganando popularidad por toda Europa aunque desde el siglo VI se cultivaban, hasta que en el siglo XIX fué el naranjo amargo el más popular entre el cultivo.\\
+
+En la época actual los mayores productores de cítricos son China, Brasil, Estados Unidos, España, India, \textit{México} y Argentina. De acuerdo a la Organización de Agricultura y Alimentos (\textbf{FAO} por sus siglas en inglés), México es uno del los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, la producción total fue de 500,000 toneladas aproximadamente \cite{sag}.\\
+
+
+A inicios de 1960, la visión por computadora iniciaba en las universidades de Estados Unidos, herramienta que hasta el día de hoy busca emular la visión de los humanos a través de computadoras para el proceso de interpretación de imágenes, las cuales pueden producir estímulos en procesos industriales de clasificación. Esta herramienta se ha utilizado en diferentes ámbitos industriales, incluyendo la alimentaria.\\
+
+Hoy en día se cuenta con sistemas de visión en la industria alimentaria para la clasificación de frutas como los \textit{cítricos}. Los cuales cuentan con bandas transportadoras las cuáles hacen pasar la fruta por el sistema clasificador, el sistema normalmente se comunica con un sistema de movimiento de actuadores que realiza la tarea de separación. Por lo general estos sistemas sirven para determinar el tamaño, color, maduración y calidad de la fruta. Ya que una maquinaria trabaja más rápido que un sistema manejado enteramente por humanos la producción puede ser elevada, abasteciendo la gran demanda mundial antes mencionada. \\
+
+Sin embargo en México no se tienen tecnologías muy desarrolladas en el ámbito, contando solamente con tecnologías extranjeras y obsoletas. Por eso el desarrollo de este proyecto.\\
+
+
+En el Capítulo 1 se abordan una pequeña introducción teórica acerca de los sistemas de clasificación actuales y su problemática nacional. En el Capítulo 2 se muestran todos los conceptos técnicos referentes a la realización del proyecto para poder comprender el principio y naturaleza de la solución propuesta. En el Capítulo 3 se muestra el desarrollo de la plataforma general del sistema propuesto, donde se explica el sistema mecánico, el flujo de información y la arquitectura propuesta del sistema. En el Capítulo 4 se demuestran los resultados obtenidos y la eficiencia detrás de la naturaleza de la solución propuesta desde los ADD. En el Capítulo 5, de encuentran las conclusiones del uso de modelos de ADD en un FPGA.
+
+
+
+
+\section{Planteamiento del problema}
+Las clasificadoras de fruta son aquellas capaces de ordenar al producto en diferentes grupos los cuales pueden ser:
+
+\begin{itemize}
+\itemsep0em
+	\item Por color
+	\item Por tamaño
+	\item Por maduración
+\end{itemize}
+
+En México existen clasificadoras que pueden separar estas clases mencionadas. Generalmente la mayoría de las veces se utilizan clasificadores manuales o mecánicos, ya que no cuentan con tecnología electrónica actual por lo que presentan muchos inconvenientes, partiendo que la mayoria solamente desempeñan 1 sola clasificación a la vez. Existen de varios tipos de clasificadores:
+
+\begin{itemize}
+	\item[$\checkmark$]{\bf Clasificadora manual}
+\end{itemize}
+Es literalmente un proceso artesanal (figura \ref{clasifMan}) en el cual un grupo de personas  se encarga de seleccionar la fruta conforme a su criterio. Las mismas personas se encargan de llevar a cabo cada etapa en la selección de la fruta, desde la limpieza hasta el empacado, convirtiendo este proceso en largas jornadas de trabajo arduo y dependencia en un 100\% de la intervención del hombre.\\
+
+Problemas frecuentes:
+\begin{itemize}
+\itemsep 0em
+ \item Se necesita de empleados, y todas las responsabilidades que esto conlleva
+ \item Velocidad de producción no estable
+ \item Clasificación a criterio del personal
+\end{itemize}
+
+
+\begin{figure}[h]
+  \centering
+     \includegraphics[scale=.40]{ima/clasifMan.jpg}
+   \caption{Fotografía de clasificación manual.}
+   \label{clasifMan}
+\end{figure}
+
+\begin{itemize}
+	\item[$\checkmark$]{\bf Clasificadora mecánica}
+\end{itemize}
+	
+
+Este tipo de clasificadora (figura \ref{clasifMeca}) la comprende una estructura, que debido a su forma geométrica puede clasificar la fruta solamente por tamaño, ya que no cuenta con ningún dispositivo electrónico de procesamiento de datos. El movimiento de la fruta puede ser por gravedad o movida por motores.\\
+
+Problemas frecuentes:
+\begin{itemize}
+\itemsep 0em
+ \item Degradación de calidad de fruta (golpes y cortes)
+ \item Propensos a atascamientos
+ \item Generadores de desperdicio
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+     \includegraphics[scale=.40]{ima/clasifMeca}
+   \caption{Dibujo de un clasificador mecánico.}
+   \label{clasifMeca}
+\end{figure}
+
+\begin{itemize}
+	\item[$\checkmark$]{\bf Clasificadora automática}
+\end{itemize}
+
+	
+	En los últimos años ha aumentado el uso de tecnología en la selección de fruta, donde predominan los métodos de inspección ópticos (cámaras) el cuál es un tipo de inspección no destructiva, aplicado a diversas frutas como manzanas, plátanos, fresas, limones, duraznos, naranjas, peras, papayas, tomates, papas, melones, sandía, etc como se verá en las secciones posteriores. En la figura \ref{clasifAut} se puede ver una máquina que cuenta con la capacidad de inspección por cámaras asistido con visión por computadora.
+
+Problemas frecuentes:
+\begin{itemize}
+\itemsep 0em
+ \item Plataforma de implementación obsoleta (computadoras, tecnologías de comunicación, etc).
+ \item Hardware obsoleto (difícil reparación).
+ \item Clasificación lenta.
+\end{itemize}
+	
+\begin{figure}[h] 
+	\centering 
+		\includegraphics[scale=.40]{ima/clasifAut.jpg} 
+	\caption{Imagen de clasificación por visión artificial.} 
+	\label{clasifAut} 
+\end{figure}	
+	
+
+Con el fin de mejorar el Hardware existente en velocidad, usar un arreglo de compuertas lógicas programables (\textbf{FPGA} por sus siglas en inglés), parece una opción prometedora, ya que estos se destacan por su procesamiento en paralelo, y flexibilidad de construcción de Hardware. 
+
+
+
+
+\section{Justificación}
+
+% Dado que el gobierno de México desea impulsar la producción nacional de naranja habrá la necesidad de nuevas tecnologías para ordenar la producción de la misma, además, Estados Unidos el cliente principal de este producto, por lo que resulta necesario impulsar la tecnología en esta área, donde también, logrando el propósito de este trabajo, se puede realizar para diferentes frutas y apoyar el sector comercial y productor beneficiosamente. 
+
+
+De acuerdo a la Organización de Agricultura y Alimentos (\textbf{FAO} por sus siglas en inglés), México es uno del los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, la producción total fue de 500,000 toneladas aproximadamente \cite{sag}.\\ 
+
+El tratamiento post-cosecha se ha convertido en una etapa esencial en el mercado de fruta fresca, para mantener la frescura de los cítricos y proveer al consumidor en las mejores condiciones posibles. Comúnmente, la calidad de la clasificación de cítricos es realizado por humanos, basado en inspección visual de un criterio externamente visible de la fruta, como su tamaño, forma y color. Esta inspección manual recae mucho en la experiencia del observador, para mantener la consistencia y uniformidad en la clasificación.\\ 
+
+Algunos autores han reportado algunos sistemas de clasificación. En \cite{7306754}, las técnicas de clasificación son revisadas. El autor menciona las características mas usadas para identificar pudrición, maduración y clase de frutas, en modelos de machine learning (\textbf{ML}) usadas para la tarea. Dos grupos grandes de enfoques fueron identificados: 
+
+
+\begin{enumerate}
+\itemsep 0em
+ \item Sistemas enfocados a la identificación de múltiples frutas (Por lo que no se revisa la calidad de la misma), alimentada con sets de miles de imágenes de una serie de diferentes frutas 
+ \item Sistemas enfocados en una fruta especifica, usando un set de imágenes de un solo tipo de fruta para entrenar y probar el clasificador. Aun y cuando el primer enfoque es más general, el segundo es una mejor opción para máquinas clasificadoras, diseñadas para clasificar una sola fruta.
+\end{enumerate}
+
+% Clasificadores de naranjas 
+Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{Mercol2008AutomaticCO}, donde 5 arboles de decisión (ADD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{sirisath}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. 
+
+Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{feng}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por caracteristicas estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
+
+En \cite{ALOHALI201129}, un prototipo para clasificar fruta en base a las fecha de cosecha es propuesto. RNAs son entrenadas con el set de datos de 1800 frutas para obtener caracteristicas como debilidad, tamaño, forma, intensidad y defectos.
+
+Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{khoje}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
+En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Utilizando una Transformación de Caracteristicas Invariantes a Escalamiento (SIFT) fue usado para obtener caracteristicas de las frutas presentadas, y un clasificador de tipo Bosque aleatorio fue aplicado de igual manera. 
+En  Vector Machines (SVM) and Probabilistic Neural Networks (PNN) classifiers were trained to distinguish between healthy and defective fruits.  In \cite{7086191}, a system for grading apples, strawberries, and oranges is presented. Scale Invariant Feature Transform (SIFT) was used to obtain features from input fruits, and a Random Forest classifier was applied for fruit grading.
+En \cite{5254804}, un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, platanos y fresas. En \cite{ROCHA201096}, descriptores de imagenes basadas en apariencia, color, tectura, y forma fueron obtenidos y distinguidos de las tecnicas de ML como SVM, LDA, arboles de clasificacion, KNN, y ensambles de arboles fueron entrenados.\\
+
+
+
+% DeepLearning- Un parrafor por separado
+
+Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrolladas para la clasificación de problemas complejos. Esos modelos son mostrados para entender mejor las caracteristicas en imagenes, y han sido usadas para afrontar con el rápido crecimiento de datos (big data). En \cite{8488544}, un clasificador basado en DL es propuesto. Algoritmos de DL requieren mucho tiempo entrenamiento de datos, una gran cantidad de datos de entrenamiento (set de datos), y un poder de procesamiento enorme. Generan una solución muy especializada en un dominio especifico, donde la revaloración es necesaria para resolver problemas fuera del dominio.\\
+
+
+% Fin de las comparativas...
+
+% Problemas...
+
+
+% La necesidad de un sistema embebido tiempo real para c
+
+El diseño de un sistema de visión para clasificación automática de cítricos es altamente deseada para reducir el costo de la fuerza laboral y problemas de mantener la consistencia y uniformidad en la clasificación. Un clasificador automático de cítricos basada en visión de computadora afronta algunos problemas técnicos como, el procesamiento de imágenes en tiempo real, baja precisión de clasificación y alto costo computacional. Un FPGA es ideal para esta tarea, ya que provee de procesamiento paralelo.  En el enfoque presentado en \cite{6820292}, una arquitectura para clasificación de cítricos es presentada. El pre-procesamiento requerido para la clasificación es implementada en hardware. La clasificación de cítricos fue basada en una umbralización global, convirtiendo al sistema sensible al ruido generado por los objetos en movimiento y un modelo de ML más robusto no fueron explorados.\\
+
+
+% Porque un DT
+
+Algunos algoritmos de clasificación para frutas como ANN, SVN requieren mucha cantidad de memoria para almacenar diferentes coeficientes y complejos cálculos no lineales. Los arboles de decisión (ADD), son uno de los mejores algoritmos para implementación de hardware, ya que no requieren cálculos aritméticos, que son computacionalmente costosos, si no que solamente usa comparadores \cite{6636881}. Los ADD han sido aplicados exitosamente en algunos dominios, como reconocimiento de objetos \cite{10.1007/978-3-540-32256-6_52}, identificación de gas \cite{li}, y reconocimiento de cantar de aves \cite{5986215}.\\
+
+
+% Cierre - Luce que lo paso al final
+
+La comparación entre los sistemas de clasificación es difícil por su larga variedad y combinatoria de sets de imágenes de frutas. Precisión, especificidad y sensibilidad de mediciones son a menudo reportadas en diversos trabajos, pero no hay una medida real para medir su desempeño en el area, ya que existen sets de imágenes que son capturadas en entornos estáticos.\\
+
+En esta tesis se propone una metodología para llegar al desarrollo de un clasificador de naranjas basado en ADD, usado para la segmentación de la fruta y su clasificación. El enfoque está dirigido para realizar una implementación sencilla en hardware, donde las arquitecturas de los modelos ADD se generan por medio de software.
+
+\section{Estado del arte}
+Por lo general los experimentos que se han realizado se usan fotografías (no video), de los cuales se extraen características, sin embargo las condiciones en las que se toman las fotografías son escenarios poco probables y poco prácticos para un problema real como lo es en un escenario industrial tal y como se ve en la figura \ref{chafa} \cite{chafafrut}.\\
+
+ \begin{figure}[h]
+\centering
+\includegraphics*[scale=0.5]{datchafa} 
+\caption{Condiciones poco probables.}
+\label{chafa}
+\end{figure}
+
+El canal de colores Hue, Saturation, Value (HSV) es pieza clave en la clasificación por color \cite{analis,chokun,rgbhisto,huehue} ya que se obtiene mucha información de uno de los canales ya que tanto H como S no son muy afectados por la iluminación.\\
+
+La clasificación por umbrales fijos es difícil de lograr ya que se necesita mucha experimentación y desarrollo \cite{huehue,josu}, por lo que la implementación de un clasificador es necesaria.\\
+
+Para la extracción de características para saber el estado de la fruta se utilizan ciertas características, tal es el caso de obtener desde el espacio de colores HSV de la imagen a procesar para obtener características sobre el color y la iluminación especifica. De esto anterior obtener la media, y el histograma de los 3 canales correspondientes \cite{analis,chokun}, por otra parte el análisis es solamente para detectar que se aprecia en mal estado, pero no se clasifica el color.\\
+
+El obtener características complicadas de computar no siempre es la mejor opción para un problema como este, ya que el obtener una precisión de 90\% es aceptable, sin embargo el tiempo de procesamiento o el desarrollo de un algoritmo sofisticado puede ser costoso en recursos y tiempo de desarrollo \cite{curvelet}. Sin embargo, existen sistemas similares, los cuales están montados en FPGA, donde la velocidad de computo se mejora hasta 100 veces \cite{faste} además de también poder ser implementados clasificadores por arboles de decisión \cite{friend}.\\
+
+El uso de diferentes clasificadores para la clasificación de naranjas están los perceptrones multicapa (analizando histogramas sobre el canal RGB) \cite{classi,analis}, arboles de decisión, Random Forest \cite{analis,rfrf}. \\
+
+Por otra parte, en la mayoría de los casos se tiene un set de datos muy reducidos, es por eso la elección de preparar un hardware industrial para tomar video, y obtener un set de datos más grande, a cambio de un poco de tiempo de desarrollo para el procesamiento del mismo y obtener fotografías variadas.\\
+
+Como se ha mencionado antes, un sistema como este, montado en un FPGA tiene resultados interesantes dado el poder de computo y la capacidad de funcionar en tiempo real \cite{josu}, sin embargo el no utilizar algún tipo de memoria para almacenar las imágenes para un post-procesamiento, así como también el no utilizar clasificadores supervisados.
+
+
+\section{Objetivos}
+\subsection*{Objetivo general}
+\begin{itemize}
+ \item Desarrollar una implementación de hardware en FPGA capaz de clasificar naranjas con una precisión del 90\% con una rapidez de 1 naranja por segundo.
+\end{itemize}
+
+\subsection*{Objetivos específicos}
+\begin{itemize}
+ \item Implementación en FPGA de un clasificador por árbol de desición.
+ \item Implementación en FPGA de un procesador de video extractor de características.
+ \item Implementación de hardware  auxiliar para mejorar el tiempo de desarrollo (microcontrolador).
+
+\end{itemize}
+
+% \section{Viabilidad}
+% El proyecto es viable puesto que Tamaulipas ocupa el segundo lugar en el país en la producción de naranja, por lo que cada vez existe una demanda mayor en productos industriales que mejoren el tiempo de los procesos para mejorar calidad y producción. Además se cuenta con todo el material necesario para desarrollar el proyecto el cual se muestra en la tabla \ref{mats}.
+% 
+% \begin{table}[!h]
+% \centering
+% \caption{Materiales.}
+% \label{mats}
+% \begin{tabularx}{\linewidth}{|X|X|X|}
+% \hline
+% \textbf{Material} & \textbf{Caracteristicas} & \textbf{Descripción de uso}                                                   \\ \hline
+% Spartan-6 FPGA Industrial Video Processing Kit  & Xilinx Spartan-6 LX150T-3 FPGA, entrada HDMI, salida HDMI, 128Mb SDRAM       & Para el desarrollo del hardware dedicado. Procesador de video y clasificador. \\ \hline
+% Cámara industrial HDMI YW2307   & 1080p, 60fps, 12V        & Para la captura del entorno en tiempo real.                                   \\ \hline
+% Máquina industrial  & 4 bandas. x2 motor AC 1HP, x2 motor DC 90V 1HP (driver) & Circuito de bandas transportadoras para el movimiento de fruta. Entorno industrial bajo prueba. \\ \hline
+% Cabina de captura & Iluminación fija 12V(ambiente controlado). & Ambiente usado para la simplificación de desarrollo. Arreglos establecidos para la colocación de la cámara y otros elementos. \\ \hline
+% Television Samsung 22'' & Entrada HDMI, 1080p. & Para visualización de avances en el desarollo. \\ \hline
+% Computadora Lenovo Y400 & 6Gb RAM, i7 4ta gen, GPU Nvidia Geforce GT750M & Para el desarrollo de la programación. \\ \hline
+% Tarjeta Arduino UNO & ATmega328 (AVR) & Para ser usada como programador AVR. \\ \hline
+% \end{tabularx}
+% \end{table}
+
+%\subsection{Alcances}
+ 
+%\end{chapter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{chapter}{Marco Teórico}
+\chapter{Marco Teórico} \label{chap:marcoteori} 
+
+En esta sección se abordan temas relacionados al trabajo realizado.
+
+% Inteligencia artificial
+% -Machine learning
+% --Clasificadores
+% --Arbol de desicion
+% ---Algoritmo J48
+
+%Vision por computadora
+%-Procesamiento de imagenes
+%--Transformaciones de color
+%--Segmentacion
+%---Umbralizacion
+%---OTSU
+%--Operaciones morfologicas
+
+% FPGA
+% FPGA con imagenes
+% Ventajas y desventajas
+
+\section{Inteligencia artificial}
+
+La inteligencia artificial en ciencia, es una rama que estudia desde un punto de vista de la ingeniería, la inteligencia en elementos artificiales, y que estos sean capaz de demostrar un comportamiento inteligente. Pretende construir sistemas que presenten un comportamiento que se pueda decir que es inteligente.\\
+
+
+La inteligencia es un concepto difícil de definir, por lo que los consensos científicos no han establecido completamente su definición e identificación de un caso de inteligencia, osease, decir cuando algo es inteligente o no, sea artificial o no.\\
+
+En el año de 1950, el padre de la computación Alan Turing, publicó un articulo relacionado a la computación y y la inteligencia llamado ``Maquinaria computacional e inteligencia'', donde él argumentaba que siempre y cuando una máquina puede actuar como un humano, entonces es inteligente \cite{iabook}. En el articulo se propuso una prueba llamada Test de Turing, que permitiría afirmar si una máquina es inteligente o no. El test es compuesto por 2 partes (individuos o cosas) donde se comunicarán por un medio informático, la primera parte debe ser un humano, y la segunda puede ser una máquina o un humano, la prueba consiste en que la primera parte defina si la segunda es una máquina o un humano. Si la primera parte identifica a una máquina como humano entonces esta máquina es considerada inteligente.\\
+
+Hoy en día con los avances de la tecnología para que una máquina sea identificada como inteligente debe tener las siguientes características:
+
+\begin{itemize}
+ \itemsep 0em
+ \item Reconocimiento de lenguaje natural
+ \item Razonamiento
+ \item Aprendizaje
+ \item Representación del conocimiento
+\end{itemize}
+
+El \textbf{aprendizaje automático} se refiere a la capacidad de la máquina para aprender cosas nuevas, de otro modo, no será capaz de adaptarse al medio o condiciones que exige el entorno. Las lineas de investigación que se revisan hoy en día se busca hacer que las máquinas capten generalizaciones a partir de ejemplos sacados del entorno. Como ejemplo, un niño pequeño al aprender a caminar, tiene caer muchas veces antes de calcular de manera exacta las instrucciones motrices para dar un paso, hasta lograr dar pasos con soltura.\\
+
+
+\section{Machine learning}
+
+Machine learning es una rama de la inteligencia artificial. Se define como la ciencia de hacer que sistemas de cómputo, aprendan y actúen como los humanos, mejorar su aprendizaje sobre el tiempo de forma autónoma, alimentándolos con datos e información que significan interacciones del mundo real \cite{mlbook}.\\
+
+Una máquina de aprendizaje es un modelo matemático o algoritmo capaz de predecir algún comportamiento a partir de datos que caracterizan el sistema (figura \ref{fml}), los datos por lo general son clusters de características de que definen el comportamiento de un sistema, cada característica se administra en el modelo como una entrada. Después el modelo calcula una predicción y esta es su salida.
+
+\begin{figure}[h] 
+	\centering 
+		\includegraphics[scale=.50]{ima_mc/flujoml} 
+	\caption{Ejemplo de la estructura de un ADD.} 
+	\label{fml} 
+\end{figure}
+
+Las máquinas aprendizaje sirven para clasificar o realizar una regresión. En la figura \ref{calsifplot} se puede ver el ejemplo de un set de datos, donde los ejes representan características de un sistema, por ejemplo: temperatura y humedad. Supongamos que se selecciona el 90\% de los datos para entrenar el modelo, el cual dependiendo del modelo se entrenará con uno u otro algoritmo.
+La linea punteada dibuja el resultado del entrenamiento el cual define la separación entre clases. Cuando un nuevo dato no conocido por el sistema ingresa al modelo, este será capaz de predecir la clase, entre más difícil sea de separar los datos se necesitan diferentes modelos.
+
+
+\begin{figure}    
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xmin=-5, xmax=6,
+    ymin=-6, ymax=8,
+    xtick=\empty, ytick=\empty,
+    x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+    y label style={at={(axis description cs:-0.1,.5)},rotate=90,anchor=south},
+    xlabel={Característica 1},
+    ylabel={Característica 2}
+]
+\addplot [only marks] table {
+-5  2
+-5  5   
+-4  7
+-3  3
+0   6
+};
+\addplot [only marks, mark=o] table {
+-4  -5
+-2  -1
+-1  -4
+2   -3
+4   3
+4   -1
+};
+\addplot [domain=-8:5, samples=2, dashed] {1*x+3};
+\end{axis}
+\end{tikzpicture}
+\caption{Ejemplo de clasificación en 2 dimensiones.}
+\label{clasifplot}
+\end{figure}
+
+
+
+Existen 3 tipos de máquinas de aprendizaje: máquinas de aprendizaje supervisado, máquinas de aprendizaje no supervisado, máquinas de aprendizaje por refuerzo.
+
+
+\section{Máquinas de aprendizaje supervisado}
+
+
+En ellas la entrada y la salida deseada son administradas para el entrenamiento del modelo  \cite{classifs}. Los datos de entrada y salida son etiquetadas para la clasificación y con ellas se forma la base del entrenamiento para el procesamiento futuro de los datos tal y como se explicó en la sección anterior.\\
+
+Algunos modelos de este tipo:
+\begin{itemize}
+\itemsep 0em
+ \item Árbol de decisión (ADD) **
+ \item Regresión Lineal 
+ \item Regresión logística 
+ \item Máquinas de soporte vectorial (SVM) 
+ \item Naive Bayes 
+ \item Algoritmo K-Vecinos más cercanos (KNN)
+ \item Algoritmo de bosque aleatorio
+\end{itemize}
+
+
+
+
+\section{Árbol de decisión}
+
+Los Arboles de decisión (ADD) es una herramienta poderosa y popular para la clasificación y predicción \cite{cart84}. Los ADD son estructuras de arboles enraizados, con hojas representando clasificaciones y nodos representando pruebas con características que definen las clasificaciones.
+
+\begin{figure}[h] 
+	\centering 
+		\includegraphics[scale=.30]{ima/add} 
+	\caption{Ejemplo de la estructura de un ADD.} 
+	\label{add} 
+\end{figure}
+
+
+Un árbol puede ser entrenado dividiendo la fuente del set de datos de entrenamiento en otros pequeños basados en un atributo. Algunos algoritmos populares para entrenar un ADD son CART, ID3, C4.5 y Bosques aleatorios.  Los ADD clasifican las instancias clasificándolas por el árbol desde la raíz hasta algún nodo hoja, lo que proporciona la clasificación de la instancia \cite{Mitchell:1997:ML:541177}. El algoritmo utilizado en este trabajo es el\textbf{algoritmo C4.5} el cuál es un derivado del algoritmo IDE3.
+
+\section{Algoritmo de entrenamiento IDE3}
+
+\section{Algoritmo de entrenamiento C4.5}
+%https://link.springer.com/article/10.1007/BF00993309
+
+El algoritmo de entrenamiento C4.5 también llamado J48, es un algoritmo para construir ADDs. Es el sucesor del algoritmo ID3 creado por J. Ross Quinlan, y es uno de los algoritmos para ADDs más populares \cite{c45salz}. 
+
+
+ \textbf{Entropía}\\
+ 
+ $$E(a) = \sum_{i=1}^{i=n} -p(c_i) log_{2}p(c_i)$$
+ 
+$a:$ Atributo\\
+$n:$ Número de clases del atributo a\\
+$c_i:$ la i-ésima clase del atributo \\
+$p(x):$ La probabilidad de que ocurra la clase x\\
+ 
+ \textbf{Ganancia}\\
+ $$G(a,b)= E(a) - \sum p(a|b)E(a|b)$$
+
+ 1. Buscar Entropia global
+ 2. Buscar el atributo con mayor ganancia
+ 3. Partir del atributo con mayor ganancia, e ir separando las clases por cada atributo de mayor a menor
+
+
+
+% \section{Weka}
+% Es un software de pruebas que contiene una colección modelos de machine learning, además de algoritmos de pre-procesamiento de datos \cite{wekiki}. Es generalmente usada para la minería de datos en donde se pueden extraer información e interpretarla.\\
+% 
+% WEKA fue desarrollado en la Universidad de Waikato en Nueva Zelanda; el nombre significa Waikato Environment for Knowledge Analysis.\\
+% 
+% En el se puede encontrar el modelo de Árbol de decisión entrenado por el algoritmo C4.5, con diversas configuraciones de diseño.
+
+
+
+
+\section{Procesamiento de imágenes}
+Párrafo introductorio donde se dice que se ponen secciones necesarias.
+
+
+\subsection{Transformaciones de color}
+
+En procesamiento de imágenes, es común que las imágenes estén en formato rojo-verde-azul (espacio de colores RGB), y se necesitan ser transformados en otros espacios de colores. 
+
+\subsubsection{Transformación RGB a escala de grises}
+
+Una operación común para reducir los recursos computacionales en procesamiento de imágenes consiste en convertir una imagen RGB en una codificación diferencial como $YC_bC_r$, donde $Y$ es la componente de luminancia, $C_b$ y $C_r$ son las componentes diferenciales de azul y rojo \cite{Book_IVSS}.\\
+
+\begin{figure}[h] 
+	\centering 
+		\includegraphics[scale=.35]{ima/rgbcol} 
+	\caption{Representación axial del espacio de color RGB.} 
+	\label{rgbcol} 
+\end{figure}
+
+En los formatos digitales ITU-R BT-709, la luminancia puede ser calculado usando la ecuación \ref{eqLuma}, donde R, G y B son los componentes del espacio de colores RGB.
+
+\begin{equation}\label{eqLuma}
+%{\displaystyle Y'_{\text{601}}=0.299R'+0.587G'+0.114B'}
+{\displaystyle Y'_{\text{709}}=0.2126R'+0.7152G'+0.722B'}
+\end{equation}
+
+Esta componente de luminancia corresponde a una imágen en escala de grises tal y como se muestra en la figura \ref{lenabn} para la imágen a color \ref{lena}.
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\subfloat[Imagen a color (RGB) \label{lena}]{\includegraphics[scale=0.25]{ima/lena}} & 
+\subfloat[Canal de luminancia de la imagen \label{lenabn}]{\includegraphics[scale=0.7]{ima/lenabn}}  
+\end{tabular}
+
+\caption{Conversión de imagen a color a escala de grises.}
+\label{lumiprueb}
+\end{figure}
+
+\subsubsection{Transformación RGB a HSV}
+
+Otro espacio de colores importante es Tono - Saturación - Valor (HSV). La particularidad de este espacio de colores es el campo del procesamiento de imágenes posible en él. Es una transformación no lineal del espacio RGB.\\
+
+Las componentes R, G y B de un objeto en una imagen digital son todas correlacionadas a la cantidad de luz que refleja el objeto. Por otra parte las descripciones en términos de esos componentes puede hacer la discriminación del objeto complicada. En estas situaciones donde la descripción del color juega un rol importante, la descripción en términos del Tono (H) , saturación (S) y brillo (V) es comúnmente usada.\\
+
+Esos valores son usados como ejes de coordenadas que proyectan el espacio RGB a lo largo de las diagonales blanco a negro (figura \ref{rgbcol}), resulta en un hexagono que forma la parte superior de una pirámide del espacio HSV (figura \ref{hsvcol}). H, es indicado como un angulo al rededor del eje vertical. El color rojo es obtenido cuando H=0$^{\circ}$ o H=360$^{\circ}$, el verde cuando H = 120$^{\circ}$, y asi sucesivamente \cite{Koschan:2008:DCI:1370941}.
+
+\begin{figure}[h] 
+	\centering 
+		\includegraphics[scale=.35]{ima/hsvcol} 
+	\caption{Pirámide de espacio de color HSV.} 
+	\label{hsvcol} 
+\end{figure}
+
+
+
+\subsection{Segmentación}
+Algo...
+
+\subsubsection{Binarización por umbral}
+Se trata de un método de segmentación que se rige por pixeles individuales. De una imágen por lo general en escala de grises se analiza pixel por pixel utilizando la ecuación \ref{eqbin}, donde \textit{T} es la función de binarización (por sus sigla en inglés de la palabra \textit{Thresholding}), \textit{p} como el valor del pixel y \textit{t} como el umbral (por sus sigla en inglés de la palabra \textit{threshold}).
+
+\begin{equation}\label{eqbin}
+{ T(p,t) = \left \{ \begin{matrix} 0 & \mbox{si }p<t
+\\ 255 & \mbox{si } p \geq t\end{matrix}\right. }
+\end{equation}
+
+El efecto de este método de segmentación da un realce de todos aquellos pixeles mayores al valor del umbral, tal y como se ve en la figura \ref{th}. Por otra parte la condición de la ecuación \ref{eqbin} puede ser invertida, obteniendo la ecuación \ref{eqbininv}, donde el efecto se muestra en la figura \ref{thinv}, la cual es una inversión de colores de la imágen \ref{th}. 
+
+\begin{equation}\label{eqbininv}
+{ T_{inv}(p,t) = \left \{ \begin{matrix} 255 & \mbox{si }p<t
+\\ 0 & \mbox{si } p \geq t\end{matrix}\right. }
+\end{equation}
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\subfloat[Binarización de \ref{lenabn} \label{th}]{\includegraphics[scale=0.25]{ima/th}} & 
+\subfloat[Binarización inversa de \ref{lenabn} \label{thinv}]{\includegraphics[scale=0.25]{ima/thinv}}  
+\end{tabular}
+
+\caption{Binarización de imagenes usando un umbral $t=127$}
+\label{lumiprueb}
+\end{figure}
+
+El cómputo de este método de segmentación es muy fácil de implementar en hardware ya que se trata de un comparador simple.
+
+\subsubsection{Contornos}
+
+\subsection{Operaciones morfológicas}
+
+Los operadores morfológicos a menudo toman una imagen binaria y un elemento estructurante como entrada y los combinan usando un operador conjunto (intersección, unión, inclusión, complemento). Procesan objetos en la imagen de entrada en función de las características de su forma. Estas características están codificadas en el elemento estructurante. Por lo general, el elemento estructurante tiene un tamaño de $3\times3$ y tiene su origen en el píxel central.\\
+
+
+\subsubsection{Dilatación}
+
+La dilatación es uno de los dos operadores básicos en el área de la morfología matemática, el otro es la erosión.El efecto básico del operador en una imagen binaria es ampliar gradualmente los límites de las regiones de pixeles de primer plano (es decir, pixeles blancos, típicamente). Por lo tanto, las áreas de pixeles en primer plano crecen en tamaño, mientras que los agujeros dentro de esas regiones se vuelven más pequeños. Suponga que $X$ es el conjunto de coordenadas euclidianas correspondientes a la imagen binaria de entrada, y que $K$ es el conjunto de coordenadas para elemento estructurante $K_x$ denota la proyección de $K$ para que su origen esté en $x$. Entonces, la dilatación de $X$ por $K$ es simplemente el conjunto de todos los puntos $x$, de modo que la intersección de $K_x$ con $X$ no está vacía.\\
+
+
+\subsubsection{Erosión}
+La erosión generalmente se aplica a imágenes binarias, pero hay versiones de este operador que funcionan en imágenes en escala de grises. El efecto básico del operador en una imagen binaria es erosionar los límites de las regiones de píxeles de primer plano (es decir, píxeles blancos, por lo general). En consecuencia, las áreas de píxeles en primer plano se reducen de tamaño y los agujeros dentro de esas áreas se hacen más grandes.
+Suponga que $X$ es el conjunto de coordenadas euclidianas correspondientes a la imagen binaria de entrada, y que $K$ es el conjunto de coordenadas para el elemento estructurante.
+$K_x$ denota la proyección de $K$ para que su origen esté en $x$.
+Entonces, la erosión de $X$ por $K$ es simplemente el conjunto de todos los puntos $x$ tal que $K_x$ es un subconjunto de $X$.
+
+\subsubsection{\textit{Closing}}
+
+\section{Visión por computadora}
+%https://www.researchgate.net/publication/228377483_Vision_por_computador
+
+\subsection{Histogramas}
+
+
+\section{FPGA}
+%http://blog.aku.edu.tr/ismailkoyuncu/files/2017/04/01_ebook.pdf
+En esta sección se hablará un poco de la historia, de los Arreglos de Compuertas Lógicas Programables llamadas en inglés Field Programable Gate Array (llamadas FPGA de aquí en adelante), de como fué su introducción a la electrónica industrial, como es que funciona y que elementos lo componen para generar el conjunto que representan.\\
+
+
+Hablar de un FPGA, no es hablar de solo un chip más que se introdujo al área de la electrónica industrial, como pudo haber sido en sus inicios circuitos integrados (llamados ICs de aquí en adelante) con operaciones lógicas. Los FPGAs en el mundo de las simulaciones y en el prototipado, tiene un gran impacto desde hace algunas décadas. Los FPGAs las compañías de electrónicos las usan para poder generar su hardware digital, poderlo probar en una etapa temprana como los puertos de comunicación y los puertos de desarrollo que son usados durante todo el prototipado. Debido a su flexibilidad son muy requeridos en el área de la electrónica industrial. 
+
+\subsection*{¿Qué es un \f? }%\cite{ni,tarun}}
+
+Un \f como todo circuito integrado está fabricado con silicio el cuál %en la figura \ref{fxi} se puede ver que
+tiene la apariencia como cualquier otro circuito integrado. A diferencia de un IC convencional, los \fs son reprogramables, es decir, su funcionamiento interno o su propósito, puede ser modificado. Estos utilizan bloques pre-establecidos dispuestos de tal forma que la conexión entre ellos permiten ser variable, logrando así que el funcionamiento final pueda ser modificado dependiendo de como es que el usuario quiera esas conexiones.
+
+El usuario puede configurar los \fs   para implementar funciones que el mismo desee, sin tener que utilizar ICs adicionales para cambiar el comportamiento del circuito y por ende no utilizar otros dispositivos físicos que se pueden convertir en basura (circuitos de prueba que fallen por ejemplo). Por otra parte, el usuario deberá desarrollar ingeniería de computo digital en un software especificado para cada fabricante, este computo digital se desarrolla en archivos de texto en Lenguaje de Descripción de Hardware (llamado HDL a partir de aquí), el cual el software compilará y dará de salida un archivo tipo bitstream, el cual contiene toda la información necesaria que se utilizará para hacer las conexiones internas en el \f. Por ende, gracias a la explicación anterior los \fs son completamente flexibles ya que se puede cambiar su configuración cada que el usuario lo requiera. \\
+
+En tiempos pasados solo había unos pocos ingenieros con grandes conocimientos los que podían trabajar con \fs pero conforme pasa el tiempo se van creando herramientas diseñadas en bloques las cuales permiten hacer un diseño en alto nivel haciendo más fácil generar los HDLs.
+
+\subsection*{Utilización en la industria}
+
+Los \fs en la industria han sido pilar importante en el desarrollo de nuevos semiconductores (procesadores, Application-Specific-Integrated-Circuits o ASICs, etc.), ya que los \fs combinan lo mejor de los ASICs y de los sistemas en los que se basan procesadores ya que estos ofrecen frecuencias de reloj administradas por hardware, sin requerir altos volúmenes de requerimientos para poder fabricar un ASIC. \\\\Para fabricar ASICs antes de que existieran los \fs significaba un verdadero problema, ya que no se contaba con algo flexible para primero hacer pruebas y después manufacturar la pieza de silicio. Las pruebas por lo general se realizan en tarjetas de desarollo comerciales %como se puede mostrar en la figura \ref{faltera}, 
+las cuales están formadas por un \f o más y tienen elementos que digitalizan todo el entorno del \f como pueden ser conversores analógicos-digitales (ADCs), ICs manejadores de puertos de comunicación (tal es el caso de un FTDI) y algunos conversores de voltaje, ya que por lo general un \f rápido, utiliza valores digitales de 3.3V para ahorrar energía y calentamiento en el chip. \\
+
+A diferencia de un procesador convencional que funcionan con una serie de instrucciones o pasos, los \fs funcionan en paralelo ya que están construidos solo por bloques lógicos o en más bajo nivel, solo están fabricados por compuertas lógicas las cuales están dispuestas de tal modo que se pueden fabricar series de bloques que ejecutan diversas tareas al mismo tiempo tal es la función de un procesador con más de un núcleo. Por otra parte, en los procesadores modernos existen hasta 8 o más núcleos, sin embargo en un \f se pueden hacer tantos bloques sean posibles físicamente dentro del \f que equivaldrían a núcleos que se dedican específicamente a una tarea en particular y no a tareas de distintos tipos lo cual es lo que mismamente desarrolla un procesador convencional de computadora. \\
+
+Algunas veces, ciertos semiconductores cuando son manufacturados, una parte de ellos es un FPGA, generalmente las partes más problemáticas, más complicadas o aquellas que puede ser que con el tiempo necesiten ser modificadas. Esto se hace con el objetivo de que en un futuro el semiconducor pueda ser reprogramado para hacer una actualización. En algunos casos, puede ocurrir que alguna parte del semiconductor esté en desarollo, o se haya desarrollado anteriormente un sistema que es menos eficiente que uno que esté en pleno desarrollo, tal es el caso de algunas computadoras que tienen un BIOS que puede ser actualizado y por ende mejorar las capacidades de entrada y salida de una computadora.\\
+
+
+La diferencia entre un ASIC y un \f es básicamente que un ASIC no puede cambiar su funcionamiento. Un ASIC como lo dice su nombre es un IC que tiene una aplicación en específico (por lo que su estructura no es flexible), su arquitectura es definida y finita. Los ASIC son ICs que son personalizables en su construcción, pero una vez manufacturados no pueden cambiar su arquitectura, por lo que para probar y hacer diseños de ASICs con otros ASICs es algo que los \fs han desplazado por completo. En un principio los \fs eran de baja potencia de computación, para desarrollar grandes volúmenes de diseño, pero hoy en día un \f puede llegar a tener un total de 500 millones de operaciones por segundo (un reloj de 500MHz) sin ningún problema y son capaces de almacenar diseños mucho más grandes comparándolos con los \fs de hace un par de décadas.
+
+\subsection{Historia de los FPGAs}
+En 1984 Xilinx creó el primer FPGA (el modelo XC2046  el cuál se muestra en la figura \ref{ffpga}), ellos no les llamaban como tal hasta que Actel popularizó el término en 1988. Desde entonces los fabricantes de \fs han incrementado las prestaciones increiblemente, tales son:
+
+\begin{itemize}
+\item Capacidad
+\item Velocidad
+\item Costo
+\item Consumo de energía
+\end{itemize} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{ima/xc2064}
+\caption{Fotografía del primer \f de Xilinx.% Tomado de \cite{xc2064}. 
+\label{ffpga}}
+\end{figure}
+
+\subsection*{FPGAs contra ASICs}
+A principios de los años 80's las compañías que se dedicaban a fabricar ASICs vieron una buena oportunidad de negocio en la actividad. A mediados de los 80's muchas compañías se encontraban vendiendo ASICs, la competencia era dura en esos entonces. Los clientes buscaban al mejor postor, ya sea que el vendedor de ASICs mantuviera en sus productos a un costo bajo, alta capacidad del dispositivo y alta velocidad del semiconductor. \\
+
+Cuando los \fs aparecieron, eran mucho más lentos, caros y pequeños (en capacidad) que cualquier ASIC en el mercado, sin embargo prosperaron, lo cuál resulta algo contradictorio. Los \fs prosperaron debido a que en la fabricación de ASICs había mucha ingeniería de por medio que podía ser reducida usando un FPGA en el camino. Esta ingeniería de por medio resultaba algo cara, ya que se tenia que investigar, contratar personal capacitado y además algunas máquinas para la manufactura. Algunos fabricantes empezaron a usar los \fs, y se dieron cuenta que a cierto volumen de ventas, resultaba mucho más rentable usarlos en sus proyectos ya que se gastaban muchos recursos en la ingeniería. Cuando otros fabricantes empezaron a ver estos beneficios el volumen de ventas de ASICs ya no era justificable, volviendo así una tendencia el uso de FPGAs en el desarrollo de semiconductores.\\
+
+Aquellos fabricantes que con el tiempo que se aferraron a la forma primitiva de fabricar ASICs empezaron a decaer, mucho del dinero invertido en algunos ASICs se perdían por errores de diseño, lotes mal manufacturados y carencia de clientes con demandas de altos volúmenes de dispositivos. Por otra parte, existían pequeños fabricantes los cuales generaban ingresos desarrollando pequeños volúmenes de ventas, solo por el hecho de usar FPGAs en sus procesos de diseño, por lo que ahorraban mucho en los errores de diseño que se pueden evitar en un FPGA, o que pueden ser reparados en un futuro.
+
+\subsection*{FPGAs contra PALs}% \cite{trimberger,my,floyd}}
+
+Antes de los FPGA existieron otro tipos de arreglos logicos programables llamados PAL (Programmable Array Logic) los cuales eran programables con memorias EPROM. Estos fueron introducidos a principios de los años 80's. Algunos otros les llamaban PLA (Programmable Logic Array).\\\\
+Estos consistian en dos niveles lógicos de estructura, en la figura \ref{pal} se puede una estructura simple de un PAL, en el fondo podemos ver que están marcadas las entradas, en la parte izquierda se encuentra un arreglo AND programable, que produce operaciones AND de cualquier combinación incluyendo sus inversos. El bloque azul de la derecha corresponde a una compuerta de operación OR que completa la operación combinacional de la función lógica programada en el PAL. De esta manera es fácil de implementar máquinas de estados finitos en una versión muy primitiva.\\\\
+
+Los PAL fueron muy eficientes desde un punto de vista de manufactura, ya que su estructura es bastante parecida a la de un arreglo de memorias EPROM. Gracias a esta arquitectura en un tiempo se tuvieron ideas nuevas sobre como expander las memorias, y expander los procesos de sus lineas de producción. El problema principal de esta arquitectura es bastante evidente, ya que para expander las funcionalidades de un PAL, este necesita convertirse en arreglos de PALs, dando como resultado una complicada programación por la cantidad exageradas de puntos que se debían de programar. Los arreglos de ANDs terminaban siendo demasiado grandes que la manufacturarlo el tamaño del dispositivo rebasaba a lo convencional. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.45]{ima/pal.png}
+\caption{Arquitectura más simple de un PAL.}% Tomado de \cite{trimberger}. 
+\label{pal}
+\end{figure}
+
+El aumento de los arreglos en los PAL, causaban que los transistores usados en esos sistemas fueran más pequeños, por lo que la resistencia de cada uno bajaba, y por ende la capacitancia total aumentaba. Esto hacia que la velocidad y la potencia de consumo fueran opuestos en este tipo de arquitectura. \\\\
+
+\subsection*{Principales fabricantes}
+
+Según la historia que se ha plasmado en la sección anterior, el primer \f fue creado por Xilinx la cuál se encuentra hoy en día aún como vendedor más exitoso de FPGAs. Los principales vendedores de FPGA son: % según \cite{guan} son: \\
+
+\textbf{\fs basados en tecnología SRAM:}
+\begin{itemize}
+\itemsep 0em
+\item Xilinx, Inc.
+\item Intel (Antes llamado Altera Corp.)
+\item Atmel
+\item Lattice Semiconductor
+
+\end{itemize}
+
+
+\textbf{\fs basados en tecnología Flash y Antifuse:}
+
+\begin{itemize}
+\itemsep 0em
+\item Actel Corp.
+\item Quick Logic Corp
+\end{itemize}
+
+Xilinx e Intel comparten el 60\% de las ventas.
+
+
+\subsection{Arquitectura general de un FPGA}
+La innovación de los FPGA fue la eliminación de la matriz de compuertas AND que se programaban, reemplazándolo por memorias de duración que fueron distribuidas entre cada nodo del arreglo de unidades lógicas. La arquitectura de un \f consiste en un arreglo de bloques programable los cuales se interconectan con unos switches programables entre unión de los bloques, los bloques están conectados entre si con estos switches, haciendo así el hardware reprogramable. El diagrama de la arquitectura de un \f convencional se puede ver en la figura \ref{arqf}, donde los bloques circulares son los switches programables, los bloques cuadrados son unidades lógicas y los bloques que se encuentran en las orillas son las entradas y salidas. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{ima/arqf.png}
+\caption{Arquitectura genérica de un FPGA.%Tomado de \cite{floyd}.
+\label{arqf}}
+\end{figure}
+
+Un \f no cuenta con un procesador el cual siga una serie de instrucciones (software). Somos nosotros mismos los que diseñamos un circuito digital y podemos configurar un \f tan simple como una compuerta AND de 2 entradas o un complejo procesador multi núcleo para usarse como DSP. En \cite{bajaj} se puede ver que los \fs son idóneos para los DSPs, por lo que para aplicaciones de alta velocidad son una ventaja imprescindible.\\
+
+
+\subsection{Componentes y caracteristicas}
+
+En general, hoy en día hay muchas otras formas de arquitectura de FPGAs sin embargo el en el modelo general son 3 componentes los que componen la arquitectura de un \f los cuales son:
+
+\begin{enumerate}
+\item CLB: Configurable-Logic-Block (Bloque Lógico Configurable).
+\item Ruteo.
+\item IOB: Input/Output Block (Bloque de Entrada/Salida).\\
+\end{enumerate} 
+
+\subsection*{CLB: Configurable-Logic-Block}
+
+La arquitectura de un CLB (figura \ref{arqclb}) de un \f lo componen varios módulos lógicos más pequeños. Por lo general estos contienen LUTs, los cuales son una clase de memoria ROM (Read-Only-Memory), que son volátiles, ya que una vez programado perderá su valor cuando el \f sea desenergizado. Además cada CLB cuenta con un bloque de interconexiones, la cual tiene como tarea comunicar los bloques lógicos.\\
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.325]{ima/clbf.png}
+\caption{Arquitectura general de un bloque Configurable Lógico (CLB).%Tomado de \cite{floyd}. 
+\label{arqclb}}
+\end{figure}
+
+\subsubsection*{Slices}
+
+Algunos \fs en sus CLBs están divididos por slices (rebanadas) como se puede ver en la figura \ref{slice}, un slice esta formado por dos módulos lógicos (o más dependiendo de su arquitectura), y entre ellos mismos la lógica combinacional se asocia dependiendo del problema en particular que se trate.\\
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.275]{ima/slice.png}
+\caption{Arquitectura general de un CL formado con slices.% Tomado de \cite{floyd}. 
+\label{slice}}
+\end{figure}
+
+
+\subsubsection*{Módulo lógico}
+
+Un módulo lógico se configura para desarrollar circuitos de lógica combinacional por medio de las LUTs, o también como registros (localidades de memoria). En si, es un modelo reducido de memoria  y que en esencia una LUT realiza el mismo trabajo que una PAL.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.275]{ima/ml.png}
+\caption{Arquitectura general de un módulo Lógico.% Tomado de \cite{floyd}. 
+\label{arqml}}
+\end{figure}
+
+\subsubsection*{LUTs}
+
+Convencionalmente, la arquitectura de una LUT (figura \ref{arqlut}) consiste en un arreglo de memorias, se tiene n como el numero de entradas, y una parte se comporta como un circuito combinacional convencional.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{ima/lut.png}
+\caption{Arquitectura general de una LUT.% Tomado de \cite{floyd}. 
+\label{arqlut}}
+\end{figure}
+
+
+
+\subsection*{IOB: Input/Output Block}
+
+Un IOB es un bloque de entrada o salida. A diferencia de un microcontrolador, la mayoría de los pines de un \f puede ser configurado de diferentes maneras. En algunas tarjetas de desarrollo algunos pines están reservados, por lo regular son entradas o salidas especializadas para ciertos periféricos, o señales de alta frecuencia, tal es el caso de las señales de reloj que utilizan los \fs. Los microcontroladores la mayoría de las veces cuentan con diferentes modalidades, tal es el caso que una misma terminal puede servir como un convertidor analógico digital (ADC), o incluso ser una salida o entrada digital, sin embargo esta función no puede ejecutarse al mismo tiempo.\\
+
+A diferencia de un Microcontrolador, todas las terminales de un FPGA son digitales, las tarjetas de desarrollo, tienen algunas veces ASICs que digitalizan cierta información y se introduce por ciertos pines de un \f por lo que al dispositivo en si nunca se le introduce una señal analógica. Un IOB permite que el usuario defina como es que se comportará esa terminal, la cual puede comportarse de las siguientes maneras:
+
+\begin{itemize}
+\item Como entrada.
+\item Como salida.
+\item Como entrada-salida (Ambas al mismo tiempo).
+\item Como buffer de salida de señal de reloj.
+\item Como buffer de entrada de señal de reloj.
+\item Como tipo latch.
+\item Como tipo Pull-Up o Pull-Down (Depende del hardware del FPGA).
+\item Como tipo triestado (Valores lógicos de salida como ``1'', ``0'' o ``Z'').\\
+\end{itemize}
+
+El valor lógico ``Z'' se refiere a que en el nodo habrá una alta impedancia. Estos son usados por bloques con múltiples nodos para poder direccionar señales correctamente.
+
+En la figura \ref{iob}, se puede ver la arquitectura general de un IOB en donde se muestran los pines de entrada y salida (I/O), entradas de reloj y bus del modo el pin, esto conectado a su respectivo pad (o pin) del \f.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{ima/iob.png}
+\caption{Esquema básico de un IOB. %Tomado de \cite{guan}. 
+\label{iob}}
+\end{figure}
+
+
+\subsubsection*{Celda BSC}
+
+Una celda BSC (Boundary Scan Cell), es un bloque que está entre un IOB y un a terminal física de un FPGA, estas celdas obtienen el valor inmediato de la terminal. estas celdas están interconectadas en serie con todos los pines de un FPGA. por lo regular se usan con el entorno de comunicación JTAG que se ve en una sección posterior de este trabajo. En algunos \fs se utilizan estos bloques como entrada de programación. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.45]{ima/BSC.png}
+\caption{Arquitectura general de una BSC.% Tomado de \cite{floyd}. 
+\label{bsc}}
+\end{figure}
+
+
+\subsection{Lenguajes de descripción de Hardware (HDL)}
+
+Como hemos visto en secciones anteriores, los \fs son dispositivos flexibles, ya vimos porqué lo son, sin embargo ¿cómo es que una computadora hace todo lo posible por resolver los circuitos que deben realizarse a bajo nivel?. Existe software que se usa para calcular todas estas cosas, pero de todo ello depende un código escrito en un HDL. El código es interpretado por un compilador y posteriormente se resuelve toda la lógica y circuitos a bajo nivel hasta convertirse e un bitstream, el cual es un sistema de archivos que sirve para programar las celdas programables dentro del \f.\\
+
+Existen unos cuantos HDLs, de entre los que más destacan son:
+
+\begin{itemize}
+
+\item \textbf{VHDL}\\
+Este HDL es un estándar en Europa. Su estilo tiene un parecido al lenguaje C, sin embargo muchos de los operadores son bastante distintos. Se suelen definir los bloques con las palabras reservadas ``begin'' y ``end''. Por lo general a los principiantes les resulta más fácil entender un código en este HDL.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{ima/vhdl.png}
+\caption{Ejemplo de HDL escrito en VHDL.% Tomado de \cite{vs}. 
+\label{vhdl}}
+\end{figure}
+
+\item \textbf{Verilog}\\
+Este HDL es un estándar en América. Su estilo tiene aún mas parecido al lenguaje C ya que tiene prácticamente los mismos operadores. Se suelen declarar bloques intependientes con el operador ``@''. Las sentencias igualmente se parece mucho al lenguaje C.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{ima/verilog.png}
+\caption{Ejemplo de HDL escrito en Verilog.% Tomado de \cite{vs}. 
+\label{veri}}
+\end{figure}
+
+\item \textbf{System Verilog}\\
+Este HDL es bastante peculiar, y como se puede intuir es una clase de ``extension'' del HDL Verilog. Este HDL suele no ser sintetizable, se usa en su mayoria para declarar simulaciones de bloques temporizados. Se utiliza mucho este HDL para la depuración de grandes proyectos. Sin duda es una herramienta muy buena de alto nivel que ayuda a depurar código rápidamente.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{ima/sv.png}
+\caption{Ejemplo de HDL escrito en System Verilog.% Tomado de \cite{vs}. 
+\label{sveri}}
+\end{figure}
+
+\end{itemize}
+
+
+Cada HDL tiene su estilo y ninguno es mejor que otro. Estos 3 son de los más usados, sin embargo existen algunos más. Por estandarización mundial, la mayoría de los desarrolladores utilizan estos 3 HDLs.\\
+
+Recordemos que este código describe circuitos y hardware, por lo que no es nada parecido a la programación de software. El flujo de datos no es secuencial, por lo que es un error común en los principiantes tratarlo como tal. Los ciclos ``for'' por ejemplo, no describen una secuencia, si no un patrón de repetición para módulos, o dicho de otra manera, reproducir circuitos iguales como un arreglo.
+
+\subsection{Implementación}% \cite{tarun}}
+
+La implementación de un diseño básicamente consiste en 3 pasos:
+
+\begin{enumerate}
+\item Síntesis
+\item Mapeo
+\item Posicionamiento y Ruteo \\
+\end{enumerate}
+
+A continuación se explicará cada uno de estos puntos:
+
+\begin{itemize}
+
+\item \textbf{Síntesis}\\
+Este proceso compila todo el circuito lógico diseñado en un HDL, en donde se revisa la sintaxis del mismo. Después se revisa si el HDL puede ser sintetizable, es decir, que se pueda construir con Hardware. Existen algunos elementos que se pueden describir con hardware pero no pueden ser construidos físicamente, como por ejemplo pueden ser pulsos temporizados sin base de alguna señal de reloj.\\
+
+\item \textbf{Mapeo}\\
+Al ya estar resuelto el circuito lógico puede que algunos circuitos no quepan en CLBs únicos, por lo que el circuito se divide en sub-bloques y trata de encajar con la arquitectura del FPGA. Esto se hace en una computadora con un compilador especial, esta compilación es distinta de cada fabricante. Una vez realizado el mapeo, el usuario por medio del software puede ser capaz de realizar análisis de tiempos de señales de mapeo estático.\\
+
+\item \textbf{Posicionamiento y Ruteo} \\
+En esta etapa se necesita una lista de red (NetList) la cual en ella, están descritos cada entrada y salida del módulo de mayor nivel y lo conecta a cada pin físico del FPGA.
+Una vez reestructurado todo el circuito en bloques pequeños que pueden recrearse en CLBs, el compilador busca la manera de colocar todos estos bloques de tal manera que ahorre espacio entre conexiones de bloques. Debido a que la arquitectura varia entre fabricantes e incluso entre modelos del mismo fabricante pero con modelos diferentes de FPGAs, el ruteo es específico para cada modelo, por lo que se necesita un compilador diferente para saber al final como obtener conexiones idóneas entre bloques o poder ahorrar e espacio para no sufrir un sobrecargo de Hardware. Al final de este paso se obtiene un bitstream. En la figura \ref{route} se puede notar gráficamente la idea del ruteo.\\
+
+\begin{figure*}[h]
+\centering
+\includegraphics[scale=0.35]{ima/route.png}
+\caption{Ejemplo de un ruteo para un caso particular.% Tomado de \cite{guan}. 
+\label{route}}
+\end{figure*}
+
+\end{itemize}
+
+\subsection{Ventajas de \f}
+Como hemos visto en las secciones anteriores, un \f tiene una estructura única y flexible. Gracias a estas características los \fs ofrecen muchos beneficios, como lo son:
+
+\begin{enumerate}
+\item Rendimiento
+\item Tiempo en llegar al mercado
+\item Precio
+\item Fiabilidad
+\item Mantenimiento a Largo Plazo\\
+\end{enumerate}
+
+Existen muchos otros beneficios pero nos centraremos en estos los cuales son los mas importantes. Veamos cada uno de estos puntos detalladamente:\\
+
+\begin{enumerate}
+\item \textbf{Rendimiento.}
+
+
+Dada la arquitectura de un \f y que puede ejecutar tareas de forma paralela, los \fs son candidatos excelentes para computar operaciones que realizan los procesadores digitales de señales (por sus siglas en ingles Digital-Signal-Processing llamados DSPs de aquí en adelante). Algunos DSPs son logrados en computadoras, esto causa que esos DSPs sean lentos o con una velocidad de muestreo muy lenta, dado que una computadora funciona de manera secuencial. Con un \f se pueden controlar entradas y salida a nivel de hardware propiamente, y esto ofrece tiempos de respuesta mucho más rápidos. En algunos osciloscopios se utilizan \fs en sus sistemas para realizar cómputos a velocidades increíbles.\\
+
+\item \textbf{Tiempo en llegar al mercado.}
+
+Gracias a las ventajas de diseño que ofrece un \f el experto puede probar una idea o un concepto sobre la construcción de un circuito digita, y verificarlo por su propia cuenta, sin tener que llegar a fabricar o manufacturar el IC. Muchos de los ICs convencionales que hoy se utilizan para diversas tareas (amplificadores operacionales, arreglos de flip-flops, etc.) tuvo que pasar algún tiempo hasta que un fabricante decidió manufacturarlos en masa para su venta. Por otra parte, a diseños o ideas de otros ingenieros se pueden refinar o mejorar en un FPGA y todo esto en solo unos cuantos días, ya que usando un \f se ahorra el tiempo de manufactura de un IC que está en prueba.\\\\
+La comunidad que trabaja sobre \fs existen algunos núcleos prefabricados (llamados IP cores de aquí en adelante) como lo pueden ser filtros, procesadores de datos, etc. Usando estos IP cores, el experto puede ahorrarse algo de tiempo en el diseño, por lo que también la curva de aprendizaje disminuye y la complejidad de un proyecto también.\\
+
+
+\item \textbf{Precio.}
+
+De primera mano comparar el precio de costo de fabricación de un ASIC contra la de un \f comercial es total mente diferente. Para un ASIC se requieren varios ingenieros tanto para desarrollar la arquitectura interna como su manufactura. Las soluciones basadas en \fs son bastante simples ya que en una primera parte solamente se necesita la ingeniería detrás de la arquitectura del IC, sin tener que gastar aun en la manufactura. Una vez refinado por completo el modelo puede ser manufacturado, esto puede ahorrar bastante en scrap realizado en pruebas. \\\\Los fabricantes de ICs por lo general hacen lo contrario, sin embargo la fuerte inversión inicial es justificable al manufacturar miles de chips que se venden por año. Por otra parte si solo se necesitan algunos cuantos ICs de un solo tipo un \f puede resultar en una solución abismalmente más barata.\\
+
+
+\item \textbf{Fiabilidad.}
+
+Como sabemos hay muchas soluciónes basadas en software que funcionan muy bien y que se encuentran en un entorno de programación, es obvio que estas soluciones están logradas en computadoras, las cuales como se ha comentado anteriormente cuentan con un procesador que ejecuta solo una tarea a la vez. \\\\
+Los circuitos realizados internamente en un \f se pueden considerar que son implementaciones seguras, ya que no existen sistemas operativos de por medio, además el paralelismo ofrecen un mayor rendimiento en cualquier tarea. Como podremos recordar, un sistema operativo administra recursos de una computadora para poder realizar cálculos de diferentes programas, eso implica que en una computadora algunas veces existen conflictos entre uno y otro programa debido a que el ancho de banda puede variar para ambos. El hardware implementado en un \f es preciso y dedicado para cada tarea, todos trabajando juntos al mismo tiempo. \\
+
+\item \textbf{Mantenimiento a largo plazo.}
+
+Como se ha mencionado en todo este escrito, los \fs son personalizables y actualizables en una implementación. No requieren el precio y el tiempo en rediseñar un nuevo chip. Algunas bloques con el tiempo pueden requerir una actualización, tal es el caso de los protocolos de comunicación los cuales con el tiempo requieren ciertos cambios, ya sean cambios de ``timing'', o de transferencia en la secuencia. \\\\Una máquina con un FPGA puede ser continuamente actualizable, mientra que una basada en ASICs no lo puede ser debido a que una gran parte de la electrónica requeriría ser rediseñada y verificada. 
+
+
+\end{enumerate}
+
+\section{Procesamiento de imágenes en FPGA}
+
+El procesamiento de imágenes en un FPGA es bastante distinto de entornos computacionales, y dependiendo del procesamiento que se va a realizar se necesita cierto hardware. Por lo general 
+
+\begin{enumerate}
+ \item Procesar una imagen guardada en una memoria
+ \item Procesar una imagen codificada
+ \item Procesar una imagen escaneada
+\end{enumerate}
+
+
+
+
+\subsection{Timing de video}
+hsync vsync
+
+\subsection{Ventajas y desventajas de FPGA en procesamiento de imágenes}
+Algo...
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{chapter}{Desarrollo}
+\chapter{Desarrollo}
+
+En este capitulo se muestran los componentes y la idea de la solución para el proyecto. Se empieza hablando por la idea general, y el flujo de la solución ya que el proyecto está compuesto de diferentes temas, tales como consideraciones mecánicas, eléctricas, electrónicas y computacionales. Después se explican particularmente cada sección que compone el proyecto, para el entendimiento de cada una de las consideraciones de diseño tomadas.
+
+
+\section{Sistema propuesto}
+La idea general del trabajo se puede apreciar en la figura \ref{sis}, el cual es un diagrama general del sistema, donde de manera general se compone de los siguientes componentes con las siguientes actividades particulares. continuación.
+
+\begin{itemize}
+	\item \textbf{FPGA.}\\ Encargado de las tareas relacionadas con el procesamiento de video y clasificación, ya que cuenta con un poder de computo superior a los demás componentes. Este será comandado por el microcontrolador.
+	\item \textbf{Microcontrolador.}\\ Encargado de todo el control de la maquinaria, tanto sensores como actuadores, encendido y secuencias. 
+	\item \textbf{Computadora.}\\ Utilizada para analizar y desarrollar el proyecto, sin embargo no forma parte del la maquinaria final.
+	\item \textbf{Circuitos auxiliares.} \\Encargados de interactuar con el usuario y la interconexión entre dispositivos.
+	\item \textbf{Actuadores.}\\ Se encargan de mover la fruta (motores y actuadores).
+\end{itemize}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics*[scale=0.5]{sis} 
+	\caption{Diagrama general del sistema.}
+	\label{sis}
+\end{figure}
+
+
+\section{Maquinaria de flujo de naranja}
+Esta maquinaria es la encargada de mover toda la fruta por un circuito para ser procesada. En la figura \ref{fig:diagramamaquina} se muestra un diagrama general de la misma, en ella se aprecian todos los componentes de que componen el flujo de naranja, empezando por el embudo de alimentación y terminando en la zona de fruta clasificada. Las flechas, muestran el sentido y la dirección de el flujo de las naranjas y en el caso de la flecha con textura punteada se trata de una realimentación de fruta que puede que no haya sido procesada correctamente para dar una nueva oportunidad de ser clasificada.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{edrawimas/diagramamaquina}
+	\caption{Diagrama general de maquinaria.}
+	\label{fig:diagramamaquina}
+\end{figure}
+
+A continuación se explica de manera particular cada parte de la maquinaria.
+
+\subsection{Embudo de alimentación}
+Es el inicio de del circuito de flujo de naranja, en el se dispondrá la fruta, y gracias a su forma, la cual es un embudo con una pendiende negativa, deposita la fruta en la banda de giro. Su diseño no es final, y puede mejorar bastante, ya que puede ser más larga y mucho mas grande, dependiendo de la capacidad a la que se quiera clasificar. Es un elemento puramente mecánico y no cuenta con elementos eléctricos (figura X). 
+
+
+<FOTO>
+
+\subsection{Banda de giro}
+Es una banda pequeña la cual se puede ver en la figura X, movida por un motor DC de 90V, la cual es controlada por un driver de 0.5HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje diferente a la fruta. La transferencia del giro es por medio de una banda mecánica genérica. Al final de la banda cuenta con un riel el cual proporciona un giro de 90 grados para posteriormente la fruta caer a la siguiente etapa.
+
+
+<FOTO>
+
+\subsection{Banda de traslación}
+Es una banda larga la cual se puede ver en la figura X, movida por un motor AC monofásico. Este motor tiene una velocidad constante, sin embargo la banda cuenta con mucho espacio para la fruta y el motor es de carga pesada.
+
+
+<FOTO>
+
+\subsection{Banda elevadora}
+Es una banda con paletas la cual se encarga de subir la fruta a la siguiente etapa. Es movida por un Motor AC monofásico. El diseño de la banda permite subir al rededor de 5 naranjas por paleta (esto dependiendo del tamaño de la fruta), posteriormente la fruta cae en un riel que tiene la misma estructura de la banda, la cual sirve para suministrar la siguiente etapa.
+
+
+<FOTO>
+
+\subsection{Embudo alineador}
+Es una estructura metálica la cual tiene forma de embudo con una pendiente negativa, y unos rieles intermedios la cual se muestra en la figura X. Esta estructura es la encargada de hacer que la fruta sea alineada o colocada en hilera para posteriormente alimentar la banda principal, esto con el fin de evitar atascos en el flujo de la naranja. Es un elemento puramente mecánico por lo que no lleva motores.
+
+
+<FOTO>
+
+\subsection{Banda principal}
+Es una estructura con un riel compuesta de rodillos capaces de crear zocalos de fruta, los cuales sirven para transportar fruta por toda la banda principal. El riel es movido por un motor DC de 90V, la cual es controlada por un driver de 0.5HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje de diferente velocidad a la fruta. En la figura X se puede ver una fotografía da la banda, y en ella esta montada la zona de actuadores y la cámara de proceso que se describirán a continuación.
+
+
+<FOTO>
+
+\subsection{Cámara de proceso}
+Es una estructura metálica en la cual se contiene un ambiente con iluminación constante con LEDs de color blanco, toda la iluminación externa es eliminada en este lugar. en la entrada de la cámara de proceso se encuentra un sensor de presencia, para detectar si una naranja está por entrar, por otra parte en la parte central y superior se encuentra la cámara digital que se conecta al FPGA. Lo anterior se puede apreciar en la figura X.
+
+
+<FOTO>
+
+\subsection{Zona de actuadores}
+Se trata de una estructura pequeña montada sobre la banda principal (figura X), la cual alberga actuadores eléctricos los cuales empujan la naranja hacia la siguiente etapa, estos serán controlados por el microcontrolador mediante relevadores de estado sólido. La estructura es puramente ajustable, para colocarse cada actuador como sea conveniente en la posición conveniente.
+
+
+<FOTO>
+
+\subsection{Zona de fruta Clasificada}
+Es una zona que aun no se construye. Su función será recolectar la fruta ya clasificada, en diferentes rieles, se tiene un diseño preliminar el cual se puede ver en la figura X.
+
+
+<FOTO>
+
+
+\section{Flujo de fruta en maquinaria}
+
+En la figura \ref{fig:diagramaflujomaquina} se muestra un diagrama de flujo el cual explica el proceso realizado por la maquinaria en general. Primeramente se recibe la fruta no clasificada, la cual debe haber sido lavada con anterioridad, puede tener polvo, sin embargo no puede estar manchada con lodo o algún agente que haga que cambie de color la misma, ya que esto puede afectar el rendimiento de la clasificación. Posteriormente, la fruta es suminstrada al circuito de bandas la cual va a ser la encargada de alinear y acomodar la fruta para su procesamiento de video y decidir la clasificación que se esté tomando. Si la clasificación es válida, pasará a la zona de actuadores y al final del proceso, de otra manera la fruta será suminstrada nuevamente al circuito de bandas para ser procesada nuevamente.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{edrawimas/diagramaflujomaquina}
+	\caption{Diagrama de flujo de procesamiento de fruta en la maquinaria.}
+	\label{fig:diagramaflujomaquina}
+\end{figure}
+
+
+\section{Sistema eléctrico/electrónico}
+En esta sección se explican los componentes eléctricos y electrónicos y su conexión propuesta. El sistema eléctrico/electrónico general está compuesto por diversas partes las cuales serán explicadas a detalle en las siguientes secciones. Primeramente veamos un esquema general del sistema (figura \ref{fig:diagramagralelectrico}) en donde se puede apreciar los componentes. Las flechas describen el flujo de señales que son emitidas o recibidas en el microcontrolador (MCU), el cuál es el que maneja los estimulos proporcionados por el los elementos de control y medición, además maneja las salidas para estimular los componentes mecánicos y de procesamiento de video. Se puede apreciar también que algunos componentes solo se usarán como auxiliares en el desarrollo (DEBUG), por lo que no forman parte del sistema final y cuando estos son eliminados las flechas con textura punteadas son utilizadas.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{edrawimas/diagramagralelectrico}
+	\caption{Diagrama eléctrico/electrónico general.}
+	\label{fig:diagramagralelectrico}
+\end{figure}
+
+A continuación será explicada cada parte en particular.
+
+
+\subsection{Elementos mecánicos}
+\subsubsection{Actuadores}
+Como se comentó en la sección anterior, son actuadores eléctricos de AC controlados mediante actuadores de estado sólido (incluidos en la etapa de potencia), esto para mejorar la velocidad de conmutación ya que necesitan ser rápidos.
+
+\subsubsection{Motores}
+Las características de los motores son los siguientes se pueden ver en la tabla \ref{motorestab}.
+
+\begin{table}
+	\caption{Caracteristicas de motores}
+	\label{motorestab}
+\begin{tabular}{ccc}
+	\textbf{Posición} & \textbf{Caracteristicas eléctricas} & \textbf{Controlado por} \\ 
+	\hline 
+	Banda principal & 90VDC 0.5HP & Driver de contacto seco \\ 
+	\hline 
+	Banda de giro & 90VDC 0.5HP & Driver de contacto seco \\ 
+	\hline 
+	Banda elevadora & 120 VAC 1HP & Relevador mecánico activado por MCU \\ 
+	\hline 
+	Banda de traslación & 120 VAC 1 HP & Relevador mecánico activado por MCU\\ 
+\end{tabular} 
+\end{table}
+
+Los drivers de motores DC cuentan con rampa de aceleración para una transición suave y el contacto es controlado por un relevador mecánico activado por el MCU.
+
+
+\subsubsection{Etapa de potencia}
+La etapa de potencia está encargada de el accionamiento de los elementos anteriores, sus conexiones se pueen observar en la figura \ref{fig:etapapotencia}, en donde se puede ver el uso de los relevadores mecánicos y de estado sólido.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{edrawimas/etapapotencia}
+	\caption{Diagrama de conexión de eleméntos mecánicos}
+	\label{fig:etapapotencia}
+\end{figure}
+
+
+\subsection{Procesador de video}
+\subsubsection{Cámara digital}
+Es capaz de grabar a una resolución de 1080p, a 60 fps, con salida de HDMI. Está colocada en la cámara de proceso y alimenta con video al FPGA.
+\subsubsection{FPGA}
+Se trata de la tarjeta de desarrollo Industrial Video Processing Kit (IVPK) de Xilinx, con un FPGA Spartan-6 de nivel industrial, además cuenta con una tarjeta I/O de video con puertos HDMI. Su capacidad es mayor a la requerida en el proyecto. Cuenta con su propia fuente de alimentación externa. Actualmente está descontinuada.
+
+
+\subsection{Elementos auxiliares}
+Estos elementos no forman parte del proyecto final, sin embargo son parte fundamental del desarrollo de etapas computacionales y para para conocer algunos datos de la maquinaria.
+
+\subsubsection{Capturadora}
+Utilizada para la captura de los datasets necesarios para generar los modelos de ADD.
+
+\subsubsection{Computadora}
+La computadora es utilizada para recabar cierta información útil, tal como la frecuencia del sensor de sincronía y el resultado de la clasificación.
+
+\subsection{Elementos de control y medición}
+Estos elementos serán los encargados de la sincronización y activación de secuencias de encendido de la maquinaria.
+
+\subsubsection{Tablero de control}
+Este se encarga del control general del sistema y de lamparas de señalización para el usuario el cual se puede ver en la figura X. Cuenta con los siguientes componentes:
+
+\textbf{ENTRADAS}
+\begin{itemize}
+	\item Botón de Inicio
+	\item Botón de paro de emergencia
+	\item Selector de 3 posiciones.
+	\item x2 Botones de propósito general
+\end{itemize}
+
+\textbf{SALIDAS}
+\begin{itemize}
+	\item x3 Lamparas de señalización.
+\end{itemize}
+
+Para el proyecto solo se utilizaron los botones de inicio y paro. Los demás componentes están disponibles para desarrollos futuros a este trabajo.
+
+<FOTO> 
+
+\subsubsection{Sensores}
+Los sensores en este proyecto solo son 2, los cuales son de proximidad fotoeléctrico Infrarrojo (E18-D80NK), su funcionamiento es detectar si existe un obstáculo frente al sensor, el obstáculo debe estar dentro del umbral de distancia el cual es ajustable desde 1cm hasta 100cm, si existe el obstáculo dentro del umbral, entonces el sensor mandará una señal de 5V. Los sensores tienen los siguientes propósitos:
+
+\begin{enumerate}
+	\item \textbf{Detección de naranja.}\\
+	Está colocado dentro de la cámara de proceso, justamente en el primer zócalo donde entra la fruta. Su actividad principal es detectar si en el zócalo de entrada hay una naranja, el zócalo de detección está desplazado por 3 zócalos de donde se encuentra el objetivo central de la cámara digital, esto con el objetivo de no interferir en la imagen suministrada al procesador de video.
+	\item \textbf{Sincronía con banda principal.}\\
+	Está colocado en la banda principal cerca de la zona de actuadores, aunque puede ser instalado en cualquier parte de la banda principal. Este se encarga de sensar cada zócalo de naranja, y con ello obtener una onda cuadrada, la cual servirá como disparador para el inicio de una clasificación.
+\end{enumerate} 
+
+En conjunto los sensores definen en que momento procesar la imagen obtenida por la cámara y si es necesario realizar el proceso, ya que si no hay una naranja en el objetivo del zócalo no es necesario realizarlo y así ahorrar recursos computacionales.
+
+
+\subsubsection{Controlador General}
+El MCU usado para el proyecto es un ATMEGA 2560, el cual cuenta con los GPIO necesarios con los pins de interrupciones necesarias. En la figura \ref{fig:pins} se puede apreciar un diagrama con los tipos de conexiones utilizadas.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{edrawimas/pins}
+	\caption{Configuracion de terminales en MCU}
+	\label{fig:pins}
+\end{figure}
+
+Se optó por un puerto SPI en el FPGA debido a la cantidad reducida de GPIOs en la tarjeta IVPK, debido a que el MCU es el maestro de la conexión, se pueden disparar instrucciones desde el microcontrolador hacia el FPGA, para iniciar una clasificación, esperar un momento y recibir la respuesta.
+
+En la figura \ref{fig:mcuprog} se puede ver un diagrama de flujo del programa que contiene el MCU. Es un diagrama de flujo reducido, debido a que faltan la parte de la comunicación con la computadora y el calculo de frecuencia la señal de sincronia, sin embargo es un diagrama muy cercano a la realidad.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{edrawimas/MCUprog}
+	\caption{Diagrama de flujo del programa del MCU}
+	\label{fig:mcuprog}
+\end{figure}
+
+
+\section{Arquitectura de procesador de video}
+
+Esquema general de la arquitectura
+
+\subsection{Módulo general de comunicación}
+\subsubsection{Puerto SPI}
+
+
+\subsection{Módulo Clasificador}
+
+\subsubsection{Módulo buffer de pixeles}
+
+\subsubsection{Módulo convertidor RGB a escala de grises}
+
+\subsubsection{Módulo convertidor RGB a HSV}
+
+\subsubsection{Módulo segmentador}
+Explicar caracteristicas generales del modelo resultante
+
+\subsection{Módulo clasificador de colores}
+Explicar caracteristicas generales del modelo resultante
+
+\section{Modelo ADD de segmentación}
+\textcolor{red}{En esta seccion falta agregar de lo que se hizo en el articulo cientifico Publicado - INCOMPLETO}
+
+Se desarrolló un modulo hardware para la segmentación de naranjas, el cual fué desarrollado con partes de la actividad anterior. Con el set de datos obtenidos, se realizó un modelo de árbol de decisión. Se realizaron las siguientes actividades:
+
+\begin{enumerate}
+	\item \textbf{Preparación de un set de datos de pixeles.}\\
+	De la actividad anterior se obtuvo un set de datos a partir de las imágenes con el cual se pueden generar modelos clasificadores, para una vista preeliminar de implementación en hardware.
+	\item \textbf{Modelo basado en árbol de decisión para clasificación de pixeles.}\\
+	Se generó y probo un modelo de árbol de decisión obteniendo una precisión de más del 90\%.
+	\item \textbf{Módulos convertidores.}\\
+	Se desarrollaron módulos necesarios para la conversión de características, necesarias para el árbol generado. Todo esto implementado en hardware.
+	\item \textbf{Módulo clasificador.}\\
+	Se desarrolló el clasificador en hardware con lenguage VHDL. Se sintetizó y se probó en la plataforma correspondiente.
+	\item \textbf{Medición de proceso.}\\
+	Por medio de una capturadora de video por puerto HDMI, se obtuvieron videos de resultado para la medición del módulo, resultando en una precisión de 94.7\% con una respuesta en tiempo real.
+	
+	De la metodología anterior se obtuvo:
+	
+	\begin{enumerate}
+		\item Un set de datos referente a la clasificación de pixeles.
+		\item Un módulo de hardware de segmentación funcional responsivo en tiempo real.
+		\item La escritura de un articulo científico (en proceso de aprobación).
+	\end{enumerate}
+	\subsection{Set de datos}
+	\subsection{Entrenamiento}
+	
+	\section{Modelo ADD clasificador de color}
+	\textcolor{red}{En esta seccion falta agregar de lo que se hizo en el primer articulo cientifico - INCOMPLETO}
+	
+	Para tener un mejor acercamiento del problema, primeramente se atacó por vía software. Se realizó un clasificador por color y tamaño por medio de diferentes softwares:
+	
+	\begin{itemize}
+		\item Open CV. Para el procesamiento de imágenes y extracción de características.
+		\item Python (scikit-learn). Para la experimentación de diferentes clasificadores.
+		\item Weka. Para el mismo fin que el punto anterior.
+	\end{itemize}
+	
+
+Se realizaron las siguientes actividades:
+
+\begin{enumerate}
+	\item \textbf{Preparación de hardware de pruebas (figura \ref{maq}).}\\Se trata de una máquina industrial en donde está colocada una cámara digital en un ambiente controlado donde se hacen pasar naranjas a gran velocidad (alrededor de 2 naranjas por segundo).
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics*[scale=0.275]{maq} 
+		\caption{Fotografía del hardware de pruebas.}
+		\label{maq}
+	\end{figure}
+	
+	\item \textbf{Grabación de proceso industrial.}\\Fue capturado un video para utilizarse en pruebas para la realización del clasificador.
+	
+	
+	\item \textbf{Métodos sencillos de extracción de características.} Se desarrollaron métodos que pueden ser fácilmente implementables a hardware los cuales pueden ser usados para extraer características de una imagen. 
+	
+	En la figura \ref{framito} se muestra como es que es detectada la naranja, apuntando su centroide. De esta forma, queda emulada la función de un microcontrolador detectando la presencia de una fruta en la escena. 
+	
+	En la figura \ref{anali} se puede apreciar un análisis de las características del canal H en diferentes muestras. Esto se realizó con el fin de encontrar patrones en los datos.
+	
+	\begin{figure}[!h]
+		\centering
+		\includegraphics*[scale=0.30]{framito} 
+		\caption{Detección de naranja sobre video.}
+		\label{framito}
+	\end{figure}
+	
+	\newcommand{\sis}{0.37}
+	
+	\begin{figure}[!h]
+		\centering
+		\subfloat[Naranja]{\includegraphics[scale = \sis]{narplot} \label{np}} \hfill
+		\subfloat[Naranja (Cerca del umbral)]{\includegraphics[scale = \sis]{plotnar2} \label{np2}} \\
+		\subfloat[Verde (Cerca del umbral)]{\includegraphics[scale = \sis]{goplot}} \hfill
+		\subfloat[Verde]{\includegraphics[scale = \sis]{verplot}}\\
+		\caption{Resultados análisis}
+		\label{anali}
+	\end{figure}
+	
+	\item \textbf{Preparación de un set de datos.}\\Utilizados para el entrenamiento y prueba de diferentes clasificadores.
+\end{enumerate}
+
+De la metodología anterior se obtuvo:
+\begin{enumerate}
+	\item Un set de datos el cual se explica de mejor manera en la tabla \ref{datiquis}.
+	
+	\begin{table}[!h]
+		\caption{Cantidad de muestras.}
+		\label{datiquis}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline
+			\textbf{Clase} & \textbf{Muestras} \\ \hline
+			Chica          & 459               \\ \hline
+			Mediana        & 1056              \\ \hline
+			Grande         & 370               \\ \hline
+			Naranja        & 1569              \\ \hline
+			Verde          & 286               \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\item Diferentes clasificadores por color con una precisión de más del 90\% como se muestra en la tabla \ref{menosr}.
+	
+	\begin{table}[!h]
+		\centering
+		\caption{Resultados de clasificadores por color.}
+		\label{menosr}
+		\begin{tabular}{|c|l|c|}
+			\hline
+			\textbf{Plataforma}              & \textbf{Clasificador}  & \textbf{Precisión} \\ \hline
+			\multirow{5}{*}{Weka (java)}     & J48 -C 0.25            & 95.53\%            \\ \cline{2-3} 
+			& J48 -C 0.1             & 95.71\%            \\ \cline{2-3} 
+			& RandomForest -Trees 10 & 94.28\%            \\ \cline{2-3} 
+			& MLP                    & 93.03\%            \\ \cline{2-3} 
+			& Adaboost               & 94.64\%            \\ \hline
+			\multirow{5}{*}{Python (scikit)} & DecisionTree -Depth 3  & 94.64\%            \\ \cline{2-3} 
+			& DecisionTree -Depth 5  & 93.75\%            \\ \cline{2-3} 
+			& RandomForest -Trees 10 & 92.85\%  \\ \cline{2-3}  
+			& Adaboost -n 3          & 95.53\%            \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	
+	\item Diferentes clasificadores por tamaño con una precisión de más del 98\% como se muestra en la tabla \ref{resuAr}.
+	
+	\begin{table}[!h]
+		\centering
+		\caption{Resultados de clasificadores por tamaño.}
+		\label{resuAr}
+		\begin{tabular}{|c|l|c|}
+			\hline
+			\textbf{Plataforma}              & \textbf{Clasificador}  & \textbf{Precisión} \\ \hline
+			\multirow{4}{*}{Weka (java)}     & J48 -C 0.25            & 99.89\%            \\ \cline{2-3} 
+			& Random forest          & 100\%              \\ \cline{2-3}
+			& MLP                    & 99.25\%            \\ \cline{2-3}
+			& Adaboost -n 10         & 100\%              \\ \hline
+			\multirow{4}{*}{Python (scikit)} & DecisionTree -Depth 3  & 100\%              \\ \cline{2-3} 
+			& RandomForest -Trees 10 & 100\%              \\ \cline{2-3}
+			& Adaboost -n 10         & 100\%              \\ \hline
+		\end{tabular}
+	\end{table}
+	
+\end{enumerate}
+
+De estos experimentos se comprueba que el uso de un árbol de decisión es un buen candidato como clasificador ya que solo lo conforman comparadores digitales que son fácilmente implementables en hardware.\\
+
+\subsection{Set de datos}
+\subsection{Entrenamiento}
+
+
+\section{Arquitectura genérica de árbol de decisión}
+
+Explicar que en serie no esta bien y mostrar la idea en paralelo y sus ventajas
+
+\subsection{HDL autogenerado}
+
+Procesamiento de texto
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+%\end{chapter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Resultados y discusión}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Conclusiones}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Trabajos futuros}
+algo aqui
+
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\appendix
+%\bibliographystyle{apalike}
+\bibliographystyle{ieeetr}
+\bibliography{ArchivoBiblio}
+
+
+\end{document}
