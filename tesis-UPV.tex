@@ -1275,7 +1275,7 @@ El MCU usado para el proyecto es un ATMEGA 2560, el cual cuenta con los GPIO nec
 
 Se optó por un puerto SPI en el FPGA debido a la cantidad reducida de GPIOs en la tarjeta IVPK, debido a que el MCU es el maestro de la conexión, se pueden disparar instrucciones desde el microcontrolador hacia el FPGA, para iniciar una clasificación, esperar un momento y recibir la respuesta.
 
-En la figura \ref{fig:mcuprog} se puede ver un diagrama de flujo del programa que contiene el MCU. Es un diagrama de flujo reducido, debido a que faltan la parte de la comunicación con la computadora y el calculo de frecuencia la señal de sincronia, sin embargo es un diagrama muy cercano a la realidad.
+En la figura \ref{fig:mcuprog} se puede ver un diagrama de flujo del programa que contiene el MCU. Es un diagrama de flujo reducido, debido a que faltan la parte de la comunicación con la computadora y el calculo de frecuencia la señal de sincronia, sin embargo es un diagrama muy cercano a la realidad. En una primera instancia se detecta el pulso de inicio y paro para dar a lugar las secuencias de encendido y apagado, ya que la maquinaria es de alta potencia se necesitan encender motores a tiempos espaciados, ya que de otra manera se producen transitorios de alta corriente que pueden dañar la instalación eléctrica. Después se detecta el pulso de sincronia, y al ser detectado, se sensa si hay una naranja en el zócalo de la cámara de proceso, de haberlo, se manda al FPGA una instrucción de procesamiento, se espera un pulso proveniente del FPGA para saber que ya ha acabado el procesamiento, esto debe de durar alrededor de 64ms ya que es la tasa de refresco que tiene la cámara es de 16ms por cuadro y el retraso es de 4 cuadros posteriores, y debe de analizar la imagen en el momento justo. Al recibir el pulso de termino, el MCU recibe el resultado de la clasificación por medio de un byte, el cual contiene la información de tamaño y color de la fruta. Dependiendo de la respuesta, se computa el movimiento de empuje para el actuador.
 
 \begin{figure}
 	\centering
@@ -1287,7 +1287,18 @@ En la figura \ref{fig:mcuprog} se puede ver un diagrama de flujo del programa qu
 
 \section{Arquitectura de procesador de video}
 
-Esquema general de la arquitectura
+La arquitectura propuesta en el proyecto está compuesta de varias partes, las cuales independientemente cumplen con una tarea en específico.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{edrawimas/arquitectura}
+	\caption{}
+	\label{fig:arquitectura}
+\end{figure}
+
+
+
 
 \subsection{Módulo general de comunicación}
 \subsubsection{Puerto SPI}
