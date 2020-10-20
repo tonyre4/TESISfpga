@@ -1,0 +1,13 @@
+Instalar Latex en Linux:
+sudo apt-get install texlive-full
+
+Para compilar el demo debe abrir una terminar el este directorio y teclear:
+bash Z.sh
+
+Si esta instalado todo correctamente, mostrará un PDF con el documento generado
+
+
+Hacer las modificaciones que considere necesarias, respetando las imágenes en el directorio graphics (en formato PNG), el texto de la diapositiva en el archivo .tex del directorio individual_slides y la bibliografía en el archivo references.bib del directorio raiz
+
+* Deben incluir por lo menos 5 bibliografías !!!!
+* Las faltas de ortografía serán seriamente sancionadas !!!

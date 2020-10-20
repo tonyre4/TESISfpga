@@ -1,0 +1,52 @@
+%% Font & Encoding
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[scaled=0.8]{beramono}  % for monospaced font
+\usepackage{microtype}		% micro-typographic aspects of the fonts
+\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+%% incompabtible with Biblatex
+% \usepackage{ucs}
+% \usepackage[utf8x]{inputenc}
+%% compatible with Biblatex
+\usepackage[utf8]{inputenc}
+
+
+
+%% Language
+%\usepackage[german]{babel}
+%\usepackage{german}
+\usepackage[english]{babel}
+\usepackage{listings}
+%\lstset{language=Java,
+%	basicstyle=\footnotesize\ttfamily,
+%    keywordstyle=\footnotesize\color{blue}\ttfamily	
+%}
+
+\usepackage{color}
+
+% Colores para Java
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+% Colores para XML
+\definecolor{maroon}{rgb}{0.5,0,0}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+
+\lstdefinelanguage{XML}
+{
+  basicstyle={\tiny\ttfamily},
+  morestring=[s]{"}{"},
+  morecomment=[s]{?}{?},
+  morecomment=[s]{!--}{--},
+  commentstyle=\color{darkgreen},
+  moredelim=[s][\color{black}]{>}{<},
+  moredelim=[s][\color{red}]{\ }{=},
+  stringstyle=\color{blue},
+  identifierstyle=\color{maroon}
+}
+
+ 
+
+ 

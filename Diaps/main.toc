@@ -1,0 +1,28 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {english}{}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{1}{Orange production}{3}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{2}{Computer vision and machine learning}{4}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{3}{Machine learning and Decision Trees}{5}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{4}{FPGA implementation advantages}{6}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {1}{5}{Orange offer and demand}{7}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{Proposed Architecture}{11}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{1}{Project platform}{12}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{2}{HW/SW components}{16}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{3}{Project methodology}{18}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@subsectionintoc {2}{4}{Data set acquisition procedure}{19}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{Results}{29}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Acknowledgment}{40}{0}{4}
