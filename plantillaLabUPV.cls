@@ -1028,10 +1028,27 @@
       \begin {center}
         \sffamily
         \begin{tabular}{cc}
-          \ hspace{4cm}
+          \hspace{2cm}
+
+          %\begin{minipage}{3cm}
+          %  \vspace{-1cm}\hspace{-2.5cm}\includegraphics[scale=0.15]{LogoUPV_2.png}
+          %\end{minipage}&
+          %\vspace{-.5cm}
+
+          %\begin{minipage}{9cm}
+          %    \centering
+          %     \vspace{2cm}{\hspace{-4cm} \large\textbf{UNIVERSIDAD POLIT\'{E}CNICA DE VICTORIA}}\\
+              %\vspace{2cm}{\hspace{-3cm} \large\textsc{uni uni uni}}\\
+              %  {\hspace{-3cm} \large\textsc{del}}\\
+          %       \vspace{.1cm}{\hspace{-3cm} \large \textsc{ }} \\
+          %\end{minipage}
+
+          %\begin{minipage}{3cm}
+          %       \vspace{-1cm}\hspace{-0.8cm}\includegraphics[scale=0.3]{LogoPOLIS.png}
+          %\end{minipage}
 
           \begin{minipage}{3cm}
-            \vspace{-1cm}\hspace{-2.5cm}\includegraphics[scale=0.8]{LogoUPV_2.png}
+            \vspace{1cm}\hspace{-3.08cm}\includegraphics[scale=0.14]{Logo_UP_Victoria.png}
           \end{minipage}&
           \vspace{-.5cm}
 
@@ -1044,7 +1061,7 @@
           \end{minipage}
 
           \begin{minipage}{3cm}
-                 \vspace{-1cm}\hspace{-0.8cm}\includegraphics[scale=0.8]{LogoPOLIS.png}
+                 \vspace{1cm}\hspace{-0.6cm}\includegraphics[scale=0.25]{UTYP.png}
           \end{minipage}
 
           \end{tabular}

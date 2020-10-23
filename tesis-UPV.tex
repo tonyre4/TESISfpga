@@ -522,70 +522,209 @@ Un árbol puede ser entrenado dividiendo la fuente del set de datos de entrenami
 El algoritmo de Dicotomización Iterativa 3 (en ingles Iterative Dichotomiser 3) inventado por Ross Quinlan es llamado así debido que de manera iterativa, divide las caracteristicas de cada grupo de muestras. El algoritmo, realiza un árbol de desición partiendo de las caracteristicas más importantes, y separando de lo más general a lo más particular, por lo que cada iteración se genera un nuevo nodo u hoja dictaminando la clasificación o si se debe realizar nuevamente una separación entre muestras.
 
 Para la compresión de este algoritmo veamos la tabla \ref{tabliqui}
-la cual contiene un data set donde 
+la cual contiene un data set falso donde se determina si una persona padece una gripe común. 
 
 \begin{table}[h]
-	\caption{Data set de X.}
+	\caption{Data set falso de prueba.}
 	\label{tabliqui}
 	\centering
-	\begin{tabular}{|c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|}
 		\hline
-		\# de clip & Velocidad & Set \\
-		\hline
-		1 & Baja & Entrenamiento \\
-		\hline
-		2 & Baja & Entrenamiento \\
-		\hline
-		3 & Baja & Entrenamiento \\
-		\hline
-		4 & Media & Entrenamiento \\
-		\hline
-		5 & Media & Test \\
-		\hline
-		6 & Media & Test \\
-		\hline
-		7 & Media & Entrenamiento \\
-		\hline
-		8 & Alta & Test \\
-		\hline
-		9 & Alta & Entrenamiento \\
-		\hline
-		10 & Alta & Entrenamiento \\
-		\hline
+		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Fiebre} & \textbf{Gripa} \\ \hline
+		1           & No           & No                                                                     & Si              & No             \\ \hline
+		2           & Si           & No                                                                     & Si              & Si             \\ \hline
+		3           & Si           & No                                                                     & No              & No             \\ \hline
+		4           & Si           & Si                                                                     & No              & Si             \\ \hline
+		5           & No           & Si                                                                     & No              & No             \\ \hline
+		6           & Si           & No                                                                     & Si              & Si             \\ \hline
+		7           & No           & Si                                                                     & Si              & Si             \\ \hline
+		8           & No           & No                                                                     & No              & No             \\ \hline
+		9           & No           & Si                                                                     & Si              & Si             \\ \hline
+		10           & No           & Si                                                                     & No              & No             \\ \hline
+		11          & Si           & Si                                                                     & No              & Si             \\ \hline
+		12          & No           & Si                                                                     & No              & No             \\ \hline
+		13          & Si           & No                                                                     & No              & No             \\ \hline
+		14          & Si           & Si                                                                     & Si              & Si             \\ \hline
+		15          & Si           & Si                                                                     & No              & Si             \\ \hline
 	\end{tabular}
 \end{table}
+
+El algoritmo selecciona la mejor caracteristica en cada paso cuando se construye un AD, para eso hay que encontrar la \textbf{ganancia} de cada característica, en este caso Tos, Escurrimiento nasal y Fiebre. La ganancia describe reducción en la entropía, es decir, mide que tan bien separa una característica entre los dos grupos de cada clase. Recordemos que la \textbf{entropía} mide el desorden del data set, será cercana a 0 cuando todos los miembros de la misma clase comparten la misma cantidad de muestras. La entropia y la ganancia son calculadas de la siguiente manera:
+
+ $$E(S) = -\sum_{i=1}^{i=n} p_i log_{2}(p_i)$$
+ $$G(S,A)= E(S) - \sum\frac{|S_v|}{|S|} E(S_v)$$
+ 
+ Donde:\\
+ $E$ es la entropía\\
+ $S$ el data set\\
+ $n$ el número de clases\\
+ $p_i$ la probabilidad de la clase $i$\\
+ $G$ es la ganancia\\
+ $|S_v|$ el número de muestras que tiene el valor $v$ \\
+ $|S|$ el número total de muestras (o filas) del data set completo\\
+ 
+ El algoritmo realiza el siguiente orden: Primero, se calcula la ganancia de cada característica. En segundo se consideran que todas las filas no pertenecen a la misma clase, dividiendo el data set en partes, usando la característica con mayor ganancia. En tercero, se instancia un nodo con la característica de mayor ganancia. En cuarto, si todas las filas pertenecen a la misma clase, se deja el nodo actual como una hoja del AD. Y por último, se repite para las siguientes características de manera iterativa hasta quedar con nodos hoja en el AD.
+ 
+ Para verlo de una mejor manera, calculemos la entropía de nuestro data set:
+ 
+  $$E(S) = - \left[\frac{8}{15} log_{2}\left(\frac{8}{15}\right)\right] - \left[\frac{7}{15} log_{2}\left(\frac{7}{15}\right)\right] = 0.4837 + 0.5131 = 0.9968$$
+ 
+ Donde 8 muestras del data set son afirmativos en gripa (del primer término), 7 los que no (del segundo término), y 15 las muestras totales. Tenemos que la entropía se acerca a 1, por lo que quiere decir que tenemos casi igual de repartidas de las 2 clases.
+ 
+ Para calcular la ganancia de la caracteristica "Tos" primero se divide el data set por la cantidad de clases que existan en la caracteristica, en este caso Si y No, correspondiendo la tabla \ref{TosSi} y \ref{TosNo}
+ 
+ \begin{table}[h]
+ 	\caption{Muestras que son positivas en característica "Tos".}
+ 	\label{TosSi}
+ 	\centering
+ 	\begin{tabular}{|c|c|c|c|c|}
+ 		\hline
+ 		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Fiebre} & \textbf{Gripa} \\ \hline
+ 		2           & Si           & No                                                                     & Si              & Si             \\ \hline
+ 		3           & Si           & No                                                                     & No              & No             \\ \hline
+ 		4           & Si           & Si                                                                     & No              & Si             \\ \hline
+ 		6           & Si           & No                                                                     & Si              & Si             \\ \hline
+ 		11          & Si           & Si                                                                     & No              & Si             \\ \hline
+ 		13          & Si           & No                                                                     & No              & No             \\ \hline
+ 		14          & Si           & Si                                                                     & Si              & Si             \\ \hline
+ 		15          & Si           & Si                                                                     & No              & Si             \\ \hline
+ 	\end{tabular}
+ \end{table}
+
+\begin{table}[h]
+	\caption{Muestras que son negativas en característica ''Tos''.}
+	\label{TosNo}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Fiebre} & \textbf{Gripa} \\ \hline
+		1           & No           & No                                                                     & Si              & No             \\ \hline
+		5           & No           & Si                                                                     & No              & No             \\ \hline
+		7           & No           & Si                                                                     & Si              & Si             \\ \hline
+		8           & No           & No                                                                     & No              & No             \\ \hline
+		9           & No           & Si                                                                     & Si              & Si             \\ \hline
+		10           & No           & Si                                                                     & No              & No             \\ \hline
+		12          & No           & Si                                                                     & No              & No             \\ \hline
+	\end{tabular}
+\end{table}
+ 
+ Al separarlas calculamos la entropia por cada parte del set de la siguiente manera.
+ 
+ $ |S| = 15$\\
+ Para $v =$ Si, $|S_{Si}| = 8$ 
+ $$E(S_{Si}) = - \left[\frac{6}{8} log_{2}\left(\frac{6}{8}\right)\right] - \left[\frac{2}{8} log_{2}\left(\frac{2}{8}\right)\right] = 0.3112 + 0.5 = 0.81$$
+ 
+ Para $v =$ No, $|S_{No}| = 7$ 
+ $$E(S_{No}) = - \left[\frac{2}{7} log_{2}\left(\frac{2}{7}\right)\right] - \left[\frac{5}{7} log_{2}\left(\frac{5}{7}\right)\right] = 0.5163 + 0.3467 = 0.863$$
+
+Y se calcula la ganancia de la característica:
+
+$$G(S,Tos) = E(S) - \left[\left(\frac{|S_{Si}|}{|S|} E(S_{Si})\right) \right] - \left[\left(\frac{|S_{No}|}{|S|} E(S_{No})\right) \right] $$
+
+$$G(S,Tos) = 0.9968 - \left[\frac{8}{15} (0.81) \right] - \left[\frac{7}{15} (0.863) \right] = 0.9968 - 0.432 - 0.402 = 0.1628$$
+
+Para las otras características se obtiene:
+
+$$G(S,Esc\_Nas) = 0.0794$$
+$$G(S,Fiebre) = \textbf{0.1859}$$
+
+Ahora como vemos la característica ''Fiebre'' es la que separa mejor las clases y tomamos como nodo raíz a esa característica con lo que se tendría el árbol como se muestra en la figura \ref{arbolito}.
+
+\begin{figure}[h] 
+	\centering 
+	\includegraphics[scale=.4]{edrawimas/arbolito} 
+	\caption{Inicio de AD de ejemplo.} 
+	\label{arbolito} 
+\end{figure}
+
+Para continuar, ahora separamos S en dos subsets de Si y No, las cuales serán nuestras nuevas S, para cada rama, veamos el caso del subset Si en la tabla \ref{FiebreSi}, donde ahora se tendrá que calcular cual de las dos caracteristicas restantes es mejor para definir la clase, por lo que se calculan de nuevo las ganancias, obteniendo la misma ganancia para ambos casos ya que hay igual muestras repartidas.
+
+\begin{table}[h]
+	\caption{Data set falso de prueba.}
+	\label{FiebreSi}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Fiebre} & \textbf{Gripa} \\ \hline
+		1           & No           & No                                                                     & Si              & No             \\ \hline
+		2           & Si           & No                                                                     & Si              & Si             \\ \hline
+		6           & Si           & No                                                                     & Si              & Si             \\ \hline
+		7           & No           & Si                                                                     & Si              & Si             \\ \hline
+		9           & No           & Si                                                                     & Si              & Si             \\ \hline
+		14          & Si           & Si                                                                     & Si              & Si             \\ \hline
+	\end{tabular}
+\end{table}
+
+Se repite el algoritmo para cada rama del árbol con su correspondiente subset sucesivamente, en el caso para la rama afirmativa se muestra la continuación del árbol en la figura \ref{arbolitoito}, donde los nodos hoja, se muestran con óvalos.
+
+\begin{figure}[h] 
+	\centering 
+	\includegraphics[scale=.4]{edrawimas/arbolitoito} 
+	\caption{Rama completa de AD de ejemplo.} 
+	\label{arbolitoito} 
+\end{figure}
+
 
 
 \subsection{Algoritmo de entrenamiento C4.5}
 %https://link.springer.com/article/10.1007/BF00993309
 
 El algoritmo de entrenamiento C4.5 también llamado J48, es un algoritmo para construir ADs. Es el sucesor del algoritmo ID3 creado por J. Ross Quinlan, y es uno de los algoritmos para ADs más populares \cite{c45salz}. 
+En este algoritmo tiene la ventaja de aceptar valores numéricos, veamos la tabla \ref{tabliqui2} en donde la columna de ''Fiebre'' se ha cambiado por ''Temperatura'' en valores continuos, Para la realización del AD, siempre que sean valores nominales, se aplicará el algoritmo ID3, sin embargo para valores continuos realiza el siguiente procedimiento:
 
+\begin{table}[h]
+	\caption{Data set falso de prueba.}
+	\label{tabliqui2}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Temperatura(°C)} & \textbf{Gripa} \\ \hline
+		1           & No           & No                                                                     & 40.1              & No             \\ \hline
+		2           & Si           & No                                                                     & 39.6              & Si             \\ \hline
+		3           & Si           & No                                                                     & 36.1              & No             \\ \hline
+		4           & Si           & Si                                                                     & 35.9              & Si             \\ \hline
+		5           & No           & Si                                                                     & 36.2              & No             \\ \hline
+		6           & Si           & No                                                                     & 39.7              & Si             \\ \hline
+		7           & No           & Si                                                                     & 38.8              & Si             \\ \hline
+		8           & No           & No                                                                     & 37.0              & No             \\ \hline
+		9           & No           & Si                                                                     & 40.2              & Si             \\ \hline
+		10           & No           & Si                                                                    & 36.4              & No             \\ \hline
+		11          & Si           & Si                                                                     & 36.7              & Si             \\ \hline
+		12          & No           & Si                                                                     & 36.1              & No             \\ \hline
+		13          & Si           & No                                                                     & 36.2              & No             \\ \hline
+		14          & Si           & Si                                                                     & 39.8              & Si             \\ \hline
+		15          & Si           & Si                                                                     & 36.7              & Si             \\ \hline
+	\end{tabular}
+\end{table}
 
- \textbf{Entropía}\\
- 
- $$E(a) = \sum_{i=1}^{i=n} -p(c_i) log_{2}p(c_i)$$
- 
-$a:$ Atributo\\
-$n:$ Número de clases del atributo a\\
-$c_i:$ la i-ésima clase del atributo \\
-$p(x):$ La probabilidad de que ocurra la clase x\\
- 
- \textbf{Ganancia}\\
- $$G(a,b)= E(a) - \sum p(a|b)E(a|b)$$
+Para convertir los valores continuos en unos nominales, primeramente se ordenan los valores de menor a mayor, tal y como se ve en la tabla \ref{ordtemp}, y se tiene que encontrar el umbral con mayor ganancia de manera iterativa, es decir, primeramente se prueba con la condicional que $Temperatura > 35.9$, después que $Temperatura > 36.1$ y asi sucesivamente, hasta encontrar el umbral con mayor, ganancia, entonces ese es el elegido como condicional para el nodo. Teniendo esto en cuenta, se realiza el procedimiento del algoritmo ID3 normalmente.
 
- 1. Buscar Entropia global
- 2. Buscar el atributo con mayor ganancia
- 3. Partir del atributo con mayor ganancia, e ir separando las clases por cada atributo de mayor a menor
+\begin{table}[h]
+	\caption{Data set falso de prueba.}
+	\label{ordtemp}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{ID} & \textbf{Tos} & \textbf{\begin{tabular}[c]{@{}c@{}}Escurrimiento\\ Nasal\end{tabular}} & \textbf{Temperatura(°C)} & \textbf{Gripa} \\ \hline
+		4           & Si           & Si                                                                     & 35.9              & Si             \\ \hline
+		3           & Si           & No                                                                     & 36.1              & No             \\ \hline
+		12          & No           & Si                                                                     & 36.1              & No             \\ \hline
+		5           & No           & Si                                                                     & 36.2              & No             \\ \hline
+		13          & Si           & No                                                                     & 36.2              & No             \\ \hline
+		10           & No           & Si                                                                    & 36.4              & No             \\ \hline
+		15          & Si           & Si                                                                     & 36.7              & Si             \\ \hline
+		11          & Si           & Si                                                                     & 36.7              & Si             \\ \hline
+		8           & No           & No                                                                     & 37.0              & No             \\ \hline
+		7           & No           & Si                                                                     & 38.8              & Si             \\ \hline
+		2           & Si           & No                                                                     & 39.6              & Si             \\ \hline
+		6           & Si           & No                                                                     & 39.7              & Si             \\ \hline
+		14          & Si           & Si                                                                     & 39.8              & Si             \\ \hline
+		1           & No           & No                                                                     & 40.1              & No             \\ \hline
+		9           & No           & Si                                                                     & 40.2              & Si             \\ \hline
 
+	\end{tabular}
+\end{table}
 
-
-% \section{Weka}
-% Es un software de pruebas que contiene una colección modelos de machine learning, además de algoritmos de pre-procesamiento de datos \cite{wekiki}. Es generalmente usada para la minería de datos en donde se pueden extraer información e interpretarla.\\
-% 
-% WEKA fue desarrollado en la Universidad de Waikato en Nueva Zelanda; el nombre significa Waikato Environment for Knowledge Analysis.\\
-% 
-% En el se puede encontrar el modelo de Árbol de decisión entrenado por el algoritmo C4.5, con diversas configuraciones de diseño.
 
 
 
@@ -622,7 +761,7 @@ Esta componente de luminancia corresponde a una imágen en escala de grises tal 
 \begin{figure}[h]
 \centering
 \begin{tabular}{cc}
-\subfloat[Imagen a color (RGB) \label{lena}]{\includegraphics[scale=0.25]{ima/lena}} & 
+\subfloat[Imagen a color (RGB) \label{lena}]{\includegraphics[scale=0.25]{ima/lena}} & \hspace{10mm}
 \subfloat[Canal de luminancia de la imagen \label{lenabn}]{\includegraphics[scale=0.7]{ima/lenabn}}  
 \end{tabular}
 
@@ -648,7 +787,7 @@ Esos valores son usados como ejes de coordenadas que proyectan el espacio RGB a 
 
 
 \subsection{Segmentación}
-Algo...
+La segmentación es la capacidad de separar o capturar una porción de una imagen, la cual contiene información de interés en el fotograma y que generalmente se extrae para procesamientos posteriores y obtener un mayor enfoque en el área. La comprenden una amplia gama de procesamientos, sin embargo en este veremos solo algunas formas utilizadas en este trabajo.
 
 \subsubsection{Binarización por umbral}
 Se trata de un método de segmentación que se rige por pixeles individuales. De una imágen por lo general en escala de grises se analiza pixel por pixel utilizando la ecuación \ref{eqbin}, donde \textit{T} es la función de binarización (por sus sigla en inglés de la palabra \textit{Thresholding}), \textit{p} como el valor del pixel y \textit{t} como el umbral (por sus sigla en inglés de la palabra \textit{threshold}).
@@ -669,7 +808,7 @@ El efecto de este método de segmentación da un realce de todos aquellos pixele
 \begin{figure}[h]
 \centering
 \begin{tabular}{cc}
-\subfloat[Binarización de \ref{lenabn} \label{th}]{\includegraphics[scale=0.25]{ima/th}} & 
+\subfloat[Binarización de \ref{lenabn} \label{th}]{\includegraphics[scale=0.25]{ima/th}} & \hspace{10mm}
 \subfloat[Binarización inversa de \ref{lenabn} \label{thinv}]{\includegraphics[scale=0.25]{ima/thinv}}  
 \end{tabular}
 
@@ -681,8 +820,15 @@ El cómputo de este método de segmentación es muy fácil de implementar en har
 
 \subsubsection{Contornos}
 
-\subsubsection{Histogramas}
+\subsection{Histogramas}
+Los histogramas en procesamiento de imágenes, representan de manera gráfica la distribución de un canal de color, es decir, en que tantas ocaciones los pixeles han tomado cierto valor,  por ejemplo, en la figura \ref{histolena}, se encuentra el histograma de la figura \ref{lenabn}, y que su distribución se encuentra entre el rango (30,200) aproximadamente, por lo que en muy pocas ocasiones, se encuentran pixeles en esta imágen fuera de este rango.
 
+\begin{figure}[h] 
+	\centering 
+	\includegraphics[scale=.6]{ima/histolena} 
+	\caption{Histograma de imágen \ref{lenabn}.} 
+	\label{histolena} 
+\end{figure}
 %\subsection{Operaciones morfológicas}
 %
 %Los operadores morfológicos a menudo toman una imagen binaria y un elemento estructurante como entrada y los combinan usando un operador conjunto (intersección, unión, inclusión, complemento). Procesan objetos en la imagen de entrada en función de las características de su forma. Estas características están codificadas en el elemento estructurante. Por lo general, el elemento estructurante tiene un tamaño de $3\times3$ y tiene su origen en el píxel central.\\
@@ -701,7 +847,7 @@ El cómputo de este método de segmentación es muy fácil de implementar en har
 %
 %\subsubsection{\textit{Closing}}
 
-\section{Visión por computadora}
+%\section{Visión por computadora}
 %https://www.researchgate.net/publication/228377483_Vision_por_computador
 
 
@@ -1003,14 +1149,14 @@ Como hemos visto en las secciones anteriores, un \f tiene una estructura única 
 %\begin{enumerate}
 \checkmark\textbf{Rendimiento.} Dada la arquitectura de un \f y que puede ejecutar tareas de forma paralela, los \fs son candidatos excelentes para computar operaciones que realizan los procesadores digitales de señales (por sus siglas en ingles Digital-Signal-Processing llamados DSPs de aquí en adelante). Con un \f se pueden controlar entradas y salida a nivel de hardware propiamente, y esto ofrece tiempos de respuesta mucho más rápidos. En algunos osciloscopios se utilizan \fs en sus sistemas para realizar cómputos a velocidades increíbles.\\
 
-\checkmark\textbf{Tiempo en llegar al mercado.} Gracias a las ventajas de diseño que ofrece un \f el experto puede probar una idea o un concepto sobre la construcción de un circuito digita, y verificarlo por su propia cuenta, sin tener que llegar a fabricar o manufacturar el IC. Por otra parte, diseños se pueden refinar o mejorar en un FPGA y todo esto, ya que usando un \f se ahorra el tiempo de manufactura de un IC que está en prueba.\\\\
+\checkmark\textbf{Tiempo en llegar al mercado.} Gracias a las ventajas de diseño que ofrece un \f el experto puede probar una idea o un concepto sobre la construcción de un circuito digita, y verificarlo por su propia cuenta, sin tener que llegar a fabricar o manufacturar el IC. Por otra parte, diseños se pueden refinar o mejorar en un FPGA y todo esto, ya que usando un \f se ahorra el tiempo de manufactura de un IC que está en prueba.\\
 %La comunidad que trabaja sobre \fs existen algunos núcleos prefabricados (llamados IP cores de aquí en adelante) como lo pueden ser filtros, procesadores de datos, etc. Usando estos IP cores, el experto puede ahorrarse algo de tiempo en el diseño, por lo que también la curva de aprendizaje disminuye y la complejidad de un proyecto también.\\
 
 
-\checkmark\textbf{Precio.} De primera mano comparar el precio de costo de fabricación de un ASIC contra la de un \f comercial es total mente diferente. Para un ASIC se requieren varios ingenieros tanto para desarrollar la arquitectura interna como su manufactura. Las soluciones basadas en \fs son bastante simples ya que en una primera parte solamente se necesita la ingeniería detrás de la arquitectura del IC, sin tener que gastar aun en la manufactura. Una vez refinado por completo el modelo puede ser manufacturado, esto puede ahorrar bastante en scrap realizado en pruebas.% \\\\Los fabricantes de ICs por lo general hacen lo contrario, sin embargo la fuerte inversión inicial es justificable al manufacturar miles de chips que se venden por año. Por otra parte si solo se necesitan algunos cuantos ICs de un solo tipo un \f puede resultar en una solución abismalmente más barata.\\
+\checkmark\textbf{Precio.} De primera mano comparar el precio de costo de fabricación de un ASIC contra la de un \f comercial es total mente diferente. Para un ASIC se requieren varios ingenieros tanto para desarrollar la arquitectura interna como su manufactura. Las soluciones basadas en \fs son bastante simples ya que en una primera parte solamente se necesita la ingeniería detrás de la arquitectura del IC, sin tener que gastar aun en la manufactura. Una vez refinado por completo el modelo puede ser manufacturado, esto puede ahorrar bastante en scrap realizado en pruebas.\\% \\\\Los fabricantes de ICs por lo general hacen lo contrario, sin embargo la fuerte inversión inicial es justificable al manufacturar miles de chips que se venden por año. Por otra parte si solo se necesitan algunos cuantos ICs de un solo tipo un \f puede resultar en una solución abismalmente más barata.\\
 
 
-\checkmark\textbf{Fiabilidad.} Los circuitos realizados internamente en un \f se pueden considerar que son implementaciones seguras, ya que no existen sistemas operativos de por medio, además el paralelismo ofrecen un mayor rendimiento en cualquier tarea. 
+\checkmark\textbf{Fiabilidad.} Los circuitos realizados internamente en un \f se pueden considerar que son implementaciones seguras, ya que no existen sistemas operativos de por medio, además el paralelismo ofrecen un mayor rendimiento en cualquier tarea. \\
 %Como podremos recordar, un sistema operativo administra recursos de una computadora para poder realizar cálculos de diferentes programas, eso implica que en una computadora algunas veces existen conflictos entre uno y otro programa debido a que el ancho de banda puede variar para ambos. El hardware implementado en un \f es preciso y dedicado para cada tarea, todos trabajando juntos al mismo tiempo. \\
 
 \checkmark\textbf{Mantenimiento a largo plazo.} Los \fs son personalizables y actualizables en una implementación. No requieren el precio y el tiempo en rediseñar un nuevo chip. Algunas bloques con el tiempo pueden requerir una actualización, tal es el caso de los protocolos de comunicación los cuales con el tiempo requieren ciertos cambios, ya sean cambios de ``timing'', o de transferencia en la secuencia. Un sistema modelado mediante un FPGA puede ser continuamente actualizable, mientra que una basada en ASICs no lo puede ser debido a que una gran parte de la electrónica requeriría ser rediseñada y verificada. 
@@ -1020,22 +1166,77 @@ Como hemos visto en las secciones anteriores, un \f tiene una estructura única 
 
 \section{Procesamiento de imágenes en FPGA}
 
-El procesamiento de imágenes en un FPGA es bastante distinto de entornos computacionales, y dependiendo del procesamiento que se va a realizar se necesita cierto hardware. Por lo general 
+El procesamiento de imágenes en un FPGA es bastante distinto de entornos computacionales, y dependiendo del procesamiento que se va a realizar se necesita cierto hardware. En imágenes de alta resolución (mayores a 720p), un FPGA en la mayoría de los casos, no se puede almacenar toda la imagen, debido a la cantidad necesaria de recursos que esta necesita tal y como se pudiera hacer en una compatadora, ya que por lo general la imagen debe estar en formato RAW (es decir, la imagen sin ningún tipo de formato de compresión), por lo que por lo general la imagen es almacenada en alguna memoria conectada al FPGA, de ahí ser leída y procesada.
+
+\subsection*{Lectura de una imagen}
+Veamos la imagen de un solo canal que tiene una resolución de $10\times10$ tal y como se muestra en la figura \ref{u} donde se muestra la imagen de un caracter ''u'', en ella podemos ver los ejes de coordenadas $x$ y $y$ donde el origen está en la esquina superior izquierda de la imagen, por lo que se considera un avance positivo hacia la derecha en el eje horizontal, y hacia abajo en el eje vertical. La imagen leída en un FPGA es pixel a pixel, empezando por el pixel ''0'' mostrado en la figura en la posición (0,0), en valores de 1 byte por pixel, posteriormente los pixeles hacia la derecha, y al acabar la fila, se empieza por la posición (0,1) en el pixel 10, así sucesivamente hasta terminar la imagen en el pixel 99 en la posición (9,9).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{edrawimas/leeimag}
+	\caption{Lectura de imagen por posiciones de pixel. 
+	\label{u}}
+\end{figure}
+
+La lectura de imágenes en FPGA puede obtenerse de las siguientes fuentes:
 
 \begin{enumerate}
- \item Procesar una imagen guardada en una memoria
- \item Procesar una imagen codificada
- \item Procesar una imagen escaneada
+ \item \textbf{Lectura desde memorias externas.}
+ Para este caso, los datos de la imagen son leídos de una memoria, mediante buses de dirección, lectura y/o escritura, con lo que se leen bloques de memoria y por consecuencia  y se pueden dar dos casos en particular:
+ 
+ \checkmark\textbf{Imagen comprimida.} Existen diversos tipos de compresión, tales como PNG, JPG, JPEG, etc. Algunos con perdidas de datos al comprimir, y otras  que no, en este caso la información está codificada y es necesario construir un decodificador, para poder obtener la imagen pixel a pixel. 
+ 
+ \checkmark\textbf{Imagen sin comprimir (RAW).} En este caso la imagen es leida pixel a pixel byte por byte contenido en la memoria, por lo que no se necesitan pasos intermedios.
+ 
+ 
+ \item \textbf{Lectura en señales de video.} 
+ La transferencia de imágenes digitales puede realizarse por medio de un conjunto de señales de sicronizacion, este formato es actualmente usado por protocolos como HDMI, DisplayPort, etc. En la figura \ref{scanU}, se denotan las señales de sincronización y algunas áreas, la primer área es la que compone la imagen en si, puede ser de varios canales, usualmente tres para RGB, del lado derecho tenemos a HBlank, el cual es una porción de la imagen con pixeles blancos, esta área es utilizada solamente para que se realicen pequeños calculos en los procesadores de video, al igual que VBlank, solo que por la parte inferior de la imagen. Cabe resaltar que estas áreas no son impresas en pantalla. Las señales de sincronización se pueden apreciar en la figura \ref{scanU} las cuales son: 
+ 
+  \checkmark\textbf{Clk Video(Reloj de video).} Este es una señal de reloj que define la transferencia de un pixel nuevo.
+ 
+ \checkmark\textbf{Vsync (Sincronizacion Vertical).} Esta señal es un pulso al final de cada fotograma y representa cuando tiene que ser restaurado el contador de pixeles verticales del procesador de video. En ella se presentan tiempos de Back/Front porch y del pulso en si, estas tienen duraciones estándar y están en base al reloj de video.
+ 
+ \checkmark\textbf{Hsync (Sincronización horizontal).} Esta señal es un pulso al final de cada fila del fotograma y representa cuando tiene que ser restaurado el contador de pixeles horizontales del procesador de video. Así como Vsync, también se tienen tiempos estándar.
+  
+ \checkmark\textbf{Video Activo.} Esta señal se mantiene en en bajo cuando está en las áreas blank, y en alto cuando son pixeles del fotograma a transmitir.
+ 
+ 
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[scale=0.3]{edrawimas/scanU}
+ 	\caption{Lectura de imagen por posiciones de pixel. 
+ 		\label{scanU}}
+ \end{figure}
+ 
 \end{enumerate}
 
+Este es el tipo de lectura que ha sido utilizado en este trabajo, ya que por medio de una cámara con puerto HDMI se puede lograr una lectura y una velocidad de procesamiento muy alta. En la tabla \ref{hdmi} se denotan los tiempos standar para cada señal obtenida de \cite{demisti}.
+
+\begin{table}[h]
+	\caption{Descripción de tiempos de sincronización de video para resoluciones 720p y 1080p.}
+	\label{hdmi}
+	\centering
+	\begin{tabular}{c|c|c|c|}
+		\cline{2-4}
+		& \textit{\textbf{Caracteristica}} & \textbf{720p 60Hz} & \textbf{1080p 60Hz} \\ \cline{2-4} 
+		& \textit{Clk video (Hz)}          & 74.25              & 148.5               \\ \hline
+		\multicolumn{1}{|c|}{\multirow{5}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Tiempos\\ Horizontales\end{tabular}}}} & \textit{Pixeles activos}         & 1280               & 1920                \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Front Porch}             & 110                & 88                  \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Pulso}                   & 40                 & 44                  \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Back Porch}              & 220                & 148                 \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Pixeles totales}         & 1650               & 2200                \\ \hline
+		\multicolumn{1}{|c|}{\multirow{5}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Tiempos\\ Verticales\end{tabular}}}}   & \textit{Pixeles activos}         & 720                & 1080                \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Front Porch}             & 5                  & 4                   \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Pulso}                   & 5                  & 5                   \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Back Porch}              & 20                 & 36                  \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                                                                         & \textit{Pixeles totales}         & 750                & 1125                \\ \hline
+	\end{tabular}
+\end{table}
 
 
-%
-%\subsection{Timing de video}
-%hsync vsync
 
 \subsection{Ventajas y desventajas de FPGA en procesamiento de imágenes}
-Algo...
+
 
 
 
@@ -1053,6 +1254,7 @@ Algo...
 
 En este capitulo se muestran los componentes empleados y la solución para el proyecto. Se empieza hablando por la idea general, y el flujo de la solución ya que el proyecto está compuesto de diferentes temas, tales como ingeniería mecánica, eléctrica, electrónica y computacional. Después se explican particularmente cada sección que compone el proyecto, para el entendimiento de cada una de las consideraciones de diseño tomadas.
 
+\section{Metodología}
 
 \section{Sistema propuesto}
 La idea general del trabajo se puede apreciar en la figura \ref{sis}, el cual es un diagrama general del sistema, donde de manera general se compone de los siguientes componentes descritos a continuación.
@@ -2019,6 +2221,7 @@ En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el
 	\end{tabular}
 \end{table}
 
+%Agregar fotos de porque salen bajos porcentajes en la tabla en NS
 
 \begin{table}[h]
 	\caption{Precisión por computadora y FPGA en lo de color}
@@ -2044,6 +2247,7 @@ En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el
 \subsection{Implementación en FPGA}
 
 
+%%Falta tabla de recursos de FPGA
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
