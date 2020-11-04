@@ -13,7 +13,7 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
-
+\usepackage{enumitem}
 \usepackage{amsmath}    
 \usepackage{amssymb}
 \usepackage[unicode=true,
@@ -165,7 +165,7 @@ AL FINAL
 \acro{LSB} {Less Significant Bit}
 \acro{MSB} {Most Significant Bit}
 %\acro{SVA} {Señal de Video Activo}
-\acro{SCHAAD} {Script Constructor HDL de Árbol De Desición}
+\acro{SCHADD} {Script Constructor HDL de Árbol De Desición}
 %\acro{SSH} {Señal de Sincronización Horizontal}
 %\acro{SSV} {Señal de Sincronización Vertical}
 %\acro{BDS} {Bit de Segmentación}
@@ -281,13 +281,13 @@ Algunos autores han reportado algunos sistemas de clasificación. En \cite{73067
 \end{enumerate}
 
 % Clasificadores de naranjas 
-Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{Mercol2008AutomaticCO}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{sirisath}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. \\
+Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{analis}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{sirisath}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. \\
 
 Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{feng}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por caracteristicas estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.\\
 
 En \cite{ALOHALI201129}, un prototipo para clasificar fruta en base a las fecha de cosecha es propuesto. RNAs son entrenadas con el set de datos de 1800 frutas para obtener caracteristicas como debilidad, tamaño, forma, intensidad y defectos.\\
 
-Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{khoje}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
+Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{curvelet}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
 En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Utilizando una Transformación de Caracteristicas Invariantes a Escalamiento (SIFT) fue usado para obtener caracteristicas de las frutas presentadas, y un clasificador de tipo Bosque aleatorio fue aplicado de igual manera. 
 %En  Vector Machines (SVM) and Probabilistic Neural Networks (PNN) classifiers were trained to distinguish between healthy and defective fruits.  In \cite{7086191}, a system for grading apples, strawberries, and oranges is presented. Scale Invariant Feature Transform (SIFT) was used to obtain features from input fruits, and a Random Forest classifier was applied for fruit grading.
 En \cite{5254804}, un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, platanos y fresas. En \cite{ROCHA201096}, descriptores de imagenes basadas en apariencia, color, tectura, y forma fueron obtenidos y distinguidos de las tecnicas de ML como SVM, LDA, arboles de clasificacion, KNN, y ensambles de arboles fueron entrenados.\\
@@ -306,7 +306,7 @@ Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrollad
 
 % La necesidad de un sistema embebido tiempo real para c
 
-El diseño de un sistema de visión para clasificación automática de cítricos es altamente deseada para reducir el costo de la fuerza laboral y problemas de mantener la consistencia y uniformidad en la clasificación. Un clasificador automático de cítricos basada en visión de computadora afronta algunos problemas técnicos como, el procesamiento de imágenes en tiempo real, baja precisión de clasificación y alto costo computacional. Un FPGA es ideal para esta tarea, ya que provee de procesamiento paralelo.  En el enfoque presentado en \cite{6820292}, una arquitectura para clasificación de cítricos es presentada. El pre-procesamiento requerido para la clasificación es implementada en hardware. La clasificación de cítricos fue basada en una umbralización global, convirtiendo al sistema sensible al ruido generado por los objetos en movimiento y un modelo de ML más robusto no fueron explorados.\\
+El diseño de un sistema de visión para clasificación automática de cítricos es altamente deseada para reducir el costo de la fuerza laboral y problemas de mantener la consistencia y uniformidad en la clasificación. Un clasificador automático de cítricos basada en visión de computadora afronta algunos problemas técnicos como, el procesamiento de imágenes en tiempo real, baja precisión de clasificación y alto costo computacional. Un FPGA es ideal para esta tarea, ya que provee de procesamiento paralelo.  En el enfoque presentado en \cite{josu}, una arquitectura para clasificación de cítricos es presentada. El pre-procesamiento requerido para la clasificación es implementada en hardware. La clasificación de cítricos fue basada en una umbralización global, convirtiendo al sistema sensible al ruido generado por los objetos en movimiento y un modelo de ML más robusto no fueron explorados.\\
 
 
 % Porque un DT
@@ -321,7 +321,7 @@ La comparación entre los sistemas de clasificación es difícil por su larga va
 En esta tesis se propone una metodología para llegar al desarrollo de un clasificador de naranjas basado en AD, usado para la segmentación de la fruta y su clasificación. El enfoque está dirigido para realizar una implementación sencilla en hardware, donde las arquitecturas de los modelos AD se generan por medio de software.
 
 \section{Estado del arte}
-Por lo general los experimentos que se han realizado se usan fotografías (no video), de los cuales se extraen características, sin embargo las condiciones en las que se toman las fotografías son escenarios poco probables y poco prácticos para un problema real como lo es en un escenario industrial tal y como se ve en la figura \ref{chafa} \cite{chafafrut}.
+Por lo general los experimentos que se han realizado se usan fotografías (no video), de los cuales se extraen características, sin embargo las condiciones en las que se toman las fotografías son escenarios poco probables y poco prácticos para un problema real como lo es en un escenario industrial tal y como se ve en la figura \ref{chafa} \cite{chafafrut}, donde la fruta está inmóvil en una escena fácil de segmentar.
 
  \begin{figure}[h]
 \centering
@@ -330,7 +330,7 @@ Por lo general los experimentos que se han realizado se usan fotografías (no vi
 \label{chafa}
 \end{figure}
 
-El canal de colores Hue, Saturation, Value (HSV) es pieza clave en la clasificación por color \cite{analis,chokun,rgbhisto,huehue} ya que se obtiene mucha información de uno de los canales ya que tanto H como S no son muy afectados por la iluminación.\\
+El canal de colores Tono, Saturación y Valor (HSV) es pieza clave en la clasificación por color \cite{analis,chokun,rgbhisto,huehue,sugarhue} ya que se obtiene mucha información de uno de los canales ya que tanto H como S no son muy afectados por la iluminación.\\
 
 La clasificación por umbrales fijos es difícil de lograr ya que se necesita mucha experimentación y desarrollo \cite{huehue,josu}, por lo que la implementación de un clasificador es necesaria.\\
 
@@ -340,22 +340,22 @@ El obtener características complicadas de computar no siempre es la mejor opci�
 
 El uso de diferentes clasificadores para la clasificación de naranjas están los perceptrones multicapa (analizando histogramas sobre el canal RGB) \cite{classi,analis}, arboles de decisión, Random Forest \cite{analis,rfrf}. \\
 
-Por otra parte, en la mayoría de los casos se tiene un set de datos muy reducidos, es por eso la elección de preparar un hardware industrial para tomar video, y obtener un set de datos más grande, a cambio de un poco de tiempo de desarrollo para el procesamiento del mismo y obtener fotografías variadas.\\
+Por otra parte, en la mayoría de los casos se tiene un set de datos muy reducidos, es por eso la elección de preparar un hardware industrial como en \cite{machineorang,machinefruit} para tomar video, y obtener un set de datos más grande, a cambio de un poco de tiempo de desarrollo para el procesamiento del mismo y obtener fotografías variadas.\\
 
 Como se ha mencionado antes, un sistema como este, montado en un FPGA tiene resultados interesantes dado el poder de computo y la capacidad de funcionar en tiempo real \cite{josu}, sin embargo el no utilizar algún tipo de memoria para almacenar las imágenes para un post-procesamiento, así como también el no utilizar clasificadores supervisados.
 
 
 \section{Objetivos}
 \subsection*{Objetivo general}
-\begin{itemize}
- \item Desarrollar una implementación de hardware en FPGA capaz de clasificar naranjas con una precisión del 90\% con una rapidez de 1 naranja por segundo.
+\begin{itemize}[noitemsep]
+ \item Desarrollar una simulación de hardware en FPGA capaz de clasificar naranjas con una precisión del 90\% con una rapidez de 1 naranja por segundo.
 \end{itemize}
 
 \subsection*{Objetivos específicos}
-\begin{itemize}
- \item Implementación en FPGA de un clasificador por árbol de desición.
- \item Implementación en FPGA de un procesador de video extractor de características.
- \item Implementación de hardware  auxiliar para mejorar el tiempo de desarrollo (microcontrolador).
+\begin{itemize}[noitemsep]
+ \item Simulación en FPGA de un clasificador por AD para segmentación y clasificación de color.
+ \item Simulación en FPGA de un procesador de video extractor de características.
+ \item Simulación de módulo de comunicación externo para hardware auxiliar de control de proceso.
 
 \end{itemize}
 
@@ -554,14 +554,7 @@ El algoritmo selecciona la mejor caracteristica en cada paso cuando se construye
  $$E(S) = -\sum_{i=1}^{i=n} p_i log_{2}(p_i)$$
  $$G(S,A)= E(S) - \sum\frac{|S_v|}{|S|} E(S_v)$$
  
- Donde:\\
- $E$ es la entropía\\
- $S$ el data set\\
- $n$ el número de clases\\
- $p_i$ la probabilidad de la clase $i$\\
- $G$ es la ganancia\\
- $|S_v|$ el número de muestras que tiene el valor $v$ \\
- $|S|$ el número total de muestras (o filas) del data set completo\\
+ Donde $E$ es la entropía, $S$ el data set, $n$ el número de clases, $p_i$ la probabilidad de la clase $i$, $G$ es la ganancia, $|S_v|$ el número de muestras que tiene el valor $v$, $|S|$ el número total de muestras (o filas) del data set completo.\\
  
  El algoritmo realiza el siguiente orden: Primero, se calcula la ganancia de cada característica. En segundo se consideran que todas las filas no pertenecen a la misma clase, dividiendo el data set en partes, usando la característica con mayor ganancia. En tercero, se instancia un nodo con la característica de mayor ganancia. En cuarto, si todas las filas pertenecen a la misma clase, se deja el nodo actual como una hoja del AD. Y por último, se repite para las siguientes características de manera iterativa hasta quedar con nodos hoja en el AD.
  
@@ -818,10 +811,10 @@ El efecto de este método de segmentación da un realce de todos aquellos pixele
 
 El cómputo de este método de segmentación es muy fácil de implementar en hardware ya que se trata de un comparador simple.
 
-\subsubsection{Contornos}
+%\subsubsection{Contornos}
 
 \subsection{Histogramas}
-Los histogramas en procesamiento de imágenes, representan de manera gráfica la distribución de un canal de color, es decir, en que tantas ocaciones los pixeles han tomado cierto valor,  por ejemplo, en la figura \ref{histolena}, se encuentra el histograma de la figura \ref{lenabn}, y que su distribución se encuentra entre el rango (30,200) aproximadamente, por lo que en muy pocas ocasiones, se encuentran pixeles en esta imágen fuera de este rango.
+Los histogramas en procesamiento de imágenes, representan de manera gráfica la distribución de un canal de color, es decir, en que tantas ocasiones los pixeles han tomado cierto valor,  por ejemplo, en la figura \ref{histolena}, se encuentra el histograma de la figura \ref{lenabn}, y que su distribución se encuentra entre el rango (30,200) aproximadamente, por lo que en muy pocas ocasiones, se encuentran valores de pixeles en esta imágen fuera de este rango.
 
 \begin{figure}[h] 
 	\centering 
@@ -1087,7 +1080,7 @@ Existen unos cuantos HDLs, de entre los que más destacan son:
 %\label{veri}}
 %\end{figure}
 
-\checkmark\textbf{System Verilog.} Este HDL es bastante peculiar, y como se puede intuir es una clase de ``extension'' del HDL Verilog. Este HDL suele no ser sintetizable, se usa en su mayoria para declarar simulaciones de bloques temporizados. Se utiliza mucho este HDL para la depuración de grandes proyectos. Sin duda es una herramienta muy buena de alto nivel que ayuda a depurar código rápidamente.\\
+\checkmark\textbf{System Verilog.} Este HDL es bastante peculiar, y como se puede intuir es una clase de ``extension'' del HDL Verilog. Este HDL suele no ser sintetizable, se usa en su mayoria para declarar simulaciones de bloques temporizados. Se utiliza mucho este HDL para la depuración de grandes proyectos. Sin duda es una herramienta muy buena de alto nivel que ayuda a depurar código rápidamente.
 
 %\begin{figure}[h]
 %\centering
@@ -1099,7 +1092,7 @@ Existen unos cuantos HDLs, de entre los que más destacan son:
 %\end{itemize}
 
 
-Cada HDL tiene su estilo y ninguno es mejor que otro. Estos 3 son de los más usados, sin embargo existen algunos más. Por estandarización mundial, la mayoría de los desarrolladores utilizan estos 3 HDLs.\\
+Cada HDL tiene su estilo y ninguno es mejor que otro. Estos 3 son de los más usados, sin embargo existen algunos más. Por estandarización mundial, la mayoría de los desarrolladores utilizan estos 3 HDLs.
 
 Recordemos que este código describe circuitos y hardware, por lo que no es nada parecido a la programación de software. El flujo de datos no es secuencial, por lo que es un error común en los principiantes tratarlo como tal. Los ciclos ``for'' por ejemplo, no describen una secuencia, si no un patrón de repetición para módulos, o dicho de otra manera, reproducir circuitos iguales como un arreglo.
 
@@ -1210,7 +1203,7 @@ La lectura de imágenes en FPGA puede obtenerse de las siguientes fuentes:
  
 \end{enumerate}
 
-Este es el tipo de lectura que ha sido utilizado en este trabajo, ya que por medio de una cámara con puerto HDMI se puede lograr una lectura y una velocidad de procesamiento muy alta. En la tabla \ref{hdmi} se denotan los tiempos standar para cada señal obtenida de \cite{demisti}.
+Este es el tipo de lectura que ha sido utilizado en este trabajo, ya que por medio de una cámara con puerto HDMI se puede lograr una lectura y una velocidad de procesamiento muy alta. En la tabla \ref{hdmi} se denotan los tiempos standar para cada señal, obtenida de \cite{demisti}.
 
 \begin{table}[h]
 	\caption{Descripción de tiempos de sincronización de video para resoluciones 720p y 1080p.}
@@ -1235,11 +1228,43 @@ Este es el tipo de lectura que ha sido utilizado en este trabajo, ya que por med
 
 
 
-\subsection{Ventajas y desventajas de FPGA en procesamiento de imágenes}
+
+\subsection{Ventajas de FPGA en procesamiento de imágenes}
 
 
+%
+El uso de diversas tecnologías en el procesamiento de imágenes depende de su aplicación y contexto, sin embargo se puede dar una opinión acerca de las ventajas comunes que se pueden encontrar en implementaciones hechas en FPGA.
+
+\subsection*{Procesamiento de imágenes en tiempo real}
+Un sistema de tiempo real es uno donde la respuesta debida a un evento debe ocurrir en un tiempo específico, de otra manera el sistema es considerado fallido según \cite{baleyrt}, en el contexto de procesamiento de imágenes entonces, se obtiene una imágen, se procesa para obtener ciertos datos, y con ello tomar el control de cierta actividad. Generalmente estos sistemas son usados para inspección o control de un proceso. Existen dos tipos de sistemas en tiempo real, el sistema duro y el sistema suave. El primero se refiere a que la muestra en proceso debe terminar antes de obtener la siguiente muestra, si esto no ocurre entonces se dice que el sistema falla. Por otra parte el segundo, se refiere a que si la siguiente muestra llega y aún no se ha terminado de procesar la anterior entonces el rendimiento del sistema baja, sin embargo sigue funcionando. En el caso de este trabajo es un sistema duro, ya que sebe ser procesada la fruta por cada muestra. Cuando se requiere que el procesamiento se realice en un periodo muy corto (dependiendo del sistema y su complejidad) es entonces que es requerido implementarse en hardware, para realizar una aceleración del procesamiento.
+
+\subsection*{Paralelismo}
+
+En principio cada parte de un algoritmo debería ser corrido por un procesador dedicado, sin embargo esto en un sistema por computadora es poco aplicable. Aunque las computadoras de hoy manejen un procesador multinucleo, muchos de estos núcleos se utilizan para tareas dedicadas por el sistema operativo. Por otra parte en un FPGA debido a su flexibilidad puede ser implementado un procesador pequeño por cada paso del algoritmo, creando una estructura de tipo pipeline. El procesamiento con un sistema de tipo pipeline se puede ver en la figura \ref{pipe}, en donde todos los procesadores corren al mismo tiempo, y que, aunque sea un proceso secuencial, todos los procesadores trabajan a la vez, que al contrario del paralelismo, que el procesador realice cada tarea por separado.
+
+ 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{edrawimas/pipe}
+	\caption{Arquitectura en tipo pipeline. 
+		\label{pipe}}
+\end{figure}
+
+El paralelismo de la arquitectura en pipeline para procesamiento de imágenes funciona de la siguiente manera: En una primera instancia el procesador 1, realiza la operación 1, entonces está realizando una operación a una imagen. Al terminar la operación, el procesador 2 recibe los datos y realiza la operación 2, mientras el procesador 1 está recibiendo la siguiente imagen y realizando la operación 1 a la segunda imagen, así es repetido sucesivamente hasta que el procesador 3 procesa la primera imagen, mientras el primero recibe la tercera imagen. 
 
 
+%
+%\subsection*{Ventajas}
+%
+%\checkmark \textbf{Consumo energético.} Por lo general un FPGA es de bajo consumo y alto proceso computacional, ya que se construye un hardware a medida , y se utilizan los recursos justos.
+%
+%\checkmark \textbf{Respuesta en tiempo real.}
+%
+%Ventajas: Consumo energético, respuesta en tiempo real, arquitectura de hardware reproducible, actualizable
+%
+%
+%\subsection*{Desventajas}
+%Desventajas: Tiempo de desarrollo, complejidad
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1255,6 +1280,31 @@ Este es el tipo de lectura que ha sido utilizado en este trabajo, ya que por med
 En este capitulo se muestran los componentes empleados y la solución para el proyecto. Se empieza hablando por la idea general, y el flujo de la solución ya que el proyecto está compuesto de diferentes temas, tales como ingeniería mecánica, eléctrica, electrónica y computacional. Después se explican particularmente cada sección que compone el proyecto, para el entendimiento de cada una de las consideraciones de diseño tomadas.
 
 \section{Metodología}
+
+Para este trabajo se siguió la metodología mostrada en la figura \ref{meth}, donde se muestran los productos de cada fase, dejando como pendiente la última de ellas.
+
+El orden de las fases se decidió a partir de lo que la fase anterior necesita para continuar. A continuación  es explicada cada fase:
+
+\textbf{Fase 1. Captura de video.} En el se obtienen clips de video en donde la escena es fruta pasando frente a ella. A partir de los clips se obtiene un data set de imágenes, y el algoritmo de segmentación por computadora.
+
+\textbf{Fase 2. Generación de Data set.} Del data set de imágenes, se obtienen tres nuevos data sets, uno de pixeles para la segmentación, uno de histogramas para la clasificación de color y otro de fruta por tamaño para la clasificación por tamaño.
+
+\textbf{Fase 3. Entrenamiento de ADs.} Com los data sets, se generan ADs para segmentación, clasificación de color y tamaño, por medio de la herramienta WEKA. 
+
+\textbf{Fase 4. Creación de HDL base.} Se crea todo el HDL necesario para el manejo de señales de video, para la extracción de caracteristicas y el procesamiento de imágenes, además, se dejan los huecos que clasifican cada parte.
+
+\textbf{Fase 5. Script Constructor HDL de Árbol de Decisión (SCHADD).} Se genera un script de python que convierte un AD de weka (texto) en HDL (VHDL) implementable.
+
+\textbf{Fase 6. Prueba en FPGA.} Prueba del modelo completo, donde una imagen en señales de video es procesada por el modelo, y se obtiene la clasificación por tamaño y color.
+
+\textbf{Fase 7. Prueba en marcha con actuadores.} Prueba de la máquina completa puesta en marcha. La fase no se pudo realizar por problemas referentes a la pandemia mundial de COVID-19.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{edrawimas/metodo}
+	\caption{Diagrama de proceso de metodología empleada.}
+	\label{meth}
+\end{figure}
 
 \section{Sistema propuesto}
 La idea general del trabajo se puede apreciar en la figura \ref{sis}, el cual es un diagrama general del sistema, donde de manera general se compone de los siguientes componentes descritos a continuación.
@@ -1494,7 +1544,7 @@ Primeramente se decidió la región de interés (ROI), la cual se puede ver en l
 	\label{fig:void}
 \end{figure}
 
-Para la segmentación de la naranja simplemente la imagen de entrada para cada cuadro fue convertida a escala de grises y binarizada con un umbral. Posteriormente encontrar el contorno con mayor área y rellenar el contorno, con esto se obtiene una máscara tal como se ve en la figura \ref{maskab}. Con ésta máscara, se calcula el centroide y el área de la misma, si el área es mayor a 10000 pixeles, quiere decir que se encuentra una fruta dentro de ROI. Por otra parte, se calcula si el centroide en el eje horizontal está entre los limites centrales, y de esa manera se toma la captura de la imagen tal y como se ve en la figura \ref{capieje}. Debido a las diferentes velocidades de la banda las capturas pueden tener una difuminación tal y como se ve en la figura \ref{maska}, sin embargo esto no afecta en la toma del set de imágenes.
+Para la segmentación de la naranja simplemente la imagen de entrada para cada cuadro fue convertida a escala de grises y binarizada con un umbral. Posteriormente encontrar el contorno con mayor área y rellenar el contorno, con esto se obtiene una máscara tal como se ve en la figura \ref{maskab}. Con ésta máscara, se calcula el centroide y el área de la misma, si el área es mayor a un sexto del área total de pixeles (10000), quiere decir que se encuentra una fruta dentro de ROI. Por otra parte, se calcula si el centroide en el eje horizontal está entre los limites centrales, y de esa manera se toma la captura de la imagen tal y como se ve en la figura \ref{capieje}. Debido a las diferentes velocidades de la banda las capturas pueden tener una difuminación tal y como se ve en la figura \ref{maska}, sin embargo esto no afecta en la toma del set de imágenes.
 
 \begin{figure}
 	\centering
@@ -1841,7 +1891,7 @@ El otro contador es el que calcula la coordenada vertical $Y$ (definida en este 
 
 Para computar el bit de ROI, es necesario hablar de los parametros $Xm$, $Xmy$, $Ym$, $Ymy$, $Xp$, $Yp$;  los cuales simplemente son las coordenadas que representan los bordes de ROI, y la cantidad de pixeles del fotograma, donde significan lo siguiente:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 \item $Xm$: Coordenada horizontal del punto izquierdo superior de ROI
 \item $Ym$: Coordenada vertical del punto izquierdo superior de ROI
 \item $Xmy$: Coordenada horizontal del punto derecho inferior de ROI
@@ -1951,7 +2001,7 @@ Este módulo tiene como entradas, a las señales BDS, $Bit_{ROI}$, reset y reloj
 	
 	cntpix = 0; //Contador de pixeles segmentados \\
 	pixTot = (Ymy-Ym) * (Xmy - Xm); // Cálculo del área de ROI\\
-	area = 0; //Area resultante
+	area = 0; //Área resultante
 	
 	\eIf{reset || SSV}{
 		cntpix = 0; \\
@@ -1975,19 +2025,19 @@ Este módulo tiene como entradas, a las señales BDS, $Bit_{ROI}$, reset y reloj
 En esta última etapa, se calcula la clasificación. De parte del clasificador de tamaño por medio de comparadores y en la parte de color por medio de un AD generado. Esta etapa tiene como salida un número de 8 bits compuesto por la señales BCC y BTC %que se ven en las secciónes \ref{sec:bcc} y \ref{sec:bct} 
 quedando compuesto el número de la siguiente manera:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 	\item Bit 0: Bit de Clase de Color (BCC)
 	\item Bit 2-1: Bits de clase de Tamaño (BCT)
 	\item Bit 7-3: Bits constantes a 0, estos se dejan con fines de diseño estandar que se ven en la sección \ref{sec:comm}
 \end{itemize}
 
-Este bus es denominado como la Respuesta del Módulo Clasificador o RMC, este módulo contiene los siguientes bloques:% visto en la figura \ref{fig:arqvid} como ''respuesta''.
+Este bus es denominado como la \textbf{Respuesta del Módulo Clasificador} o RMC, este módulo contiene los siguientes bloques:% visto en la figura \ref{fig:arqvid} como ''respuesta''.
 
 
 \checkmark\textbf{Módulo AD de clasificación de color} \label{sec:bcc}
-Éste módulo tendrá como entradas los 35 números de 15 bits correspondientes a los histogramas normalizados vistos en el módulo de la sección \ref{sec:histo} y como salida un bit que corresponde a la clase de color llamado Bit de Clase de Color o BCC, donde su salida es interpretada como:
+Éste módulo tendrá como entradas los 35 números de 15 bits correspondientes a los histogramas normalizados vistos en el módulo de la sección \ref{sec:histo} y como salida un bit que corresponde a la clase de color llamado \textbf{Bit de Clase de Color} o BCC, donde su salida es interpretada como:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 	\item 0: Color naranja
 	\item 1: Color verde
 \end{itemize}
@@ -1996,9 +2046,9 @@ Al tratarse de un circuito combinacional, no es necesaria la adición de la señ
 
 
 \checkmark\textbf{Módulo clasificador de tamaño} \label{sec:bct}
-El módulo tiene como entrada unicamente el área calculada por el modulo mostrado en la sección \ref{sec:areasgm}, y  por salida un número de 2 bits llamado Bits de Clase de Tamaño o BCT, el cual es interpretada su salida como:
+El módulo tiene como entrada unicamente el área calculada por el modulo mostrado en la sección \ref{sec:areasgm}, y  por salida un número de 2 bits llamado \textbf{Bits de Clase de Tamaño} o BCT, el cual es interpretada su salida como:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
 	\item 0: Tamaño chico
 	\item 1: Tamaño mediano
 	\item 2: Tamaño grande
@@ -2009,14 +2059,13 @@ Al tratarse de una simple comparación la cual es tratada como un circuito combi
 
 
 \section{Módulos de comunicación y gestión de respuesta} \label{sec:comm}
-La capa de comunicación del proyecto, es la encargada de administrar las señales que provee el MCU, sincronizandolas con las internas del FPGA para finalmente regresar una respuesta, la cuál será la clasificación resultante, esto con el fin de realizar una clasificación de la manera más rápida posible. Cabe mencionar, que esta capa está regida por diferentes señales de reloj para diferentes etapas. El funcionamiento de cada módulo será explicado en esta sección.
+La capa de comunicación del proyecto, es la encargada de administrar las señales que provee el MCU, sincronizandolas con las internas del FPGA para finalmente regresar una respuesta, la cuál será la clasificación resultante, esto con el fin de realizar una clasificación de la manera más rápida posible. Cabe mencionar, que esta capa está regida por diferentes señales de reloj para diferentes etapas. El funcionamiento de cada módulo será explicado en esta sección.\\
 
 \checkmark\textbf{Módulo de comunicación}
-
-Disparo de clasificación (DDC)
+Este módulo es el encargado de administrar el protocolo SPI, cuando el MCU transfiere una instrucción de proceso da un pulso al bit \textbf{Disparo de clasificación} (DDC) y transfiere el byte de RMC, una vez que el \textbf{Disparo de Clasificación Lista} (DCL) proveniente del módulo de secuencia de respuesta, este, transfiere el \textbf{Byte de respuesta del SPI} (BRSPI) al MCU.\\
 
 \checkmark\textbf{Módulo de secuencia de respuesta}
-Éste módulo es el encargado de administrar la clasificación correctamente. Tiene como entrada, las señales Reloj de video, reset, y reloj interno DDC, SSV, HL (de la sección \ref{sec:histo}) , y RMC , y como salida la señal de Inicio de clasificación (mostrado en la figura \ref{fig:arqvid} como ''Inicio'') o también llamado INC, el Byte de respuesta del SPI (BRSPI), y el disparo de clasificación lista (DCL).\\
+Éste módulo es el encargado de administrar la clasificación correctamente. Tiene como entrada, las señales Reloj de video, reset, y reloj interno DDC, SSV, HL (de la sección \ref{sec:histo}) , y RMC , y como salida la señal de Inicio de clasificación (mostrado en la figura \ref{fig:arqvid} como ''Inicio'') o también llamado INC, BRSPI, y DCL 
 
 El reloj interno mencionado, corresponde al del FPGA, siendo este de 150MHz. El funcionamiento del módulo, se muestra en el algoritmo\ref{alg:secuencia}, el cuál está compuesto por una Máquina de estados finitos. La secuencia está controlada por el reloj interno, y con el, se encarga de que por medio la señal DLC, esperar un nuevo fotograma para ser contemplado en su totalidad, ya que puede ser que el disparo se realice a mediación del fotograma, es por eso que la secuencia espera uno nuevo, para ser procesado, y con el, se genera la señal para el inicio de la clasificación, y la correcta administración de la respuesta al módulo de comunicación.  
 
@@ -2118,66 +2167,68 @@ Para la prueba del modelo en su totalidad se realizaron X pruebas:
 
 \checkmark\textbf{Prueba 1.} Se realizó una prueba con el data set completo.
 
-\checkmark\textbf{Prueba 2.} Se realizó una prueba con el data set al X\%.
+\checkmark\textbf{Prueba 2.} Se realizó una prueba con el data set de entrenamiento al 50\%.
 
-\checkmark\textbf{Prueba 3.} Se realizó una prueba con el data set al X\%.
+\checkmark\textbf{Prueba 3.} Se realizó una prueba con el data set de entrenamiento al 30\%.
 
 
-De los clips se obtuvo el data set de imágenes para el entrenamiento y el testeo los cuales se pueden observar en la tabla \ref{imadat}. Cabe destacar que el conjunto que componen las pruebas 2 y 3, son parte de la prueba 1, y fueron seleccionadas de manera aleatoria, por lo que puede haber elementos de la prueba 2 en la prueba 3.
+De los clips se obtuvo el data set de imágenes para el entrenamiento y el testeo los cuales se pueden observar en la tabla \ref{imadat}. Cabe destacar que el conjunto que componen las capturas de las pruebas 2 y 3, forman parte del conjunto de capturas de la prueba 1 y fueron seleccionadas de manera aleatoria, por lo que puede haber capturas que formen parte del mismo conjunto de capturas de la prueba 2 en el conjunto de capturas de la prueba 3. Para cada prueba, se probó con el mismo data set de Test, por lo que se puede ver que el conjunto de la prueba 2, es similar al conjunto de Test; por otra parte, el conjunto de la prueba 3, tiene menos capturas que el data set de Test.
 
 \begin{table}[h]
-	\caption{Cantidad total de capturas para el data set de imágenes.}
+	\caption{Distribución de capturas por prueba para el data set de imágenes.}
 	\label{imadat}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
 		\textbf{Set}                               & \multicolumn{2}{c|}{\textbf{Capturas totales}}      & \multicolumn{2}{c|}{\textbf{Prueba1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-9} 
-		& 1159                     & 211                      & 1159                     & 211                      & 0                        & 0                        & 0                        & 0                        \\
+		& 1159                     & 211                      & 1159                     & 211                      & 579                        & 105                        & 347                        & 63                        \\
 		\cline{2-9} 
-		& \multicolumn{2}{c|}{1370}                           & \multicolumn{2}{c|}{1370}                           & \multicolumn{2}{c|}{0}                           & \multicolumn{2}{c|}{0}                           \\ \cline{2-9} 
-		\multirow{-4}{*}{\textbf{Entrenamiento}}   & 60.42\%                  & 11\%                   & 60.42\%                  & 11\%                   & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
+		& \multicolumn{2}{c|}{1370}                           & \multicolumn{2}{c|}{1370}                           & \multicolumn{2}{c|}{684}                           & \multicolumn{2}{c|}{360}                           \\ \cline{2-9} 
+		\multirow{-4}{*}{\textbf{Entrenamiento}}   & 60.42\%                  & 11\%                   & 60.42\%                  & 11\%                   & 47\%                      & 8.52\%                      & 36.22\%                      & 6.57\%                      \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-9} 
-		& 475                      & 73                       & 475                      & 73                       & 0                        & 0                        & 0                        & 0                        \\
+		& 475                      & 73                       & 475                      & 73                       & 475                        & 73                        & 475                        & 73                        \\
 		\cline{2-9} 
-		& \multicolumn{2}{c|}{548}                           & \multicolumn{2}{c|}{548}                           & \multicolumn{2}{c|}{0}                           & \multicolumn{2}{c|}{0}                           \\ \cline{2-9} 
-		\multirow{-4}{*}{\textbf{Test}}            & 24.76\%                  & 3.8\%                   & 24.76\%                  & 3.8\%                   & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
+		& \multicolumn{2}{c|}{548}                           & \multicolumn{2}{c|}{548}                           & \multicolumn{2}{c|}{548}                           & \multicolumn{2}{c|}{548}                           \\ \cline{2-9} 
+		\multirow{-4}{*}{\textbf{Test}}            & 24.76\%                  & 3.8\%                   & 24.76\%                  & 3.8\%                   & 38.55\%                      & 5.92\%                      & 49.58\%                      & 7.62\%                      \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-9} 
-		& 1634                     & 284                      & 1634                     & 284                      & 0                        & 0                        & 0                        & 0                        \\
+		& 1634                     & 284                      & 1634                     & 284                      & 1054                        & 178                        & 822                        & 136                        \\
 		\cline{2-9} 
-		& \multicolumn{2}{c|}{1918}                           & \multicolumn{2}{c|}{1918}                           & \multicolumn{2}{c|}{0}                           & \multicolumn{2}{c|}{0}                           \\ \cline{2-9} 
-		\multirow{-3}{*}{\textbf{Total por color}} & 100\%                    & 100\%                    & 100\%                    & 100\%                    & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
-		\% Total                                   & 85.2\%                   & 14.8\%                   & 85.2\%                   & 14.8\%                   & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
+		& \multicolumn{2}{c|}{1918}                           & \multicolumn{2}{c|}{1918}                           & \multicolumn{2}{c|}{1232}                           & \multicolumn{2}{c|}{958}                           \\ \cline{2-9} 
+		\multirow{-4}{*}{\textbf{Total}} & 85.2\%                   & 14.8\%                   & 85.2\%                   & 14.8\%                   & 85.55\%                      & 14.45\%                      & 85.8\%                      & 14.2\%                      \\ \hline
+
 	\end{tabular}
 \end{table}
 
 
-En la tabla \ref{pixet}, se denota la distribución del data set de pixeles. En el caso de la prueba 1, se puede ver que se muestra un overfitting en el entrenamiento, es por eso que, para comprobar la efectividad del mismo, se simuló por computadora el comportamiento de la segmentación, para lo que se tiene la tabla \ref{acurasgm}
+En la tabla \ref{pixet}, se denota la distribución del data set de pixeles. En todas las pruebas, se puede ver que se muestra un overfitting en el entrenamiento, para los dos tipos de entrenamiento, es por eso que, para comprobar la efectividad del mismo, se simuló por computadora y FPGA el comportamiento de la segmentación, mostrada su efectividad por prueba en la tabla \ref{acurasgm}.
 
 \begin{table}[h]
-	\caption{Descripción de data set de pixeles por prueba y sus resultados de entrenamiento.}
+	\caption{Distribución de data set de pixeles por prueba obtenidos y sus resultados de entrenamiento en WEKA.}
 	\label{pixet}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
 		\textbf{Set}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}               & \multicolumn{2}{c|}{\textbf{Prueba 3}}               \\ \hline
 		& {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} & {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} & {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} \\ \cline{2-7} 
-		& 101589                   & 27359                     & 0                        & 0                         & 0                        & 0                         \\ \cline{2-7} 
-		\multirow{-3}{*}{\textbf{Entrenamiento}} & 78.78\%                  & 21.22\%                   & 0\%                      & 0\%                       & 0\%                      & 0\%                       \\ \hline
-		\textbf{Muestras Totales}                & \multicolumn{2}{c|}{{\color[HTML]{000000} 128948}}   & \multicolumn{2}{c|}{{\color[HTML]{000000} 0\%}}      & \multicolumn{2}{c|}{{\color[HTML]{000000} 0\%}}      \\ \hline
-		\textbf{Presición 10-Fold}               & \multicolumn{2}{c|}{99.27\%}                         & \multicolumn{2}{c|}{0\%}                             & \multicolumn{2}{c|}{0\%}                             \\ \hline
-		\textbf{Presición 66\%-34\%}             & \multicolumn{2}{c|}{99.21\%}                         & \multicolumn{2}{c|}{0\%}                             & \multicolumn{2}{c|}{0\%}                             \\ \hline
+		& 101589                   & 27359                     & 92621                        & 24326                         & 84568                        & 23110                         \\ \cline{2-7} 
+		\multirow{-3}{*}{\textbf{Entrenamiento}} & 78.78\%                  & 21.22\%                   & 79.2\%                      & 20.8\%                       & 78.53\%                      & 21.47\%                       \\ \hline
+		\textbf{Muestras Totales}                & \multicolumn{2}{c|}{{\color[HTML]{000000} 128948}}   & \multicolumn{2}{c|}{{\color[HTML]{000000} 116947}}      & \multicolumn{2}{c|}{{\color[HTML]{000000} 107678}}      \\ \hline
+		\textbf{Presición 10-Fold}               & \multicolumn{2}{c|}{99.27\%}                         & \multicolumn{2}{c|}{99.16\%}                             & \multicolumn{2}{c|}{99.29\%}                             \\ \hline
+		\textbf{Presición 66\%-34\%}             & \multicolumn{2}{c|}{99.21\%}                         & \multicolumn{2}{c|}{99.14\%}                             & \multicolumn{2}{c|}{99.35\%}                             \\ \hline
 	\end{tabular}
 \end{table}
+
+Se puede ver, que los data sets de pixeles por prueba, difieren al rededor de 10000 muestras cada uno, por lo que se esperaría un desempeño similar para cada modelo de AD para segmentación. Para cada prueba, en muestras de pixeles no segmentados se muestra una distribucion por debajo del 22\%, esto es debido a las capturas, como se puede ver en la figura \ref{fig:framito} de un color un poco más verde que el resto, donde el fondo siempre es el mismo para cada captura, por lo que se esperan pixeles bastante iguales en la parte no segmentada y por lo tanto un conjunto de muestras más amplio en la parte segmentada. 
 
 \section{Árbol de Decisión de segmentación}
 
 En la tabla \ref{acurasgm} se muestra la tabla de precisiones para el modelo de AD de segmentación, recordando que la prueba es solamente para el conjunto de imágenes que comprenden el set de Test, osease, un universo de pixeles totalmente nuevo para el modelo, para cada prueba. En ella también se muestra el rango de precisiones, es decir, la menor y mayor precisión obtenida, así como el promedio global.  
 
 
-Para la simulación por computadora, se tiene en la prueba 1 un rango de precisión por encima del 90\%, teniendo como resultado global, una precisión casi perfecta.
+Para la simulación por computadora, se tiene en la prueba 1 un rango de precisión por encima del 90\%, teniendo como resultado global, una precisión casi perfecta. Por otra parte, en las pruebas 2 y 3, también, se tuvo una buena precisión, sin embargo, la prueba 3, tuvo un mejor resultado. Esto puede ser debido al data set de imágenes de donde se tomó.  
 
-Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notablemente, sin embargo la precisión global se mantiene alta en 95.08\%.
+Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notablemente, sin embargo la precisión global se mantiene alta en 95.08\%. Para la prueba 3, se tiene un rendimiento aceptable, con una precisión global por encima del 95\% obtenido en la prueba 1, por otra parte la prueba 2...
 
 
 \begin{table}[h]
@@ -2190,12 +2241,13 @@ Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notable
 		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5} 
 		& 91.32\%                       & 99.87\%                      & 68.64\%                       & 99.83\%                      \\ \cline{2-5} 
 		\multirow{-3}{*}{\textbf{Prueba 1}} & \multicolumn{2}{c|}{99.21\%}                                 & \multicolumn{2}{c|}{95.08\%}                             \\ \hline
+		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5}
+		%acuerdate que aqui habia un 53 pero no creemos que sea eso. 
+		& 87.21\%                           & 99.86\%                          & 87.08\%                       & 99.83\%                      \\ \cline{2-5} 
+		\multirow{-3}{*}{\textbf{Prueba 2}} & \multicolumn{2}{c|}{97.5\%}                                     & \multicolumn{2}{c|}{97.52\%}                             \\ \hline
 		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5} 
-		& 0\%                           & 0\%                          & 0\%                       & 0\%                      \\ \cline{2-5} 
-		\multirow{-3}{*}{\textbf{Prueba 2}} & \multicolumn{2}{c|}{0\%}                                     & \multicolumn{2}{c|}{0\%}                             \\ \hline
-		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5} 
-		& 0\%                           & 0\%                          & 0\%                       & 0\%                      \\ \cline{2-5} 
-		\multirow{-3}{*}{\textbf{Prueba 3}} & \multicolumn{2}{c|}{0\%}                                     & \multicolumn{2}{c|}{0\%}                             \\ \hline
+		& 88.53\%                           & 99.86\%                          & 88.74\%                       & 99.77\%                      \\ \cline{2-5} 
+		\multirow{-3}{*}{\textbf{Prueba 3}} & \multicolumn{2}{c|}{98.18\%}                                     & \multicolumn{2}{c|}{98.22\%}                             \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -2203,40 +2255,40 @@ Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notable
 
 \section{Árbol de Decisión de clasificación de color}
 
-En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el entrenamiento. En el caso de la prueba 1, se puede ver que la distribución es casi idéntica al data set de imágenes, aunque con algunas muestras descartadas, debido a que se eliminaron las muestras duplicadas, el entrenamiento muestra una precisión por arriba del 95\% en los 2 casos sin llegar al overfitting.
+En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el entrenamiento. En para las tres pruebas, se puede ver que la distribución es casi idéntica al data set de imágenes, aunque con algunas muestras descartadas, debido a que se eliminaron las muestras duplicadas. El rendimiento del entrenamiento para cada prueba y para los dos modos de entrenamiento se alcanza una precisión cercana al 95\%, por lo que no se llega a un overfitting en ningún caso. Cabe destacar que estos valores son interesantes ya que se puede ver que con una menor cantidad de muestras el modelo se comporta muy similar.
 
 \begin{table}[h]
-	\caption{Descripción de data set de histogramas por prueba y sus resultados de entrenamiento.}
+	\caption{Descripción de data set de histogramas por prueba y sus resultados de entrenamiento en WEKA.}
 	\label{imadatcol}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
 		\textbf{Set}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-7} 
-		& 1151                     & 210                      & 0                        & 0                        & 0                        & 0                        \\ \cline{2-7} 
-		\multirow{-3}{*}{\textbf{Entrenamiento}} & 84.57\%                  & 15.42\%                  & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
-		\textbf{Muestras totales}                & \multicolumn{2}{c|}{1361}                           & \multicolumn{2}{c|}{0}                              & \multicolumn{2}{c|}{0}                              \\ \hline
-		\textbf{Precisión 10-fold}               & \multicolumn{2}{c|}{95.73\%}                        & \multicolumn{2}{c|}{0\%}                            & \multicolumn{2}{c|}{0\%}                            \\ \hline
-		\textbf{Precisión 66\%-34\%}             & \multicolumn{2}{c|}{96.11\%}                        & \multicolumn{2}{c|}{0\%}                            & \multicolumn{2}{c|}{0\%}                            \\ \hline
+		& 1151                     & 210                      & 578                        & 104                        & 346                        & 63                        \\ \cline{2-7} 
+		\multirow{-3}{*}{\textbf{Entrenamiento}} & 84.57\%                  & 15.42\%                  & 84.75\%                      & 15.25\%                      & 84.6\%                      & 15.4\%                      \\ \hline
+		\textbf{Muestras totales}                & \multicolumn{2}{c|}{1361}                           & \multicolumn{2}{c|}{682}                              & \multicolumn{2}{c|}{409}                              \\ \hline
+		\textbf{Precisión 10-fold}               & \multicolumn{2}{c|}{95.73\%}                        & \multicolumn{2}{c|}{95.30\%}                            & \multicolumn{2}{c|}{94.62\%}                            \\ \hline
+		\textbf{Precisión 66\%-34\%}             & \multicolumn{2}{c|}{96.11\%}                        & \multicolumn{2}{c|}{93.10\%}                            & \multicolumn{2}{c|}{96.40\%}                            \\ \hline
 	\end{tabular}
 \end{table}
 
-%Agregar fotos de porque salen bajos porcentajes en la tabla en NS
+
+En la tabla \ref{accimadatcol} se muestra la tabla de precisiones obtenida para las pruebas realizadas por computadora y FPGA. Como era de esperar, las precisiones para cada prueba son muy similares a la precisión de entrenamiento de la tabla \ref{imadatcol}, obteniendo precisiones para las dos plataformas también cercanas al 95\%, lo que de manera muy marcada, se denota que con pocas muestras, el modelo de AD para la clasificación de color obtiene un resultado más que aceptable.
+
 
 \begin{table}[h]
-	\caption{Precisión por computadora y FPGA en lo de color}
-	\label{imadatcol}
+	\caption{Precisión por computadora y FPGA de modelo AD de clasificación de color.}
+	\label{accimadatcol}
 	\centering
 \begin{tabular}{c|c|c|c|c|c|c|c|}
 	\cline{2-8}
 	& \textbf{Set}                    & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \cline{2-8} 
-	&                                 & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{3-8} 
-	&                                 & 475                      & 73                       & 0                        & 0                        & 0                        & 0                        \\ \cline{3-8} 
-	& \multirow{-3}{*}{\textbf{Test}} & 86.67\%                  & 13.32\%                  & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \hline
-	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 96.42\%                  & 89.04\%                  & 0\%                      & 0\%                      & 0                        & 0\%                      \\ \cline{2-8} 
-	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Por computadora}}} & \textbf{Precisión}              & \multicolumn{2}{c|}{95.43\%}                        & \multicolumn{2}{c|}{0\%}                            & \multicolumn{2}{c|}{0\%}                            \\ \hline
-	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 93.68\%                  & 91.89\%                  & 0\%                      & 0\%                      & 0\%                      & 0\%                      \\ \cline{2-8} 
-	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{FPGA}}}            & \textbf{Precisión}              & \multicolumn{2}{c|}{93.44\%}                        & \multicolumn{2}{c|}{0\%}                            & \multicolumn{2}{c|}{0\%}                            \\ \hline
+	& \textbf{Clase}                                & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \hline
+	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 96.42\%                  & 89.04\%                  & 94.1\%                      & 89.04\%                      & 97.05\%                        & 82.19\%                      \\ \cline{2-8} 
+	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Por computadora}}} & \textbf{Precisión}              & \multicolumn{2}{c|}{95.43\%}                        & \multicolumn{2}{c|}{93.43\%}                            & \multicolumn{2}{c|}{95.07\%}                            \\ \hline
+	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 93.68\%                  & 91.89\%                  & 97.26\%                      & 85.14\%                      & 97.26\%                      & 75.68\%                      \\ \cline{2-8} 
+	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{FPGA}}}            & \textbf{Precisión}              & \multicolumn{2}{c|}{93.44\%}                        & \multicolumn{2}{c|}{95.63\%}                            & \multicolumn{2}{c|}{94.35\%}                            \\ \hline
 \end{tabular}
 \end{table}
 
