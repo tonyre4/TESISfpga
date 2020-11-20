@@ -100,8 +100,8 @@
 \date           	{\today}
 \degreeday     	 {7}
 \degreeyear     	{2020}
-\degreemonth   	 {Octubre}
-\degreemonthen  	{Octubre}
+\degreemonth   	 {Diciembre}
+\degreemonthen  	{Diciembre}
 
 %\acknowledgmenttoproject {
 %Esta investigación fue parcialmente financiada mediante el proyecto ...
@@ -114,8 +114,7 @@
 
 \dedication  {
 \large
-Este trabajo de tanto esfuerzo lo dedico enteramente a mis padres por su amor incondicional en todos mis años de estudio. A mi familia por siempre confiar en mi.
-
+Este trabajo de tanto esfuerzo lo dedico enteramente a mis padres Ismael Davila y Socorrito Rodríguez por su amor incondicional en todos mis años de estudio, a mi familia por siempre confiar en mi capacidad y a mi novia Adriana Echartea por tanto apoyo y comprensión durante este grado.
 
 }
 
@@ -123,12 +122,12 @@ Este trabajo de tanto esfuerzo lo dedico enteramente a mis padres por su amor in
 
 \abstract{
 \vspace{-.5cm}
-AL FINAL
+Se presenta un sistema de clasificación de tamaño y color mediante una cámara implementado en FPGA, donde la escena captada por la cámara se transportan naranjas mediante una banda industrial. Se utilizaron arboles de decisión para la resolución de la segmentación de la fruta para una posterior clasificación de tamaño y color. Además se desarrolló un script que convierte un archivo de texto donde se describe el comportamiento de los arboles a un lenguaje VHDL sintetizable. Se realizaron pruebas con diferentes sets de prueba, en donde cada set contiene menos prueba que la siguiente en donde se obtiene como resultado una precisión del 97\% para la segmentación de la fruta en la escena, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño, donde se denota la eficiencia del modelo al entrenarlo con pocas muestras.
 }
 
 \abstracten{
 \vspace{-.5cm}
-AL FINAL
+A color and size fruit grading system is presented, implemented in FPGA where the scene from a camera citrus fruit is transported by an industrial conveyor belt. Decision Trees were used to solve fruit segmentation to then perform a size and color grading. Also a script was developed that converts a decision tree text file to VHDL language synthesizable. Was made with different test sets where each set has fewer samples than others, was as a result the accuracy obtained where 97\% for segmentation, 94\% for color grading and 90\% for size grading, where the efficency is maintained using fewer samples for training. 
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,15 +138,34 @@ AL FINAL
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \acknowledgments {
 \bigskip{}
-\begin{itemize}
-\begin{doublespace}
-
-\item  CONACYT 
-
- 
+%\begin{itemize}
+%\begin{doublespace}
 %
-\end{doublespace}
-\end{itemize}
+%
+%
+%
+% 
+%%
+%\end{doublespace}
+%\end{itemize}
+
+Primeramente quiero agradecer al \textbf{Ing. Arturo Martinez} por su apoyo en todas las etapas del proyecto, con herramientas, su guía y conocimientos de electrónica/maquinaria industrial.
+
+También quiero agradecer a los Doctores que me enseñaron tanto en este grado: 
+
+\textbf{Dr. Marco Nuño} por sus grandes e interesantes conocimientos en el HDL, Android, Java; y por su guía en el desarrollo del proyecto y escrito. 
+
+\textbf{Dr. Said Polanco} por sus profundos conocimientos y experiencia en modelos de aprendizaje automático. 
+
+\textbf{Dr. Yahir Hernandez} por su apoyo referente a la ponencia del congreso internacional Reconfig 2019, producto de este grado.
+
+\textbf{Dr. Amparo Rodríguez, Dr. Enrique Rocha y Dr. Carlos Calles} por sus amplios conocimientos de investigación que me ayudaron a realizar este trabajo.
+
+\textbf{Dr. Benjamín Ortiz, Dr. Willian Pech y Dr. Miguel Ibarra} por sus conocimientos varios de ingeniería que me ayudaron en el transcurso del estudio de mi grado.
+
+\textbf{Dra. Daniela Cruz y Dr. Victor Martinez} por sus conocimientos varios de investigación y administración que me ayudaron en este grado.
+
+Estoy profundamente agradecido con todos ustedes por su apoyo en las diferentes etapas de este grado. Gracias.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1297,7 +1315,7 @@ El orden de las fases se decidió a partir de lo que la fase anterior necesita p
 
 \textbf{Fase 6. Prueba en FPGA.} Prueba del modelo completo, donde una imagen en señales de video es procesada por el modelo, y se obtiene la clasificación por tamaño y color.
 
-\textbf{Fase 7. Prueba en marcha con actuadores.} Prueba de la máquina completa puesta en marcha. La fase no se pudo realizar por problemas referentes a la pandemia mundial de COVID-19.
+\textbf{Fase 7. Prueba en marcha con actuadores.} Prueba de la máquina completa puesta en marcha. La fase no se pudo realizar por problemas externos al proyecto.
 
 \begin{figure}[h]
 	\centering
@@ -1807,8 +1825,8 @@ Gray(R,G,B) = \frac{ (299)R + (587)G + (114)B} {2^{10}}
 
 \subsubsection{Módulo convertidor RGB a HSV}
 
-Este módulo tiene como entradas los canales del pixel entrante y la señal de reloj, y simplemente se encarga de realizar las operaciones que se aprecian en las ecuaciones \ref{primas}, \ref{eqv}, \ref{eqs}, \ref{eqh}. Las cuales también son las implementadas en las librerias de OpenCV  \ref{ocvbook11} %\ref{https://docs.opencv.org/2.4/modules/imgproc/doc/miscellaneous_transformations.html#void%20cvtColor%28InputArray%20src,%20OutputArray%20dst,%20int%20code,%20int%20dstCn%29}
-. El módulo está sincronizado por lo que se hará el cálculo cada flanco positivo del reloj.
+Este módulo tiene como entradas los canales del pixel entrante y la señal de reloj, y simplemente se encarga de realizar las operaciones que se aprecian en las ecuaciones \ref{primas}, \ref{eqv}, \ref{eqs}, \ref{eqh}. Las cuales también son las implementadas en las librerias de OpenCV  \cite{ocvbook}. %\ref{https://docs.opencv.org/2.4/modules/imgproc/doc/miscellaneous_transformations.html#void%20cvtColor%28InputArray%20src,%20OutputArray%20dst,%20int%20code,%20int%20dstCn%29}
+El módulo está sincronizado por lo que se hará el cálculo cada flanco positivo del reloj.
 
 \begin{equation} \label{primas}
 \begin{aligned}
@@ -2232,23 +2250,19 @@ Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notable
 
 
 \begin{table}[h]
-	\caption{Precisión simulada por computadora de segmentación con AD por prueba.}
+	\caption{Precisión obtenida por plataforma de segmentación con AD por prueba.}
 	\label{acurasgm}
 	\centering
-	\begin{tabular}{|c|c|c|c|c|}
-		\hline
-		\textbf{Set}                        & \multicolumn{2}{c|}{\textbf{Precisión por computadora (\%)}} & \multicolumn{2}{c|}{\textbf{Precisión en FPGA (\%)}} \\ \hline
-		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5} 
-		& 91.32\%                       & 99.87\%                      & 68.64\%                       & 99.83\%                      \\ \cline{2-5} 
-		\multirow{-3}{*}{\textbf{Prueba 1}} & \multicolumn{2}{c|}{99.21\%}                                 & \multicolumn{2}{c|}{95.08\%}                             \\ \hline
-		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5}
-		%acuerdate que aqui habia un 53 pero no creemos que sea eso. 
-		& 87.21\%                           & 99.86\%                          & 87.08\%                       & 99.83\%                      \\ \cline{2-5} 
-		\multirow{-3}{*}{\textbf{Prueba 2}} & \multicolumn{2}{c|}{97.5\%}                                     & \multicolumn{2}{c|}{97.52\%}                             \\ \hline
-		& \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}            & \multicolumn{2}{c|}{{\color[HTML]{000000} Rango}}    \\ \cline{2-5} 
-		& 88.53\%                           & 99.86\%                          & 88.74\%                       & 99.77\%                      \\ \cline{2-5} 
-		\multirow{-3}{*}{\textbf{Prueba 3}} & \multicolumn{2}{c|}{98.18\%}                                     & \multicolumn{2}{c|}{98.22\%}                             \\ \hline
-	\end{tabular}
+\begin{tabular}{c|c|c|}
+	\cline{2-3}
+	& \textbf{Precisión por computadora (\%)} & \textbf{Precisión por FPGA (\%)} \\ \hline
+	\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Prueba 1}}} & {[}91.32, 99.87{]}                      & {[}68.64, 99.83{]}               \\ \cline{2-3} 
+	\multicolumn{1}{|c|}{}                                   & 99.21                                   & 95.08                            \\ \hline
+	\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Prueba 2}}} & {[}87.21, 99.86{]}                      & {[}87.08, 99.83{]}               \\ \cline{2-3} 
+	\multicolumn{1}{|c|}{}                                   & 97.5                                    & 97.52                            \\ \hline
+	\multicolumn{1}{|c|}{\multirow{2}{*}{\textbf{Prueba 3}}} & {[}88.53, 99.86{]}                      & {[}88.74, 99.77{]}               \\ \cline{2-3} 
+	\multicolumn{1}{|c|}{}                                   & 98.18                                   & 98.22                            \\ \hline
+\end{tabular}
 \end{table}
 
 
@@ -2281,25 +2295,99 @@ En la tabla \ref{accimadatcol} se muestra la tabla de precisiones obtenida para 
 	\caption{Precisión por computadora y FPGA de modelo AD de clasificación de color.}
 	\label{accimadatcol}
 	\centering
-\begin{tabular}{c|c|c|c|c|c|c|c|}
-	\cline{2-8}
-	& \textbf{Set}                    & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \cline{2-8} 
-	& \textbf{Clase}                                & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \hline
-	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 96.42\%                  & 89.04\%                  & 94.1\%                      & 89.04\%                      & 97.05\%                        & 82.19\%                      \\ \cline{2-8} 
-	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Por computadora}}} & \textbf{Precisión}              & \multicolumn{2}{c|}{95.43\%}                        & \multicolumn{2}{c|}{93.43\%}                            & \multicolumn{2}{c|}{95.07\%}                            \\ \hline
-	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 93.68\%                  & 91.89\%                  & 97.26\%                      & 85.14\%                      & 97.26\%                      & 75.68\%                      \\ \cline{2-8} 
-	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{FPGA}}}            & \textbf{Precisión}              & \multicolumn{2}{c|}{93.44\%}                        & \multicolumn{2}{c|}{95.63\%}                            & \multicolumn{2}{c|}{94.35\%}                            \\ \hline
+%\begin{tabular}{c|c|c|c|c|c|c|c|}
+%	\cline{2-8}
+%	& \textbf{Set}                    & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \cline{2-8} 
+%	& \textbf{Clase}                                & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \hline
+%	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 96.42\%                  & 89.04\%                  & 94.1\%                      & 89.04\%                      & 97.05\%                        & 82.19\%                      \\ \cline{2-8} 
+%	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Por computadora}}} & \textbf{Precisión}              & \multicolumn{2}{c|}{95.43\%}                        & \multicolumn{2}{c|}{93.43\%}                            & \multicolumn{2}{c|}{95.07\%}                            \\ \hline
+%	\multicolumn{1}{|c|}{}                                           & \textbf{Precisión por clase}    & 93.68\%                  & 91.89\%                  & 97.26\%                      & 85.14\%                      & 97.26\%                      & 75.68\%                      \\ \cline{2-8} 
+%	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{FPGA}}}            & \textbf{Precisión}              & \multicolumn{2}{c|}{93.44\%}                        & \multicolumn{2}{c|}{95.63\%}                            & \multicolumn{2}{c|}{94.35\%}                            \\ \hline
+%\end{tabular}
+\begin{tabular}{c|c|c|c|c|c|c|}
+	\cline{2-7}
+	& \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \cline{2-7} 
+	& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \hline
+	\multicolumn{1}{|c|}{}                                       & 96.42\%                  & 89.04\%                  & 94.1\%                   & 89.04\%                  & 97.05\%                  & 82.19\%                  \\ \cline{2-7} 
+	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{Computadora}}} & \multicolumn{2}{c|}{95.43\%}                        & \multicolumn{2}{c|}{93.43\%}                        & \multicolumn{2}{c|}{95.07\%}                        \\ \hline
+	\multicolumn{1}{|c|}{}                                       & 93.38\%                  & 91.89\%                  & 97.26\%                  & 85.14\%                  & 97.26\%                  & 75.68\%                  \\ \cline{2-7} 
+	\multicolumn{1}{|c|}{\multirow{-2}{*}{\textbf{FPGA}}}        & \multicolumn{2}{c|}{93.44\%}                        & \multicolumn{2}{c|}{95.63\%}                        & \multicolumn{2}{c|}{94.35\%}                        \\ \hline
 \end{tabular}
 \end{table}
 
 
 \section{Clasificación de tamaño}
-\subsection{Captura de data set de áreas}
-\subsection{Entrenamiento y prueba por computadora}
-\subsection{Implementación en FPGA}
+
+Para la clasificación de tamaño, primeramente se tomó un data set de imágenes, donde se clasificó manualmente cada imágen, la distribución se muestra en la tabla \ref{capstam}, dejando por tamaño el área aproximada para la distinción de las 4 clases correspondientes, cabe mencionar que no se tuvo ninguna muestra inválida por lo que se agregó posteriormente al data set, es por esto que no se reportan las muestras inválidas en la tabla.
+
+\begin{table}[h]
+	\caption{Distribución de data set de imágenes para clasificación por tamaño.}
+	\label{capstam}
+	\centering
+	\begin{tabular}{c|c|c|c|}
+		\cline{2-4}
+		& \multicolumn{3}{c|}{\textbf{Capturas por clase}} \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Set}}                            & Chico           & Mediano        & Grande        \\ \hline
+		\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Entrenamiento}}} & 388             & 941            & 61            \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & 19.97\%         & 48.45\%        & 3.14\%        \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{1390}                        \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{71.57\%}                     \\ \hline
+		\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Test}}}          & 131             & 394            & 27            \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & 6.74\%          & 20.28\%        & 1.4\%         \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{522}                         \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{26.87\%}                     \\ \hline
+		\multicolumn{1}{|c|}{\multirow{3}{*}{\textbf{Total}}}         & 519             & 1335           & 88            \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & 26.72\%         & 68.74\%        & 4.53\%        \\ \cline{2-4} 
+		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{1942}                        \\ \hline
+	\end{tabular}
+\end{table}
+
+Al realizar el entrenamiento en WEKA para obtener un modelo de comparadores para la clasificación de tamaño se obtuvo en la prueba de 10-fold una precisión de \textbf{99.71\%} y por entrenamiento 66-34 se obtuvo una precisión de \textbf{99.57\%} respectivamente.
+
+El árbol resultante, se describe en la figura \ref{adareas}, en donde se agrega la directiva de muestras inválidas.
+
+%area <= 1993: Small (388.0/1.0)
+%area > 1993
+%|   area <= 3985: Medium (942.0/1.0)
+%|   area > 3985: Big (62.0/1.0)
+\begin{figure} 
+	\centering
+	\includegraphics[width=0.8\linewidth]{edrawimas/arboldeareas}
+	\caption{AD usado para clasificación de tamaño.}
+	\label{adareas}
+\end{figure}
+
+En la tabla \ref{acctam} se muestra el resultado en FPGA de la precisión del árbol mostrado en la figura \ref{adareas}, sobrepasando un 90\% de precisión global. Como era de esperarse, la menor precisión fue obtenida en la clase Grande, ya que la distribución es poca en ese tipo de muestras. 
+
+\begin{table}[h]
+	\caption{Distribución de data set de imágenes para clasificación por tamaño.}
+	\label{acctam}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Clase}                              & \textbf{Chico} & \textbf{Mediano} & \textbf{Grande} \\ \hline
+		\multirow{2}{*}{\textbf{Precisión en FPGA}} & 86.26\%        & 93.15\%          & 77.78\%         \\ \cline{2-4} 
+		& \multicolumn{3}{c|}{90.76\%}                        \\ \hline
+	\end{tabular}
+\end{table}
 
 
-%%Falta tabla de recursos de FPGA
+\newpage
+\section{Recursos utilizados}
+En la tabla \ref{resources} se muestra la distribución de recursos utilizados por la arquitectura, se utilizaron muy pocos slices como registros y además hay disponible más del 60\% de slices como LUTs disponibles. Dados estos datos, se podría construir una doble linea de procesamiento trabajando en paralelo en un mismo dispositivo. 
+
+
+\begin{table}[h]
+	\caption{Distribución recursos utilizados del FPGA.}
+	\label{resources}
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Recurso}          & \textbf{Usados} & \textbf{Disponibles} & \textbf{Utilización} \\ \hline
+		\textbf{Slices-Registros} & 764             & 184304               & 0.41\%               \\ \hline
+		\textbf{Slices LUT}       & 31222           & 92152                & 33.9\%               \\ \hline
+	\end{tabular}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2309,10 +2397,36 @@ En la tabla \ref{accimadatcol} se muestra la tabla de precisiones obtenida para 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Conclusiones}
-Algo...
+
+La clasificación de fruta asistida por sistemas embebidos es una forma de apoyo para la industria local de alimentos, esto para lograr una aceleración en la clasificación de la misma y lograr metas comerciales como la exportación y ventas en aumento.\\
+
+
+El uso de FPGA para la clasificación por medio de una cámara resulta una forma adecuada de implementación de un clasificador de fruta, ya que permite un menor consumo de energía y paralelismo en la clasificación, ya que si el FPGA es suficientemente grande se pueden implementar múltiples lineas con el mismo dispositivo funcionando en paralelo.\\
+
+
+Ayudándose mediante modelos de aprendizaje supervisado, se pueden lograr tareas complejas como segmentación y clasificación de color mediante operaciones sencillas realizadas en paralelo. Para ello se propuso una arquitectura de 4 etapas: la primera para extracción de características para segmentación, la segunda para el computo del modelo de segmentación, la tercera para extracción de características para clasificación de tamaño y color, y por último la etapa de clasificación de tamaño y computo del modelo de clasificación de color.\\
+
+Para este trabajo, el modelo utilizado es el árbol de decisión ya que por medio de la arquitectura propuesta, ésta puede ser computada por un circuito combinacional, ya que cada rama del árbol se computa en paralelo, obteniendo así, un computo orientado a obtener una respuesta en tiempo real. \\
+
+
+La arquitectura propuesta en este proyecto, su función es clasificar por tamaño y color por medio de una segmentación de la fruta, en una escena tomada por una cámara colocada en una maquinara que transporta fruta a través de la escena. La clasificación por color es resuelta mediante árboles de decisión, los cuales en los resultados muestran que este modelo puede ser incluso entrenado con pocas muestras y obtener resultados por encima del 90\% para ambas tareas, obteniendo como resultado una precisión del 97\% para la segmentación, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño.
+
+
+
+%Condensar introduccion
+%
+%decir acerca de que se hace muy simple hacer en HW 
+%
+%se dice lo que se esta proponiendo  y luego los resultados que obtuve
+%
+%1.para que se aplica
+%2.que metodos propones
+%3.que se propone
+%4.que resultados se obtuvieron
 
 \section*{Trabajos futuros}
-Algo...
+
+Se plantean pruebas en campo con la implementación propuesta en el proyecto, usando el mejor modelo obtenido en este trabajo, donde se realizarán pruebas con la maquinaria completa, siendo controlada por el MCU en convivencia con el FPGA, midiendo tiempo de clasificación  que se estima rondar a los 16ms por muestra debido al muestreo de la cámara.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
