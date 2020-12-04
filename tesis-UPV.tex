@@ -301,13 +301,13 @@ Algunos autores han reportado algunos sistemas de clasificación. En \cite{73067
 \end{enumerate}
 
 % Clasificadores de naranjas 
-Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{analis}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{sirisath}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. 
+Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{analis}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{chokun}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. 
 
-Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{feng}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por caracteristicas estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
+Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{rgbhisto}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por caracteristicas estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
 
 En \cite{ALOHALI201129}, un prototipo para clasificar fruta en base a las fecha de cosecha es propuesto. RNAs son entrenadas con el conjunto de datos de 1800 frutas para obtener caracteristicas como debilidad, tamaño, forma, intensidad y defectos.
 
-Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{curvelet}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
+Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{khoje}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
 En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Utilizando una Transformación de Caracteristicas Invariantes a Escalamiento (SIFT) fue usado para obtener caracteristicas de las frutas presentadas, y un clasificador de tipo Bosque aleatorio fue aplicado de igual manera. 
 %En  Vector Machines (SVM) and Probabilistic Neural Networks (PNN) classifiers were trained to distinguish between healthy and defective fruits.  In \cite{7086191}, a system for grading apples, strawberries, and oranges is presented. Scale Invariant Feature Transform (SIFT) was used to obtain features from input fruits, and a Random Forest classifier was applied for fruit grading.
 En \cite{5254804}, un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, platanos y fresas. En \cite{ROCHA201096}, descriptores de imágenes basadas en apariencia, color, tectura, y forma fueron obtenidos y distinguidos de las tecnicas de ML como SVM, LDA, arboles de clasificacion, KNN, y ensambles de arboles fueron entrenados.
@@ -356,7 +356,7 @@ La clasificación por umbrales fijos es difícil de lograr ya que se necesita mu
 
 Para la extracción de características para saber el estado de la fruta se utilizan ciertas características, tal es el caso de obtener desde el espacio de colores HSV de la imagen a procesar para obtener características sobre el color y la iluminación especifica. De esto anterior obtener la media, y el histograma de los 3 canales correspondientes \cite{analis,chokun}, por otra parte el análisis es solamente para detectar que se aprecia en mal estado, pero no se clasifica el color.
 
-El obtener características complicadas de computar no siempre es la mejor opción para un problema como este, ya que el obtener una precisión de 90\% es aceptable, sin embargo el tiempo de procesamiento o el desarrollo de un algoritmo sofisticado puede ser costoso en recursos y tiempo de desarrollo \cite{curvelet}. Sin embargo, existen sistemas similares, los cuales están montados en FPGA, donde la velocidad de computo se mejora hasta 100 veces \cite{faste} además de también poder ser implementados clasificadores por arboles de decisión \cite{friend}.
+El obtener características complicadas de computar no siempre es la mejor opción para un problema como este, ya que el obtener una precisión de 90\% es aceptable, sin embargo el tiempo de procesamiento o el desarrollo de un algoritmo sofisticado puede ser costoso en recursos y tiempo de desarrollo \cite{khoje}. Sin embargo, existen sistemas similares, los cuales están montados en FPGA, donde la velocidad de computo se mejora hasta 100 veces \cite{faste} además de también poder ser implementados clasificadores por arboles de decisión \cite{friend}.
 
 El uso de diferentes clasificadores para la clasificación de naranjas están los perceptrones multicapa (analizando histogramas sobre el canal RGB) \cite{classi,analis}, arboles de decisión, Random Forest \cite{analis,rfrf}. 
 
@@ -831,7 +831,7 @@ El cómputo de este método de segmentación es muy fácil de implementar en har
 %\subsubsection{Contornos}
 
 \subsection{Histogramas}
-Los histogramas en procesamiento de imágenes, representan de manera gráfica la distribución de un canal de color, es decir, en que tantas ocasiones los pixeles han tomado cierto valor,  por ejemplo, en la figura \ref{histolena}, se encuentra el histograma de la figura \ref{lenabn}, y que su distribución se encuentra entre el rango (30,200) aproximadamente, por lo que en muy pocas ocasiones, se encuentran valores de pixeles en esta imagen fuera de este rango.
+Los histogramas en procesamiento de imágenes, representan de manera gráfica la distribución de un canal de color, es decir, en que tantas ocasiones los pixeles han tomado cierto valor,  por ejemplo, en la figura \ref{histolena}, se encuentra el histograma de la figura \ref{lenabn}, y que su distribución se encuentra entre el rango $(30,200)$ aproximadamente, por lo que en muy pocas ocasiones, se encuentran valores de pixeles en esta imagen fuera de este rango.
 
 \begin{figure}[!tbh] 
 	\centering 
@@ -839,6 +839,8 @@ Los histogramas en procesamiento de imágenes, representan de manera gráfica la
 	\caption{Histograma de imagen \ref{lenabn}.} 
 	\label{histolena} 
 \end{figure}
+
+Debido a que el rango de los pixeles en una imagen en escala de grises es $[0,255]$ entonces es el rango correspondiente que se muestra en el eje horizontal, cada barra por cada unidad son llamados bins, y para el caso son 256 bins, pero bien podrian ser 8 bins donde, el primero comprende del rango de $[0,32)$, el segundo de $[32,64)$, y así sucesivamente hasta tener los 8 rangos, por cada pixel que tenga un valor definido entre el rango de algún bin, entonces ese será contado en el histograma en el bin correspondiente.  
 %\subsection{Operaciones morfológicas}
 %
 %Los operadores morfológicos a menudo toman una imagen binaria y un elemento estructurante como entrada y los combinan usando un operador conjunto (intersección, unión, inclusión, complemento). Procesan objetos en la imagen de entrada en función de las características de su forma. Estas características están codificadas en el elemento estructurante. Por lo general, el elemento estructurante tiene un tamaño de $3\times3$ y tiene su origen en el píxel central.\\
@@ -1175,7 +1177,7 @@ Un \f tiene una estructura flexible, que ofrece muchos beneficios, como lo son:
 
 \section{Procesamiento de imágenes en FPGA}
 
-El procesamiento de imágenes en un FPGA es bastante distinto de entornos computacionales, y dependiendo del procesamiento que se va a realizar se necesita cierto hardware. En imágenes de alta resolución (mayores a 720p), un FPGA en la mayoría de los casos, no se puede almacenar toda la imagen, debido a la cantidad necesaria de recursos que esta necesita tal y como se pudiera hacer en una compatadora, ya que por lo general la imagen debe estar en formato RAW (es decir, la imagen sin ningún tipo de formato de compresión), por lo que por lo general la imagen es almacenada en alguna memoria conectada al FPGA, de ahí ser leída y procesada.
+El procesamiento de imágenes en un FPGA es bastante distinto de entornos computacionales, y dependiendo del procesamiento que se va a realizar se necesita cierto hardware. En imágenes de alta resolución (mayores a 720p), un FPGA en la mayoría de los casos, no se puede almacenar toda una imagen, debido a la cantidad necesaria de recursos que esta necesita tal y como se pudiera hacer en una computadora, ya que por lo general la imagen debe estar en formato RAW (es decir, la imagen sin ningún tipo de formato de compresión), por lo que por lo general la imagen es almacenada en alguna memoria conectada al FPGA, de ahí ser leída y procesada.
 
 \subsection*{Detalles de sincronización de video}
 Suponiendo que se tiene una imagen de un solo canal que tiene una resolución de $10\times10$ tal y como se muestra en la figura \ref{u} donde se muestra la imagen de un caracter ``u'', en ella podemos ver los ejes de coordenadas $x$ y $y$ donde el origen está en la esquina superior izquierda de la imagen, por lo que se considera un avance positivo hacia la derecha en el eje horizontal, y hacia abajo en el eje vertical. La imagen leída en un FPGA es pixel a pixel, empezando por el pixel ''0'' mostrado en la figura en la posición (0,0), en valores de 1 byte por pixel, posteriormente los pixeles hacia la derecha, y al acabar la fila, se empieza por la posición (0,1) en el pixel 10, así sucesivamente hasta terminar la imagen en el pixel 99 en la posición (9,9).
@@ -1259,9 +1261,15 @@ El procesado de imágenes en tiempo real es por lo general para aplicaciones de 
 
 \subsection*{B) Inclusión de diversos grados de paralelismo}
 
-*RESUMEN
+Existen algunos tipos de paralelismo según \cite{paralel} utilizadas en diversas tecnologías:
 
-En principio cada parte de un algoritmo debería ser corrido por un procesador dedicado, sin embargo esto en un sistema por computadora es poco aplicable. Aunque las computadoras de hoy manejen un procesador multinucleo, muchos de estos núcleos se utilizan para tareas dedicadas por el sistema operativo. Por otra parte en un FPGA debido a su flexibilidad puede ser implementado un procesador pequeño por cada paso del algoritmo, creando una estructura de tipo pipeline. El procesamiento con un sistema de tipo pipeline se puede ver en la figura \ref{pipe}, en donde todos los procesadores corren al mismo tiempo, y que, aunque sea un proceso secuencial, todos los procesadores trabajan a la vez, que al contrario del paralelismo, que el procesador realice cada tarea por separado.
+\checkmark\textbf{Paralelismo a nivel de instrucción.} Es usado en microprocesadores de alto desempeño, los cuales implementan el paralelismo para mejorar los procesos computacionales de lectura y escritura que comprenden a su unidad aritmética lógica (ALU por sus siglas en inglés), realizando más de una tarea por ciclo de reloj. Esto por lo general se aplica a nivel bajo, por lo que el programador no es capaz de modificar el proceso de cómputo.
+
+\checkmark\textbf{Paralelismo a nivel de datos.} También llamado Paralelismo a nivel bucle y es usado en cálculos de vectores en donde en vez de realizar un cálculo por elemento del vector, se calcula el arreglo en una sola operación. Es un recurso utilizado usualmente en FPGAs.
+
+\checkmark\textbf{Paralelismo a nivel de tareas.} Es usualmente utilizado en FPGAs para aplicaciones de alto desempeño, y es utilizado en arquitecturas de tipo pipeline. Consiste en múltiples procesadores que resuelven subtareas en paralelo de manera seriada.
+
+En principio cada parte de un algoritmo debería ser corrido por un procesador dedicado, sin embargo esto en un sistema por computadora es poco aplicable. Aunque las computadoras de hoy manejen un procesador multinúcleo, muchos de estos núcleos se utilizan para tareas dedicadas por el sistema operativo. Por otra parte en un FPGA debido a su flexibilidad puede ser implementado un procesador pequeño por cada paso del algoritmo, creando una estructura de tipo pipeline. El procesamiento con un sistema de tipo pipeline se puede ver en la figura \ref{pipe}, en donde todos los procesadores corren al mismo tiempo, y que, aunque sea un proceso secuencial, todos los procesadores trabajan a la vez, que al contrario del paralelismo, que el procesador realice cada tarea por separado.
 
  
 \begin{figure}[!tbh]
@@ -1324,10 +1332,9 @@ El orden de las fases se decidió a partir de lo que la fase anterior necesita p
 	\centering
 	
 	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{
-	\caption{Diagrama de proceso de metodología empleada.}\end{minipage}},rotate=90,center}
+	\caption{Diagrama de proceso de metodología empleada.}\label{meth}\end{minipage}},rotate=90,center}
 	\includegraphics[width=0.9\textheight]{edrawimas/metodo}
 	\end{adjustbox}
-	\label{meth}
 \end{figure}
 
 \section{Sistema propuesto}
@@ -1353,11 +1360,11 @@ La idea general del trabajo se puede apreciar en la figura \ref{sis}, el cual es
 
 
 \section{Maquinaria de flujo de naranja}
-La maquinaria es la encargada de mover toda la fruta por un circuito mecánico para ser procesada. En la figura \ref{fig:diagramamaquina} se muestra un diagrama general donde se aprecian todos los componentes de que componen el flujo de naranja, empezando por el embudo de alimentación y terminando en la zona de fruta clasificada. Las flechas, muestran el sentido y la dirección de el flujo de las naranjas y en el caso de la flecha con textura punteada se trata de una realimentación de fruta que puede que no haya sido procesada correctamente para dar una nueva oportunidad de ser clasificada.  
+La maquinaria es la encargada de mover toda la fruta por un circuito mecánico para ser procesada. En la figura \ref{fig:diagramamaquina} se muestra un diagrama general donde se aprecian todos los componentes de que componen el flujo de naranja, empezando por el embudo de alimentación y terminando en la zona de fruta clasificada. Las flechas, muestran el sentido y la dirección de el flujo de las naranjas y en el caso de la flecha con textura punteada se trata de una realimentación de fruta que puede que no haya sido procesada correctamente para dar una nueva oportunidad de ser clasificada. En la figura \ref{maqui}, se mustran fotografías de la maquinaria en diferentes ángulos.
 
 \begin{figure}[!tbh]
 	\centering
-	\includegraphics[scale=0.3]{edrawimas/diagramamaquina}
+	\includegraphics[width=0.5\textheight]{edrawimas/diagramamaquina}
 	\caption{Diagrama general de maquinaria para el sistema de separación automática de naranjas.}
 	\label{fig:diagramamaquina}
 \end{figure}
@@ -1369,7 +1376,7 @@ A continuación se explica de manera particular cada parte de la maquinaria.
 
 %<FOTO>
 
-\checkmark\textbf{Banda de giro.} Es una banda pequeña, movida por un motor DC de 90 V, la cual es controlada por un driver de 0.5HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje diferente a la fruta. La transferencia del giro es por medio de una banda mecánica genérica. Al final de la banda cuenta con un riel el cual proporciona un giro de 90 grados para posteriormente la fruta caer a la siguiente etapa.
+\checkmark\textbf{Banda de giro.} Es una banda pequeña, movida por un motor DC de 90 V, la cual es controlada por un driver de 0.5 HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje diferente a la fruta. La transferencia del giro es por medio de una banda mecánica genérica. Al final de la banda cuenta con un riel el cual proporciona un giro de 90 grados para posteriormente la fruta caer a la siguiente etapa.
 
 
 %<FOTO>
@@ -1389,12 +1396,12 @@ A continuación se explica de manera particular cada parte de la maquinaria.
 
 %<FOTO>
 
-\checkmark\textbf{Banda principal.} Es una estructura con un riel compuesta de rodillos capaces de crear zocalos de fruta, los cuales sirven para transportar fruta por toda la banda principal. El riel es movido por un motor DC de 90 V, la cual es controlada por un driver de 0.5HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje de diferente velocidad a la fruta. En ella esta montada la zona de actuadores y la cámara de proceso que se describirán a continuación.
+\checkmark\textbf{Banda principal.} Es una estructura con un riel compuesta de rodillos capaces de crear zocalos de fruta, los cuales sirven para transportar fruta por toda la banda principal. El riel es movido por un motor DC de 90 V, la cual es controlada por un driver de 0.5 HP por lo que la velocidad de giro puede ser controlada para suministrar un empuje de diferente velocidad a la fruta. En ella esta montada la zona de actuadores y la cámara de proceso que se describirán a continuación.
 
 
 %<FOTO>
 
-\checkmark\textbf{Cámara de proceso.} Es una estructura metálica en la cual se contiene un ambiente con iluminación constante con LEDs de color blanco, toda la iluminación externa es eliminada en este lugar. en la entrada de la cámara de proceso se encuentra un sensor de presencia, para detectar si una naranja está por entrar, por otra parte en la parte central y superior se encuentra la cámara digital que se conecta al FPGA.
+\checkmark\textbf{Cámara de proceso.} Es una estructura metálica mostrada en la figura \ref{cab} en la cual se contiene un ambiente con iluminación constante con LEDs de color blanco, toda la iluminación externa es eliminada en este lugar. en la entrada de la cámara de proceso se encuentra un sensor de presencia, para detectar si una naranja está por entrar, por otra parte en la parte central y superior se encuentra la cámara digital que se conecta al FPGA.
 
 
 %<FOTO>
@@ -1407,7 +1414,19 @@ A continuación se explica de manera particular cada parte de la maquinaria.
 \checkmark\textbf{Bloque de fruta clasificada.} Es una zona que aun no se construye. Su función será recolectar la fruta ya clasificada, en diferentes rieles, se tiene un diseño preliminar.
 
 
-%<FOTO>
+\begin{figure}[!tbh]
+	\centering
+	%\makebox[0pt]{
+
+	\subfloat[Fotografía frontal de maquinaria.]{\includegraphics[width=0.4\linewidth]{ima/altomaqui} \label{front}} \hspace{5mm} %\hfill
+	\subfloat[Fotografía de cámara de proceso.]{\includegraphics[width=0.4\linewidth]{ima/cabina} \label{cab}} 
+	
+	\subfloat[Fotografía lateral izquierdo de maquinaria.]{\includegraphics[width=0.4\linewidth]{ima/ladomaqui}\label{lado1}} \hspace{5mm}%\hfill
+	\subfloat[Fotografía lateral derecho de maquinaria.]{\includegraphics[width=0.4\linewidth]{ima/lado2maqui}  \label{lado2}} %\hfill\\
+	%}
+	\caption{Fotografías de diferentes ángulos de la maquinaria industrial utilizada.}
+	\label{maqui}
+\end{figure}
 
 
 \section{Flujo de fruta en maquinaria}
@@ -1415,22 +1434,29 @@ A continuación se explica de manera particular cada parte de la maquinaria.
 En la figura \ref{fig:diagramaflujomaquina} se muestra un diagrama de flujo el cual explica el proceso realizado por la maquinaria en general. Primeramente se recibe la fruta no clasificada, la cual debe haber sido lavada con anterioridad, puede tener polvo, sin embargo no puede estar manchada con lodo o algún agente que haga que cambie de color la misma, ya que esto puede afectar el rendimiento de la clasificación. Posteriormente, la fruta es suminstrada al circuito de bandas la cual va a ser la encargada de alinear y acomodar la fruta para su procesamiento de video y decidir la clasificación que se esté tomando. Si la clasificación es válida, pasará a la zona de actuadores y al final del proceso, de otra manera la fruta será suminstrada nuevamente al circuito de bandas para ser procesada nuevamente.
 
 
-\begin{figure}
+\begin{figure} [!tbh]
 	\centering
-	\includegraphics[scale=0.35]{edrawimas/diagramaflujomaquina}
+	\includegraphics[height=0.5\textheight]{edrawimas/diagramaflujomaquina}
 	\caption{Diagrama de flujo de procesamiento de fruta en la maquinaria.}
 	\label{fig:diagramaflujomaquina}
 \end{figure}
 
 
 \section{Sistema eléctrico/electrónico}
-Se explican los componentes eléctricos y electrónicos y su conexión propuesta. El sistema eléctrico/electrónico general está compuesto por diversas partes las cuales serán explicadas a detalle en las siguientes secciones. Primeramente veamos un esquema general del sistema (figura \ref{fig:diagramagralelectrico}) en donde se puede apreciar los componentes. Las flechas describen el flujo de señales que son emitidas o recibidas en el microcontrolador (MCU), el cuál es el que maneja los estimulos proporcionados por el los elementos de control y medición, además maneja las salidas para estimular los componentes mecánicos y de procesamiento de video. Se puede apreciar también que algunos componentes solo se usarán como auxiliares en el desarrollo (DEBUG), por lo que no forman parte del sistema final y cuando estos son eliminados las flechas con textura punteadas son utilizadas.
+Se explican los componentes eléctricos y electrónicos y su conexión propuesta. El sistema eléctrico/electrónico general está compuesto por diversas partes las cuales serán explicadas a detalle en las siguientes secciones. Primeramente veamos un esquema general del sistema (figura \ref{fig:diagramagralelectrico}) en donde se puede apreciar los componentes. Las flechas describen el flujo de señales que son emitidas o recibidas en el microcontrolador (MCU), el cuál es el que maneja los estimulos proporcionados por el los elementos de control y medición, además maneja las salidas para estimular los componentes mecánicos y de procesamiento de video. Se puede apreciar también que algunos componentes solo se usarán como auxiliares en el desarrollo (DEBUG), por lo que no forman parte del sistema final y cuando estos son eliminados las flechas con textura punteadas son utilizadas. Todos estos componentes fueron instalados en un tablero general de control mostrado en la figura \ref{fig:tablero}.
 
 \begin{figure}[!tbh]
 	\centering
 	\includegraphics[width=\linewidth]{edrawimas/diagramagralelectrico}
 	\caption{Diagrama eléctrico/electrónico general.}
 	\label{fig:diagramagralelectrico}
+\end{figure}
+
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics[height=0.5\textheight]{ima/tablero}
+	\caption{Tablero electrónico general de maquinaria.}
+	\label{fig:tablero}
 \end{figure}
 
 A continuación será explicada cada parte en particular.
@@ -1442,17 +1468,17 @@ Los elementos mecánicos se describen a continuación:
 
 \checkmark\textbf{Motores.} Las características de los motores se pueden ver en la tabla \ref{motorestab}. Los drivers de motores DC cuentan con rampa de aceleración para una transición suave y el contacto es controlado por un relevador mecánico activado por el MCU.
 
-\begin{table}
+\begin{table}[!tbh]
 	\caption{Caracteristicas de motores}
 	\label{motorestab}
 \begin{tabular}{ccc}
 	\textbf{Posición} & \textbf{Caracteristicas eléctricas} & \textbf{Controlado por} \\ 
 	\hline 
-	Banda principal & 90 VDC 0.5HP & Driver de contacto seco \\ 
+	Banda principal & 90 VDC 0.5 HP & Driver de contacto seco \\ 
 	\hline 
-	Banda de giro & 90 VDC 0.5HP & Driver de contacto seco \\ 
+	Banda de giro & 90 VDC 0.5 HP & Driver de contacto seco \\ 
 	\hline 
-	Banda elevadora & 120 VAC 1HP & Relevador mecánico activado por MCU \\ 
+	Banda elevadora & 120 VAC 1 HP & Relevador mecánico activado por MCU \\ 
 	\hline 
 	Banda de traslación & 120 VAC 1 HP & Relevador mecánico activado por MCU\\ 
 \end{tabular} 
@@ -1612,19 +1638,26 @@ Una vez obtenidas las imágenes visto en la sección anterior, estas se utilizan
 
 Esto es un problema grave y no existe una separación espacial entre los datos. Estos pixeles son eliminados del conjunto de datos para mostrar una tendencia entre lo que es un pixel que pertenece a la fruta y uno que no.
 
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.9\linewidth]{edrawimas/dspixes}
+%	\caption{Diagrama de flujo de captura de conjunto de datos de pixeles.}
+%	\label{fig:dspixes}
+%\end{figure}
+
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{edrawimas/dspixes}
+	\includegraphics[width=0.9\linewidth]{edrawimas/dscolor2}
 	\caption{Diagrama de flujo de captura de conjunto de datos de pixeles.}
 	\label{fig:dspixes}
 \end{figure}
 
-De última instancia, se procedió al entrenamiento en WEKA, lo cual se realizó con un modelo del tipo J48 de ramas binarias con un factor de confidencia $C=0.25$, el cual es un valor referente en la poda del AD, con valores más bajos se obtiene una poda más profunda, este valor es utilizado usualmente para evitar ovefitting.
+De última instancia, se procedió al entrenamiento en WEKA, lo cual se realizó con un modelo del tipo J48 de ramas binarias con un parámetro de pre-poda de Número minimo de instancias por nodo igual a 2, y un factor de confidencia $C=0.25$, el cual es un valor referente en la post-poda del AD, con valores más bajos se obtiene una poda más profunda.
 
 
 \section{Modelo AD clasificador de color} \label{sec:classcol}
 
-Para el desarrollo de este modelo, se utilizó el conjunto de datos de imágenes anterior. Primeramente se analizó el conjunto de datos de imágenes y se clasificó de manera manual, separando entre las clases ``naranja'' y ``verde''. Una vez clasificadas se realizó ek cálculo de los histogramas que se verá en las secciones siguientes.
+Para el desarrollo de este modelo, se utilizó el conjunto de datos de imágenes anterior. Primeramente se analizó el conjunto de datos de imágenes y se clasificó de manera manual, separando entre las clases ``naranja'' y ``verde''. Una vez clasificadas se realizó el cálculo de los histogramas que se verá en las secciones siguientes.
 
 
 \subsection{Análisis de color}
@@ -1658,6 +1691,8 @@ En la figura \ref{fig:dscolor} se muestra un ejemplo gŕafico de como se efectú
 	\caption{Diagrama de flujo y ejemplo de captura de conjunto de datos de histogramas.}
 	\label{fig:dscolor}
 \end{figure}
+
+
 
 
 De última instancia, se procedió al entrenamiento en WEKA, de la misma manera que el modelo AD de segmentación.
@@ -1761,7 +1796,7 @@ De última instancia, se procedió al entrenamiento en WEKA, de la misma manera 
 
 \section{Arquitectura genérica de árbol de decisión}
 
-Un AD puede ser fácilmente mapeado a hardware digital mediante HDL. Para explicar la arquitectura se tomará como referencia el AD de la figura \ref{adds}, además, se tomará que todos los componentes sencillos tales como buffers, y compuertas lógicas comprenden solamente 1 unidad de retardo (UDR). El modelo encontrado en la literatura corresponde al de la figura \ref{addserie}, en donde se puede ver bloques generales los cuales corresponden a comparadores con habilitación (el pin 'En'), donde sus entradas corresponden el valor a comparar (Val) y el valor fijo de comparación (Comp), estos, comprenden 2 UDR ya que primeramente se calcula si debe realizarse la comparación, y si esta se va a realizar se computa la salida. Sabiendo esto, se puede calcular que se tiene en el circuito completo un retardo de 7 UDR desde la entrada hasta la salida. Se puede reducir el circuito en 1 UDR reemplazando el primer comparador por uno sin habilitación, sin embargo, entonces un componente del módulo sería diferente y habría que realizar el cambio manualmente y correr riesgo de equivocación por parte del programador.
+Un AD puede ser fácilmente mapeado a hardware digital mediante HDL. Para explicar la arquitectura se tomará como referencia el AD de la figura \ref{adds}, además, se tomará que todos los componentes sencillos tales como buffers, y compuertas lógicas comprenden solamente 1 unidad de retardo (UDR). El modelo encontrado en la literatura (\cite{ad1}, \cite{6034358}, \cite{4211794}, \cite{ad2}, \cite{ad3}) corresponde al de la figura \ref{addserie}, en donde se puede ver bloques generales los cuales corresponden a comparadores con habilitación (el pin 'En'), donde sus entradas corresponden el valor a comparar (Val) y el valor fijo de comparación (Comp), estos, comprenden 2 UDR ya que primeramente se calcula si debe realizarse la comparación, y si esta se va a realizar se computa la salida. Sabiendo esto, se puede calcular que se tiene en el circuito completo un retardo de 7 UDR desde la entrada hasta la salida. Se puede reducir el circuito en 1 UDR reemplazando el primer comparador por uno sin habilitación, sin embargo, entonces un componente del módulo sería diferente y habría que realizar el cambio manualmente y correr riesgo de equivocación por parte del programador.
 
 
 \begin{figure}[!tbh]
@@ -1775,6 +1810,8 @@ Un AD puede ser fácilmente mapeado a hardware digital mediante HDL. Para explic
 	\caption{Modelos de AD en Hardware.}
 	\label{lumiprueb}
 \end{figure}
+
+Además en \cite{ad4}, \cite{ad5}, \cite{ad6} se proponen estructuras de AD basados en espacios de memoria fijos, en donde su salida se computa en una arquitectura de tipo pipeline, que por defecto tarda más de 1 UDR.
 
 Por otra parte la arquitectura que se propone una forma más eficiente de realizar el cálculo de la clasificación, colocando algunos bloques en paralelo. Ésta se puede ver en la figura \ref{addparal} la cual comprende 3 etapas. La primera, se compone de todos los comparadores, ya que estan en paralelo y no cuentan con un pin de habilitación estos solo tienen 1 UDR, después se tiene la etapa de compuertas AND, el cual resuelve la ramificación del AD, y por último, la etapa de compuertas OR donde se adjuntan todas las posibilidades donde la salida es la clase '1'. Con esta forma, se tienen 4 UDR en el circuito, reduciendo el computo de la clase en 3 UDR.
 
@@ -1800,12 +1837,11 @@ La arquitectura propuesta en el proyecto está compuesta de varias etapas, las c
 
 \begin{figure}[!tbh]
 	\centering
-	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{
-	\caption{Esquema general de la arquitectura.}\end{minipage}},rotate=90,center}
-	\includegraphics[width=\textheight ]{edrawimas/arquitectura}
-	\label{fig:arqvid}
-	\end{adjustbox}
 	
+	\begin{adjustbox}{addcode={\begin{minipage}{\width}}{
+	\caption{Esquema general de la arquitectura.}\label{fig:arqvid}\end{minipage}},rotate=90,center}
+	\includegraphics[width=\textheight ]{edrawimas/arquitectura}
+	\end{adjustbox}
 \end{figure}
 
 La capa de comunicación se encarga de manejar las señales entre el MCU y el FPGA, para la gestión de la clasificación, ya que la capa de clasificación estará en reposo y solo funcionará cuando el MCU lo indique.
@@ -1973,7 +2009,7 @@ El módulo tiene como entradas los canales $R$, $G$, $B$, $H$, $S$, $V$, y Gray,
  
 
 \subsection{Cálculo de histogramas y área de segmentación}
-En esta etapa se implementaron histogramas de 5 bins para cada canal computado en la primera etapa. Además de un módulo el cual se encarga de computar el área definida por la segmentación computada en la etapa 2.
+En esta etapa se implementaron histogramas de 5 bins para cada canal computado en la primera etapa, la utilización de 5 bins es debido que realizar el cálculo de muchos más bins es propenso al uso mayor recursos dentro del FPGA, por otro lado, la experimentación resultó que 5 bins eran suficientes para la clasificación por color. Además esta etapa comprende un módulo el cual se encarga de computar el área definida por la segmentación computada en la etapa 2.
 
 \checkmark\textbf{Histogramas de pixeles segmentados}\\ \label{sec:histo}
 %Como lo visto en la sección \ref{sec:classcol},
@@ -1981,7 +2017,7 @@ Para alimentar el AD para la clasificación de color es necesario el cálculo de
 
 Los bordes determinados en la variable $B$, fueron los mismos indicados en el algoritmo para todos los canales, a excepción de el canal $H$, ya que el rango de $H$ es $[0,180)$.
 
-En esta etapa, se construyeron 7 módulos de histograma que a su vez como salida se obtienen 35 buses con los histogramas normalizados por canal. Todos los módulos tienen en común la señal $HL$..
+En esta etapa, se construyeron 7 módulos de histograma que a su vez como salida se obtienen 35 buses con los histogramas normalizados por canal. Todos los módulos tienen en común la señal $HL$.
 
 %%checar bien este algoritmo
 \begin{algorithm} %[H] %or another one check
@@ -2024,7 +2060,7 @@ En esta etapa, se construyeron 7 módulos de histograma que a su vez como salida
 
 \subsubsection{Módulo de cálculo de área de segmentación} \label{sec:areasgm}
 
-Este módulo tiene como entradas, a las señales $BDS$, $Bit_{ROI}$, reset y reloj de video, y como salida un número de 15 bits que corresponde al área normalizada. El funcionamiento del módulo se describe con el algoritmo \ref{alg:area}, y está compuesto de un contador por habilitación, donde su habilitación es calculada por la operación BDS \&\& $Bit_{ROI}$, la cuál significa que si se está dentro de ROI, y además es un pixel segmentado, entonces se contabiliza el pixel. Al obtener un flanco de bajada de la señal FDR, se calcula el área normalizada. Estos componentes están sincronizados por el reloj de video y con un reset asíncrono implementado.
+Este módulo tiene como entradas, a las señales $BDS$, $Bit_{ROI}$, reset y reloj de video, y como salida un número de 15 bits que corresponde al área normalizada. El funcionamiento del módulo se describe con el algoritmo \ref{alg:area}, y está compuesto de un contador por habilitación, donde su habilitación es calculada por la operación $BDS$ \&\& $Bit_{ROI}$, la cuál significa que si se está dentro de ROI, y además es un pixel segmentado, entonces se contabiliza el pixel. Al obtener un flanco de bajada de la señal FDR, se calcula el área normalizada. Estos componentes están sincronizados por el reloj de video y con un reset asíncrono implementado.
 
 \begin{algorithm} %[H] %or another one check
 	\caption{Algoritmo para cálculo del área segmentada}
@@ -2054,20 +2090,20 @@ Este módulo tiene como entradas, a las señales $BDS$, $Bit_{ROI}$, reset y rel
 
 
 \subsection{Clasificación de color y tamaño}
-En esta última etapa, se calcula la clasificación. De parte del clasificador de tamaño por medio de comparadores y en la parte de color por medio de un AD generado. Esta etapa tiene como salida un número de 8 bits compuesto por la señales BCC y BTC %que se ven en las secciónes \ref{sec:bcc} y \ref{sec:bct} 
+En esta última etapa, se calcula la clasificación. De parte del clasificador de tamaño por medio de comparadores y en la parte de color por medio de un AD generado. Esta etapa tiene como salida un número de 8 bits compuesto por la señales $BCC$ y $BTC$ %que se ven en las secciónes \ref{sec:bcc} y \ref{sec:bct} 
 quedando compuesto el número de la siguiente manera:
 
 \begin{itemize}[noitemsep]
-	\item Bit 0: Bit de Clase de Color (BCC)
-	\item Bit 2-1: Bits de clase de Tamaño (BCT)
+	\item Bit 0: Bit de Clase de Color ($BCC$)
+	\item Bit 2-1: Bits de clase de Tamaño ($BCT$)
 	\item Bit 7-3: Bits constantes a 0, estos se dejan con fines de diseño estandar que se ven en la sección \ref{sec:comm}
 \end{itemize}
 
-Este bus es denominado \textbf{Respuesta del Módulo Clasificador} o RMC, y contiene los siguientes bloques:% visto en la figura \ref{fig:arqvid} como ''respuesta''.
+Este bus es denominado \textbf{Respuesta del Módulo Clasificador} o $RMC$, y contiene los siguientes bloques:% visto en la figura \ref{fig:arqvid} como ''respuesta''.
 
 
 \checkmark\textbf{Módulo AD de clasificación de color} \label{sec:bcc}
-Éste módulo tendrá como entradas los 35 números de 15 bits correspondientes a los histogramas normalizados vistos en el módulo de la sección \ref{sec:histo} y como salida un bit que corresponde a la clase de color llamado \textbf{Bit de Clase de Color} o BCC, donde su salida es interpretada como:
+Éste módulo tendrá como entradas los 35 números de 15 bits correspondientes a los histogramas normalizados vistos en el módulo de la sección \ref{sec:histo} y como salida un bit que corresponde a la clase de color llamado \textbf{Bit de Clase de Color} o $BCC$, donde su salida es interpretada como:
 
 \begin{itemize}[noitemsep]
 	\item 0: Color naranja
@@ -2078,7 +2114,7 @@ Al tratarse de un circuito combinacional, no es necesaria sincronización por se
 
 
 \checkmark\textbf{Módulo clasificador de tamaño} \label{sec:bct}
-El módulo tiene como entrada únicamente el área calculada por el modulo mostrado en la sección \ref{sec:areasgm}, y  por salida un número de 2 bits llamado \textbf{Bits de Clase de Tamaño} o BCT, el cual es interpretada su salida como:
+El módulo tiene como entrada únicamente el área calculada por el modulo mostrado en la sección \ref{sec:areasgm}, y  por salida un número de 2 bits llamado \textbf{Bits de Clase de Tamaño} o $BCT$, el cual es interpretada su salida como:
 
 \begin{itemize}[noitemsep]
 	\item 0: Tamaño chico
@@ -2168,30 +2204,19 @@ Para la toma del conjunto de datos de imágenes del cual es la base del conjunto
 	\caption{Descripción de velocidades y tipos de conjunto para cada video.}
 	\label{clips}
 	\centering
-	\begin{tabular}{|c|c|c|}
+	\begin{tabular}{|c|c|c|c|}
 		\hline
-		\# de video & Velocidad & Set \\
-		\hline
-		1 & Baja & Entrenamiento \\
-		\hline
-		2 & Baja & Entrenamiento \\
-		\hline
-		3 & Baja & Entrenamiento \\
-		\hline
-		4 & Media & Entrenamiento \\
-		\hline
-		5 & Media & Prueba \\
-		\hline
-		6 & Media & Prueba \\
-		\hline
-		7 & Media & Entrenamiento \\
-		\hline
-		8 & Alta & Prueba \\
-		\hline
-		9 & Alta & Entrenamiento \\
-		\hline
-		10 & Alta & Entrenamiento \\
-		\hline
+		\textbf{\# de clip} & \textbf{Velocidad} & \textbf{Conjunto} & \textbf{Duración (mm:ss)} \\ \hline
+		1                   & Baja               & Entrenamiento     & 03:01                     \\ \hline
+		2                   & Baja               & Entrenamiento     & 03:02                     \\ \hline
+		3                   & Baja               & Entrenamiento     & 03:02                     \\ \hline
+		4                   & Media              & Entrenamiento     & 03:02                     \\ \hline
+		5                   & Media              & Prueba            & 03:01                     \\ \hline
+		6                   & Media              & Prueba            & 03:01                     \\ \hline
+		7                   & Media              & Entrenamiento     & 03:02                     \\ \hline
+		8                   & Alta               & Prueba            & 03:02                     \\ \hline
+		9                   & Alta               & Entrenamiento     & 03:01                     \\ \hline
+		10                  & Alta               & Entrenamiento     & 00:18                     \\ \hline
 	\end{tabular}
 \end{table}
 
@@ -2212,7 +2237,7 @@ De los videos se obtuvo el conjunto de datos de imágenes para el entrenamiento 
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 		\hline
-		\textbf{Set}                               & \multicolumn{2}{c|}{\textbf{Capturas totales}}      & \multicolumn{2}{c|}{\textbf{Prueba1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
+		\textbf{Conjunto}                               & \multicolumn{2}{c|}{\textbf{Capturas totales}}      & \multicolumn{2}{c|}{\textbf{Prueba1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-9} 
 		& 1159                     & 211                      & 1159                     & 211                      & 579                        & 105                        & 347                        & 63                        \\
 		\cline{2-9} 
@@ -2233,7 +2258,7 @@ De los videos se obtuvo el conjunto de datos de imágenes para el entrenamiento 
 \end{table}
 
 
-En la tabla \ref{pixet}, se denota la distribución del conjunto de datos de pixeles donde NS significa No Segmentado  y S significa Segmentado. En todas las pruebas, se puede ver que se muestra un overfitting en el entrenamiento, para los dos tipos de entrenamiento, es por eso que, para comprobar la efectividad del mismo, se simuló por computadora y FPGA el comportamiento de la segmentación, mostrada su efectividad por prueba en la tabla \ref{acurasgm}.
+En la tabla \ref{pixet}, se denota la distribución del conjunto de datos de pixeles donde $NS$ significa $No$ $Segmentado$  y $S$ significa $Segmentado$. En todas las pruebas, se puede ver que se muestra un posible modelo sobreajustado en el entrenamiento, para los dos tipos de entrenamiento, es por eso que, para comprobar la efectividad del mismo, se simuló por computadora y FPGA el comportamiento de la segmentación, mostrada su efectividad por prueba en la tabla \ref{acurasgm}.
 
 \begin{table}[!tbh]
 	\caption{Distribución de conjunto de datos de pixeles por prueba obtenidos y sus resultados de entrenamiento en WEKA.}
@@ -2241,21 +2266,25 @@ En la tabla \ref{pixet}, se denota la distribución del conjunto de datos de pix
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
-		\textbf{Set}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}               & \multicolumn{2}{c|}{\textbf{Prueba 3}}               \\ \hline
+		\textbf{Conjunto}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}               & \multicolumn{2}{c|}{\textbf{Prueba 2}}               & \multicolumn{2}{c|}{\textbf{Prueba 3}}               \\ \hline
 		& {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} & {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} & {\color[HTML]{000000} S} & {\color[HTML]{000000} NS} \\ \cline{2-7} 
 		& 101589                   & 27359                     & 92621                        & 24326                         & 84568                        & 23110                         \\ \cline{2-7} 
 		\multirow{-3}{*}{\textbf{Entrenamiento}} & 78.78\%                  & 21.22\%                   & 79.2\%                      & 20.8\%                       & 78.53\%                      & 21.47\%                       \\ \hline
 		\textbf{Muestras Totales}                & \multicolumn{2}{c|}{{\color[HTML]{000000} 128948}}   & \multicolumn{2}{c|}{{\color[HTML]{000000} 116947}}      & \multicolumn{2}{c|}{{\color[HTML]{000000} 107678}}      \\ \hline
+		\textbf{Hojas}             & \multicolumn{2}{c|}{171}                         & \multicolumn{2}{c|}{137}                             & \multicolumn{2}{c|}{83}                             \\ \hline
+		\textbf{Tamaño}             & \multicolumn{2}{c|}{341}                         & \multicolumn{2}{c|}{277}                             & \multicolumn{2}{c|}{175}                             \\ \hline
 		\textbf{Presición 10-Fold}               & \multicolumn{2}{c|}{99.27\%}                         & \multicolumn{2}{c|}{99.16\%}                             & \multicolumn{2}{c|}{99.29\%}                             \\ \hline
 		\textbf{Presición 66\%-34\%}             & \multicolumn{2}{c|}{99.21\%}                         & \multicolumn{2}{c|}{99.14\%}                             & \multicolumn{2}{c|}{99.35\%}                             \\ \hline
 	\end{tabular}
 \end{table}
 
-Se puede ver, que los conjunto de datos de pixeles por prueba, difieren al rededor de 10000 muestras cada uno, por lo que se esperaría un desempeño similar para cada modelo de AD para segmentación. Para cada prueba, en muestras de pixeles no segmentados se muestra una distribucion por debajo del 22\%, esto es debido a las capturas, como se puede ver en la figura \ref{fig:framito} de un color un poco más verde que el resto, donde el fondo siempre es el mismo para cada captura, por lo que se esperan pixeles bastante iguales en la parte no segmentada y por lo tanto un conjunto de muestras más amplio en la parte segmentada. 
+
+
+Se puede ver, que los conjunto de datos de pixeles por prueba, difieren al rededor de 10000 muestras cada uno, por lo que se esperaría un desempeño similar para cada modelo de AD para segmentación. Por otra parte, se obtuvo un cámbio drástico en el tamaño del árbol en funcion del conjunto utilizado por prueba, siendo el primero más largo, y el tercero el más corto. Para cada prueba, en muestras de pixeles no segmentados se muestra una distribucion por debajo del 22\%, esto es debido a las capturas, como se puede ver en la figura \ref{fig:framito} de un color un poco más verde que el resto, donde el fondo siempre es el mismo para cada captura, por lo que se esperan pixeles bastante iguales en la parte no segmentada y por lo tanto un conjunto de muestras más amplio en la parte segmentada. 
 
 \section{Árbol de Decisión de segmentación}
 
-En la tabla \ref{acurasgm} se muestra la tabla de precisiones para el modelo de AD de segmentación, recordando que la prueba es solamente para el conjunto de imágenes que comprenden el conjunto de datos de prueba, es decir, un universo de pixeles totalmente nuevo para el modelo, para cada prueba. En ella también se muestra el rango de precisiones, es decir, la menor y mayor precisión obtenida, así como el promedio global.  
+En la tabla \ref{acurasgm} se muestra la tabla de precisiones para el modelo de AD de segmentación, recordando que la prueba es solamente para el conjunto de imágenes que comprenden el conjunto de datos de prueba, es decir, un universo de pixeles totalmente nuevo para el modelo, para cada prueba y con esto descartar la posibilidad de un modelo sobreajustado. En ella también se muestra el rango de precisiones, es decir, la menor y mayor precisión obtenida, así como el promedio global.  
 
 
 Para la simulación por computadora, se tiene en la prueba 1 un rango de precisión por encima del 90\%, teniendo como resultado global, una precisión casi perfecta. Por otra parte, en las pruebas 2 y 3, también, se tuvo una buena precisión, sin embargo, la prueba 3, tuvo un mejor resultado. Esto puede ser debido al conjunto de datos de imágenes de donde se tomó.  
@@ -2279,11 +2308,31 @@ Para el desempeño en FPGA, en la prueba 1 los rangos de precisión baja notable
 \end{tabular}
 \end{table}
 
+Como se puede ver en la tabla \ref{acurasgm}, en la prueba 1 se obtuvo una de las muestras con una precisión de 68.64\%, y además se nota que entre más corto sea el aŕbol, tiene un mejor resultado la precisión global. En la tabla \ref{acuraoverf} se muestran algunas pruebas modificando los parametros Factor de confidencia, y número minimo de instancias por nodo, los cuales son parametros de poda para el árbol, y como se puede observar mientras el factor de confidencia se acerque a cero, y el número mínimo de instancias por nodo se eleve entonces el árbol se reducirá en tamaño, y como se puede observar, la precisión se mantiene en todas las pruebas, por lo que en conclusión el modelo de la prueba 1 sufre de un sobreajuste, el cual provoca que con nuevas muestras no conocidas el modelo no se desempeña adecuadamente.
+
+\begin{table}[!tbh]
+	\caption{Precisiones obtenidas a partir de variaciones en Factor de confidencia y Número mínimo de instacias por nodo.}
+	\label{acuraoverf}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{\begin{tabular}[c]{@{}c@{}}Factor de \\ confidencia\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Número mínimo \\ de instancias\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Número\\ de hojas\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Tamaño\\ del árbol\end{tabular}} & \textbf{Precisión} \\ \hline
+		0.25                                                                      & 2                                                                               & 171                                                                & 341                                                                 & 99.27\%              \\ \hline
+		0.1                                                                       & 2                                                                               & 108                                                                & 215                                                                 & 99.26\%              \\ \hline
+		0.25                                                                      & 10                                                                              & 102                                                                & 203                                                                 & 99.22\%              \\ \hline
+		0.25                                                                      & 20                                                                              & 30                                                                 & 119                                                                 & 99.18\%              \\ \hline
+		0.25                                                                      & 40                                                                              & 20                                                                 & 39                                                                  & 99.13\%              \\ \hline
+		0.1                                                                       & 10                                                                              & 69                                                                 & 137                                                                 & 99.22\%              \\ \hline
+		0.1                                                                       & 20                                                                              & 31                                                                 & 61                                                                  & 99.17\%              \\ \hline
+	\end{tabular}
+\end{table}
+
+
 
 
 \section{Árbol de Decisión de clasificación de color}
 
-En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el entrenamiento. En para las tres pruebas, se puede ver que la distribución es casi idéntica al conjunto de datos de imágenes, aunque con algunas muestras descartadas, debido a que se eliminaron las muestras duplicadas. El rendimiento del entrenamiento para cada prueba y para los dos modos de entrenamiento se alcanza una precisión cercana al 95\%, por lo que no se llega a un overfitting en ningún caso. Cabe destacar que estos valores son interesantes ya que se puede ver que con una menor cantidad de muestras el modelo se comporta muy similar.
+En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el entrenamiento. En para las tres pruebas, se puede ver que la distribución es casi idéntica al conjunto de datos de imágenes, aunque con algunas muestras descartadas, debido a que se eliminaron las muestras duplicadas. El rendimiento del entrenamiento para cada prueba y para los dos modos de entrenamiento se alcanza una precisión cercana al 95\%. Cabe destacar que estos valores son interesantes ya que se puede ver que con una menor cantidad de muestras el modelo se comporta muy similar.
 
 \begin{table}[!tbh]
 	\caption{Descripción de conjunto de datos de histogramas por prueba y sus resultados de entrenamiento en WEKA.}
@@ -2291,11 +2340,13 @@ En la tabla \ref{imadatcol} se puede ver la cantidad de muestras tomadas para el
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
-		\textbf{Set}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
+		\textbf{Conjunto}                             & \multicolumn{2}{c|}{\textbf{Prueba 1}}              & \multicolumn{2}{c|}{\textbf{Prueba 2}}              & \multicolumn{2}{c|}{\textbf{Prueba 3}}              \\ \hline
 		& {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} & {\color[HTML]{F56B00} N} & {\color[HTML]{009901} V} \\ \cline{2-7} 
 		& 1151                     & 210                      & 578                        & 104                        & 346                        & 63                        \\ \cline{2-7} 
 		\multirow{-3}{*}{\textbf{Entrenamiento}} & 84.57\%                  & 15.42\%                  & 84.75\%                      & 15.25\%                      & 84.6\%                      & 15.4\%                      \\ \hline
 		\textbf{Muestras totales}                & \multicolumn{2}{c|}{1361}                           & \multicolumn{2}{c|}{682}                              & \multicolumn{2}{c|}{409}                              \\ \hline
+		\textbf{Hojas}                & \multicolumn{2}{c|}{18}                           & \multicolumn{2}{c|}{9}                              & \multicolumn{2}{c|}{6}                              \\ \hline
+		\textbf{Tamaño}                & \multicolumn{2}{c|}{35}                           & \multicolumn{2}{c|}{17}                              & \multicolumn{2}{c|}{11}                              \\ \hline
 		\textbf{Precisión 10-fold}               & \multicolumn{2}{c|}{95.73\%}                        & \multicolumn{2}{c|}{95.30\%}                            & \multicolumn{2}{c|}{94.62\%}                            \\ \hline
 		\textbf{Precisión 66\%-34\%}             & \multicolumn{2}{c|}{96.11\%}                        & \multicolumn{2}{c|}{93.10\%}                            & \multicolumn{2}{c|}{96.40\%}                            \\ \hline
 	\end{tabular}
@@ -2341,7 +2392,7 @@ Para la clasificación de tamaño, primeramente se tomó un conjunto de datos de
 	\begin{tabular}{c|c|c|c|}
 		\cline{2-4}
 		& \multicolumn{3}{c|}{\textbf{Capturas por clase}} \\ \hline
-		\multicolumn{1}{|c|}{\textbf{Set}}                            & Chico           & Mediano        & Grande        \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Conjunto}}                            & Chico           & Mediano        & Grande        \\ \hline
 		\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{Entrenamiento}}} & 388             & 941            & 61            \\ \cline{2-4} 
 		\multicolumn{1}{|c|}{}                                        & 19.97\%         & 48.45\%        & 3.14\%        \\ \cline{2-4} 
 		\multicolumn{1}{|c|}{}                                        & \multicolumn{3}{c|}{1390}                        \\ \cline{2-4} 
