@@ -78,6 +78,7 @@
 
 \usepackage[spanish,onelanguage,algo2e]{algorithm2e}
 %\usepackage[algo2e]{algorithm2e} 
+\decimalpoint
 
  
 % \usepackage[printonlyused,withpage]{acronym}
@@ -124,12 +125,12 @@ Este trabajo de tanto esfuerzo lo dedico enteramente a mis padres Ismael Davila 
 
 \abstract{
 \vspace{-.5cm}
-Se presenta un sistema de clasificación de tamaño y color mediante una cámara implementado en FPGA, donde la escena captada por la cámara se transportan naranjas mediante una banda industrial. Se utilizaron arboles de decisión para la resolución de la segmentación de la fruta para una posterior clasificación de tamaño y color. Además se desarrolló un script que convierte un archivo de texto donde se describe el comportamiento de los arboles a un lenguaje VHDL sintetizable. Se realizaron pruebas con diferentes conjuntos de prueba, en donde cada conjunto contiene menos prueba que la siguiente en donde se obtiene como resultado una precisión del 97\% para la segmentación de la fruta en la escena, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño, donde se denota la eficiencia del modelo al entrenarlo con pocas muestras.
+En esta tesis se presenta un sistema de clasificación de fruta por tamaño y color implementado en FPGA, el cual recibe imágenes de una cámara colocada sobre una banda transportadora industrial. Se utilizaron árboles de decisión para la segmentación de la fruta, así como para la posterior clasificación por tamaño y color. Además, se desarrolló un script que convierte un archivo de texto donde se describe el comportamiento de los árboles a un lenguaje VHDL sintetizable. Se realizaron pruebas con diferentes sets de prueba, en donde cada set contiene menos elementos que el siguiente, logrando una precisión del 97\% para la segmentación de la fruta en la escena, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño. Esto último muestra la eficiencia del modelo, ya que es posible entrenarlo con pocas muestras.
 }
 
 \abstracten{
 \vspace{-.5cm}
-A color and size fruit grading system is presented, implemented in FPGA where the scene from a camera citrus fruit is transported by an industrial conveyor belt. Decision Trees were used to solve fruit segmentation to then perform a size and color grading. Also a script was developed that converts a decision tree text file to VHDL language synthesizable. Was made with different test sets where each set has fewer samples than others, was as a result the accuracy obtained where 97\% for segmentation, 94\% for color grading and 90\% for size grading, where the efficency is maintained using fewer samples for training. 
+In this thesis, a color and size fruit grading system implemented in an FPGA is presented. This system receives images from a camera placed over an industrial conveyor belt. Decision Trees were used to solve for fruit segmentation, as well as to perform size and color grading. In addition, a script that converts a decision tree text file to VHDL language synthesizable was developed. Testing was performed over different experimentation datasets, where each set had fewer samples than the previous one. Resulting accuracies were 97\% for segmentation, 94\% for color grading and 90\% for size grading. This shows the efficiency of the implemented model, because it is possible to train it with few samples.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -185,7 +186,7 @@ Estoy profundamente agradecido con todos ustedes por su apoyo en las diferentes 
 \acro{LSB} {Less Significant Bit}
 \acro{MSB} {Most Significant Bit}
 %\acro{SVA} {Señal de Video Activo}
-\acro{SCHADD} {Script Constructor HDL de Árbol De Desición}
+\acro{SCHAD} {Script Constructor HDL de Árbol se Desición}
 %\acro{SSH} {Señal de Sincronización Horizontal}
 %\acro{SSV} {Señal de Sincronización Vertical}
 %\acro{BDS} {Bit de Segmentación}
@@ -218,21 +219,20 @@ Estoy profundamente agradecido con todos ustedes por su apoyo en las diferentes 
 
 \section{Antecedentes}
 
-Desde la antigüedad los cítricos han sido parte fundamental de los alimentos, teniendo su origen desde las regiones tropicales y subtropicales del sureste de Asia y el archipiélago Malayo y esparcirse a todo el mundo. Partiendo históricamente por la planta del cidro vista por primera vez en Europa en 300 a.C. el cuál se utilizaba para el injerto y generación de especies híbridas de plantas y frutas, esto siendo una particularidad de los cítricos, ya que presentan mutaciones con mucha frecuencia incluso entre miembros de la misma especie \cite{anticidi}.
+Desde la antigüedad, los cítricos han sido parte fundamental de la alimentación del hombre. Su origen se dio en las regiones tropicales y subtropicales del sureste de Asia y el archipiélago Malayo, para después esparcirse por todo el mundo. Históricamente, la planta del cidro fue vista por primera vez en Europa en el año 300 a. C., la cual se utilizaba para el injerto y generación de especies híbridas de plantas y frutas, ya que los cítricos presentan mutaciones con mucha frecuencia, incluso entre miembros de la misma especie \cite{anticidi}.
 
-Desde el siglo XVI, los cítricos fueron ganando popularidad por toda Europa aunque desde el siglo VI se cultivaban, hasta que en el siglo XIX fué el naranjo amargo el más popular entre el cultivo.
+Aunque desde el siglo VI se cultivaban, es en el siglo XVI que los cítricos fueron ganando popularidad por toda Europa, hasta que en el siglo XIX, el naranjo amargo fue el cultivo más popular.
 
-En la época actual los mayores productores de cítricos son China, Brasil, Estados Unidos, España, India, \textit{México} y Argentina. De acuerdo a la Organización de Agricultura y Alimentos (\textbf{FAO} por sus siglas en inglés), México es uno del los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, la producción total fue de 500,000 toneladas aproximadamente \cite{sag}.
-
-
-A inicios de 1960, la visión por computadora iniciaba en las universidades de Estados Unidos, herramienta que hasta el día de hoy busca emular la visión de los humanos a través de computadoras para el proceso de interpretación de imágenes, las cuales pueden producir estímulos en procesos industriales de clasificación. Esta herramienta se ha utilizado en diferentes ámbitos industriales, incluyendo la alimentaria.
-
-Hoy en día se cuenta con sistemas de visión en la industria alimentaria para la clasificación de frutas como los \textit{cítricos}. Los cuales cuentan con bandas transportadoras las cuáles hacen pasar la fruta por el sistema clasificador, el sistema normalmente se comunica con un sistema de movimiento de actuadores que realiza la tarea de separación. Por lo general estos sistemas sirven para determinar el tamaño, color, maduración y calidad de la fruta. Ya que una maquinaria trabaja más rápido que un sistema manejado enteramente por humanos la producción puede ser elevada, abasteciendo la gran demanda mundial antes mencionada. 
-
-Sin embargo en México no se tienen tecnologías muy desarrolladas en el ámbito, contando solamente con tecnologías extranjeras y obsoletas. Por eso la necesidad de desarrollar un proyecto que mediante tecnologías actuales y nacionales, solventar la producción de cítricos.
+De acuerdo a la Organización de Agricultura y Alimentos (FAO por sus siglas en inglés), México es uno de los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. En la época actual los mayores productores de cítricos son China, Brasil, Estados Unidos, España, India, México y Argentina. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, su producción total fue de aproximadamente 500,000 toneladas \cite{sag}.
 
 
-En las secciónes posteriores de éste capitulo se aborda una pequeña introducción teórica acerca de los sistemas de clasificación actuales y su problemática nacional. En el Capítulo 2 se muestran todos los conceptos técnicos referentes a la realización del proyecto para poder comprender el principio y naturaleza de la solución propuesta. En el Capítulo 3 se muestra el desarrollo de la plataforma general del sistema propuesto, donde se explica el sistema mecánico, el flujo de información y la arquitectura propuesta del sistema. En el Capítulo 4 se demuestran los resultados obtenidos y la eficiencia detrás de la naturaleza de la solución propuesta desde los AD. En el Capítulo 5, de encuentran las conclusiones del uso de modelos de AD en un FPGA.
+A inicios de 1960, la visión por computadora iniciaba en las universidades de Estados Unidos. Es una herramienta que hasta el día de hoy busca emular la visión de los humanos en el proceso de interpretación de imágenes, a través de computadoras, las cuales pueden producir interactuar con actuadores en procesos industriales de clasificación. Esta herramienta se ha utilizado en diferentes ámbitos industriales, incluyendo el alimentario.
+
+Hoy en día se cuenta con sistemas de visión en la industria alimentaria para la clasificación de frutas como los \textit{cítricos}. Estos sistemas cuentan utilizan bandas transportadoras, las cuales hacen pasar la fruta por el sistema clasificador. El sistema clasificador normalmente se comunica con actuadores que realizan la tarea de separación. Generalmente, estos sistemas sirven para determinar el tamaño, color, maduración y calidad de la fruta. Ya que una máquina trabaja más rápido que un sistema manejado enteramente por humanos, es posible incrementar la producción de las empresas y ser más competitivas a nivel mundial. 
+
+En México, las tecnologías de clasificación automática para la industria alimentaria no están desarrolladas, por lo que se debe usar tecnología extranjera, que en muchas ocasiones es obsoleta. Por lo anterior, es necesario desarrollar tecnología nacional moderna que beneficie a la industria citrícola.
+
+En las siguientes subsecciones de este capítulo se aborda la problemática a resolver, la importancia de la propuesta, los trabajos relacionados y los objetivos de esta tesis. En el Capítulo 2 se tratan los conceptos técnicos relacionados con la realización del proyecto, los principios y la naturaleza de la solución propuesta. En el Capítulo 3 se detalla el desarrollo de la plataforma general del sistema propuesto, donde se explica el sistema mecánico, el flujo de información, así como la arquitectura y construcción  del sistema propuesto. En el Capítulo 4 se muestran los resultados obtenidos y su relación con los AD utilizados en la solución propuesta. Finalmente, en el Capítulo 5 se dan las conclusiones del presente trabajo.
 
 
 
@@ -1261,7 +1261,7 @@ El procesado de imágenes en tiempo real es por lo general para aplicaciones de 
 
 \subsection*{B) Inclusión de diversos grados de paralelismo}
 
-Existen algunos tipos de paralelismo según \cite{paralel} utilizadas en diversas tecnologías:
+Existen algunos tipos de paralelismo según \cite{paralel} y \cite{paralel2} utilizadas en diversas tecnologías:
 
 \checkmark\textbf{Paralelismo a nivel de instrucción.} Es usado en microprocesadores de alto desempeño, los cuales implementan el paralelismo para mejorar los procesos computacionales de lectura y escritura que comprenden a su unidad aritmética lógica (ALU por sus siglas en inglés), realizando más de una tarea por ciclo de reloj. Esto por lo general se aplica a nivel bajo, por lo que el programador no es capaz de modificar el proceso de cómputo.
 
@@ -1322,7 +1322,7 @@ El orden de las fases se decidió a partir de lo que la fase anterior necesita p
 
 \textbf{Fase 4. Creación de HDL base.} Se crea todo el HDL necesario para el manejo de señales de video, para la extracción de caracteristicas y el procesamiento de imágenes, además, se dejan los huecos que clasifican cada parte.
 
-\textbf{Fase 5. Script Constructor HDL de Árbol de Decisión (SCHADD).} Se genera un script de python que convierte un AD de weka (texto) en HDL (VHDL) implementable.
+\textbf{Fase 5. Script Constructor HDL de Árbol de Decisión (SCHAD).} Se genera un script de python que convierte un AD de weka (texto) en HDL (VHDL) implementable.
 
 \textbf{Fase 6. Prueba en FPGA.} Prueba del modelo completo, donde una imagen en señales de video es procesada por el modelo, y se obtiene la clasificación por tamaño y color.
 
@@ -2436,11 +2436,25 @@ En la tabla \ref{acctam} se muestra el resultado en FPGA de la precisión del á
 	\end{tabular}
 \end{table}
 
+En la Tabla \ref{mdctam} se muestra la matriz de confusión de la clasificación por tamaño, en la esquina inferior izquierda y en la superior derecha se muestra que no ha habido ningún problema entre la distinción entre clases Chico-Grande, por otra parte, el modelo tiene algunos problemas entre las clases Chico-Mediano, fallando en un total de 40 ocasiones, es decir, un 7.24\% de las muestras del conjunto de prueba, por otro lado entre las clases Mediano-Grande no parece haber muchas complicaciones, obteniendo 6 fallos, es decir, un 1.08\% de las muestras del conjunto de prueba. 
+
+\begin{table}[!tbh]
+	\caption{Matriz de confusión de clasificación por tamaño.}
+	\label{mdctam}
+	\centering
+	\begin{tabular}{c|c|c|c|}
+		\cline{2-4}
+		& \textbf{Chico} & \textbf{Mediano} & \textbf{Grande} \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Chico}}   & 118            & 13               & 0               \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Mediano}} & 27             & 367              & 0               \\ \hline
+		\multicolumn{1}{|c|}{\textbf{Grande}}  & 0              & 6                & 21              \\ \hline
+	\end{tabular}
+\end{table}
+
 
 \newpage
 \section{Recursos utilizados}
-En la tabla \ref{resources} se muestra la distribución de recursos utilizados por la arquitectura, se utilizaron muy pocos slices como registros y además hay disponible más del 60\% de slices como LUTs disponibles. Dados estos datos, se podría construir una doble linea de procesamiento trabajando en paralelo en un mismo dispositivo. 
-
+En la tabla \ref{resources} se muestra la distribución de recursos utilizados por la arquitectura, se utilizaron muy pocos slices como registros y además hay disponible más del 60\% de slices como LUTs disponibles. Dados estos datos, se podría construir una doble linea de procesamiento trabajando en paralelo en un mismo dispositivo. Dada la mínima cantidad de registros, se estima que estos fueron utilizados entre cada etapa de la arquitectura, utilizados en la estructura pipeline por lo que no es posible su optimización. Por otra parte, la mayor parte de los LUTs utilizados se estima que fueron utilizados en el los AD implementados.
 
 \begin{table}[!tbh]
 	\caption{Distribución recursos utilizados del FPGA.}
@@ -2453,6 +2467,9 @@ En la tabla \ref{resources} se muestra la distribución de recursos utilizados p
 		\textbf{Slices LUT}       & 31222           & 92152                & 33.9\%               \\ \hline
 	\end{tabular}
 \end{table}
+
+Hay una posibilidad de optimización en los módulos de AD dado que se podría utilizar uno de menor tamaño. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2476,22 +2493,13 @@ Para este trabajo, el modelo utilizado es el árbol de decisión ya que por medi
 
 La arquitectura propuesta en este proyecto, clasifica por tamaño y color por medio de una segmentación de la fruta, en una escena tomada por una cámara colocada en una maquinara que transporta fruta a través de la escena. La clasificación por color es realizada mediante árboles de decisión, cuyos resultados muestran que ser entrenado con pocas muestras y obtener resultados por encima del 90\% de precisión para ambas tareas, obteniendo como resultado una precisión del 97\% para la segmentación, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño.
 
+Gracias al SCHAD es posible implementar mejores modelos de AD con facilidad en este proyecto, que sean más cortos para el ahorro de recursos, y que estos puedan mejorar los resultados ya obtenidos.
 
+Una mejora que se desea implementar para futuro, es una mejor clasificación a partir de dos fotografías de la fruta una por el frente y una por detrás, esto puede ser posible con la misma cámara, aprovechando el objetivo completo de la cámara en tiempos distintos, mejorando el desempeño del modelo, el cual pueda demostrar a base de ambas fotografías una mejor clasificación de la fruta.
 
-%Condensar introduccion
-%
-%decir acerca de que se hace muy simple hacer en HW 
-%
-%se dice lo que se esta proponiendo  y luego los resultados que obtuve
-%
-%1.para que se aplica
-%2.que metodos propones
-%3.que se propone
-%4.que resultados se obtuvieron
+Además se plantea un SCHAD mejorado, para generar ADs con más de 2 clases. Se puede utilizar los productos de este trabajo, para la clasificación de otras frutas de forma esférica, esto debido a la naturaleza los mecanismos de la maquinaria, por otra parte, la metodología presentada, puede ser útil para la clasificación de otro tipo de frutas no necesariamente esféricas.
 
-%\section*{Trabajos futuros}
-
-Se plantean pruebas en campo con la implementación propuesta en el proyecto, usando el mejor modelo obtenido en este trabajo, donde se realizarán pruebas con la maquinaria completa, siendo controlada por el MCU en convivencia con el FPGA, midiendo tiempo de clasificación  que se estima rondar a los 16 ms por muestra debido al muestreo de la cámara.
+Se plantean pruebas en campo con la implementación propuesta en el proyecto, usando el mejor modelo obtenido en este trabajo, donde se realizarán pruebas con la maquinaria completa, siendo controlada por el MCU, siendo encargado de la clasificación el FPGA, midiendo tiempo de clasificación  que se estima rondar a los 16 ms por muestra debido al muestreo de la cámara.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
