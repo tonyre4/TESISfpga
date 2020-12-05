@@ -235,16 +235,25 @@ En México, las tecnologías de clasificación automática para la industria ali
 En las siguientes subsecciones de este capítulo se aborda la problemática a resolver, la importancia de la propuesta, los trabajos relacionados y los objetivos de esta tesis. En el Capítulo 2 se tratan los conceptos técnicos relacionados con la realización del proyecto, los principios y la naturaleza de la solución propuesta. En el Capítulo 3 se detalla el desarrollo de la plataforma general del sistema propuesto, donde se explica el sistema mecánico, el flujo de información, así como la arquitectura y construcción  del sistema propuesto. En el Capítulo 4 se muestran los resultados obtenidos y su relación con los AD utilizados en la solución propuesta. Finalmente, en el Capítulo 5 se dan las conclusiones del presente trabajo.
 
 
-
-
 \section{Planteamiento del problema}
+
+% Dado que el gobierno de México desea impulsar la producción nacional de naranja habrá la necesidad de nuevas tecnologías para ordenar la producción de la misma, además, Estados Unidos el cliente principal de este producto, por lo que resulta necesario impulsar la tecnología en esta área, donde también, logrando el propósito de este trabajo, se puede realizar para diferentes frutas y apoyar el sector comercial y productor beneficiosamente. 
+
+
+De acuerdo a la Organización de Agricultura y Alimentos (\textbf{FAO} por sus siglas en inglés), México es uno del los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, la producción total fue de 500,000 toneladas aproximadamente \cite{sag}.
+
+El tratamiento post-cosecha se ha convertido en una etapa esencial en el mercado de fruta fresca para mantener la frescura de los cítricos y proveer al consumidor frutos en las mejores condiciones posibles. Comúnmente, la clasificación de los cítricos por calidad es realizada por humanos, con base en la inspección visual de un criterio externamente visible de la fruta, como su tamaño, forma y color. Esta inspección manual depende de la experiencia del observador para mantener la consistencia y uniformidad de la clasificación. 
+
+
+
+\section{Justificación}
 Las clasificadoras de fruta son aquellas capaces de ordenar al producto en diferentes grupos tales como separarlas por color, tamaño o maduración.
 
 En México existen clasificadoras que pueden separar estas clases mencionadas. Generalmente la mayoría de las veces se utilizan clasificadores manuales o mecánicos, ya que no cuentan con tecnología electrónica actual por lo que presentan muchos inconvenientes, partiendo que la mayoria solamente desempeñan 1 sola clasificación a la vez. Existen de varios tipos de clasificadores:
 
 
 \checkmark {\bf Clasificadora manual.} Es literalmente un proceso artesanal %(figura \ref{clasifMan})
- en el cual un grupo de personas  se encarga de seleccionar la fruta conforme a su criterio. Las mismas personas se encargan de llevar a cabo cada etapa en la selección de la fruta, desde la limpieza hasta el empacado, convirtiendo este proceso en largas jornadas de trabajo arduo y dependencia en un 100\% de la intervención del hombre. Algunos de los problemas que presenta es la necesidad de empleados y todas las responsabilidades humanas, fiscales y legales que esto conlleva, también, la velocidad de producción no es estable ya que depende del personal y el clima laboral, así como la precisión del criterio del personal que puede ser variada, ocasionando errores en la clasificación.
+en el cual un grupo de personas  se encarga de seleccionar la fruta conforme a su criterio. Las mismas personas se encargan de llevar a cabo cada etapa en la selección de la fruta, desde la limpieza hasta el empacado, convirtiendo este proceso en largas jornadas de trabajo arduo y dependencia en un 100\% de la intervención del hombre. Algunos de los problemas que presenta es la necesidad de empleados y todas las responsabilidades humanas, fiscales y legales que esto conlleva, también, la velocidad de producción no es estable ya que depende del personal y el clima laboral, así como la precisión del criterio del personal que puede ser variada, ocasionando errores en la clasificación.
 
 
 
@@ -268,55 +277,51 @@ la comprende una estructura, que debido a su forma geométrica puede clasificar 
 
 \checkmark{\bf Clasificadora automática.} En los últimos años ha aumentado el uso de tecnología en la selección de fruta, donde predominan los métodos de inspección ópticos (cámaras) el cuál es un tipo de inspección no destructiva, aplicado a diversas frutas como manzanas, plátanos, fresas, limones, duraznos, naranjas, peras, papayas, tomates, papas, melones, sandía, etc como se verá en las secciones posteriores. En la figura %\ref{clasifAut} 
 se puede ver una máquina que cuenta con la capacidad de inspección por cámaras asistido con visión por computadora. Entre los problemas mas frecuentes de estos clasificadores es su obsolescencia, ya que por lo regular sus componentes no son actualizables, tanto hardware como software. Debido a esto también las reparaciones son difíciles, ya que el hardware necesario para reparaciones es escaso al pasar del tiempo, además que la clasificación es de menor velocidad ya que existen tecnologías muy avanzadas hoy día.
-	
+
 %\begin{figure}[h] 
 %	\centering 
 %		\includegraphics[scale=.40]{ima/clasifAut.jpg} 
 %	\caption{Imagen de clasificación por visión artificial.} 
 %	\label{clasifAut} 
 %\end{figure}	
-	
-
-Con el fin de mejorar el hardware existente en velocidad, usar un arreglo de compuertas lógicas programables (\textbf{FPGA} por sus siglas en inglés), parece una opción prometedora, ya que estos se destacan por su procesamiento en paralelo, y flexibilidad de construcción de hardware. 
 
 
 
 
-\section{Justificación}
+\section{Estado del arte}
 
-% Dado que el gobierno de México desea impulsar la producción nacional de naranja habrá la necesidad de nuevas tecnologías para ordenar la producción de la misma, además, Estados Unidos el cliente principal de este producto, por lo que resulta necesario impulsar la tecnología en esta área, donde también, logrando el propósito de este trabajo, se puede realizar para diferentes frutas y apoyar el sector comercial y productor beneficiosamente. 
+En una gran cantidad de los experimentos reportados en la literatura, se usan fotografías y no video, de las cuales se extraen características. Sin embargo, las condiciones en las que se toman las fotografías son diferentes de las que se encontrarían en un ambiente industrial y no son utilizables en el contexto del presente trabajo. La  figura \ref{chafa} \cite{chafafrut}, muestra ejemplos de este tipo de imágenes, donde la fruta está inmóvil en una escena donde la segmentación de la misma sería más simple.
 
+\begin{figure}[!tbh]
+	\centering
+	\includegraphics*[scale=0.5]{datchafa} 
+	\caption{Condiciones poco probables \cite{chafafrut}.}
+	\label{chafa}
+\end{figure}
 
-De acuerdo a la Organización de Agricultura y Alimentos (\textbf{FAO} por sus siglas en inglés), México es uno del los 5 mayores productores de cítricos en el mundo \cite{FAO_2016}. Actualmente, en el estado de Tamaulipas es el segundo productor de cítricos en México. En el 2011, la producción total fue de 500,000 toneladas aproximadamente \cite{sag}.
-
-El tratamiento post-cosecha se ha convertido en una etapa esencial en el mercado de fruta fresca, para mantener la frescura de los cítricos y proveer al consumidor en las mejores condiciones posibles. Comúnmente, la calidad de la clasificación de cítricos es realizado por humanos, basado en inspección visual de un criterio externamente visible de la fruta, como su tamaño, forma y color. Esta inspección manual recae mucho en la experiencia del observador, para mantener la consistencia y uniformidad en la clasificación. 
-
-Algunos autores han reportado algunos sistemas de clasificación. En \cite{7306754}, las técnicas de clasificación son revisadas. El autor menciona las características mas usadas para identificar pudrición, maduración y clase de frutas, en modelos de machine learning (\textbf{ML}) usadas para la tarea. Dos grupos grandes de enfoques fueron identificados: 
+En la literatura, algunos autores han reportado algunos sistemas de clasificación de frutas. En  \cite{7306754}, diversas técnicas de clasificación son revisadas. El autor identifica las características más usadas para identificar el grado de pudrición, maduración y la clase de frutas, así como los modelos de machine learning (ML) usados en esas tareas. El autor identifica dos enfoques: 
 
 
 \begin{enumerate}
-\itemsep 0em
- \item Sistemas enfocados a la identificación de múltiples frutas (Por lo que no se revisa la calidad de la misma), alimentada con conjuntos de miles de imágenes de una serie de diferentes frutas 
- \item Sistemas enfocados en una fruta especifica, usando un conjunto de imágenes de un solo tipo de fruta para entrenar y probar el clasificador. Aun y cuando el primer enfoque es más general, el segundo es una mejor opción para máquinas clasificadoras, diseñadas para clasificar una sola fruta.
+	\itemsep 0em
+	\item Sistemas enfocados a la identificación de múltiples frutas (por lo que no se revisa la calidad de la misma), alimentada con sets de miles de imágenes de una serie de diferentes frutas. 
+	\item Sistemas enfocados en una fruta específica, usando un set de imágenes de un solo tipo de fruta para entrenar y probar el clasificador. Aun y cuando el primer enfoque es más general, el segundo es más adecuado para máquinas clasificadoras de una sola fruta.
 \end{enumerate}
 
 % Clasificadores de naranjas 
-Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{analis}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{chokun}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basada en una estructura de datos de arboles cuadruples es presentada. 
+Para sistemas específicamente diseñadas para clasificación de cítricos, una evaluación de diferentes clasificadores automáticos para naranja es reportado en \cite{analis}, donde 5 arboles de decisión (AD) diferentes, tres redes neuronales artificiales (RNA) y un clasificador por reglas fueron probados. En \cite{chokun}, un clasificador de tipo árbol de reglas fue propuesto para clasificar la maduración de las naranjas. En \cite{Martinez-Uso:2005:MIS:1565835.1565847}, un algoritmo de segmentación multiespectral basado en una estructura de datos de árboles cuádruples es presentado. 
 
-Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{rgbhisto}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por caracteristicas estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
+Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{rgbhisto}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por características estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
 
-En \cite{ALOHALI201129}, un prototipo para clasificar fruta en base a las fecha de cosecha es propuesto. RNAs son entrenadas con el conjunto de datos de 1800 frutas para obtener caracteristicas como debilidad, tamaño, forma, intensidad y defectos.
+En \cite{ALOHALI201129}, un prototipo para clasificar fruta con base en la fecha de cosecha es propuesto. RNAs son entrenadas con un set de datos de 1800 frutas para obtener características como debilidad, tamaño, forma, intensidad de color y defectos.
 
-Relacionados a sistemas de multiples frutas, hay algunas aplicaciones en la literatura. En \cite{khoje}, una transformación curvelet para la clasificación de guayaba y limón es propuesto. Medidas de texturas basadas en la transformación curvelet como la energia, entropia, media y desviación estandar es usada para caracterizar textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales  Probabilisticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. 
-En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Utilizando una Transformación de Caracteristicas Invariantes a Escalamiento (SIFT) fue usado para obtener caracteristicas de las frutas presentadas, y un clasificador de tipo Bosque aleatorio fue aplicado de igual manera. 
-%En  Vector Machines (SVM) and Probabilistic Neural Networks (PNN) classifiers were trained to distinguish between healthy and defective fruits.  In \cite{7086191}, a system for grading apples, strawberries, and oranges is presented. Scale Invariant Feature Transform (SIFT) was used to obtain features from input fruits, and a Random Forest classifier was applied for fruit grading.
-En \cite{5254804}, un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, platanos y fresas. En \cite{ROCHA201096}, descriptores de imágenes basadas en apariencia, color, tectura, y forma fueron obtenidos y distinguidos de las tecnicas de ML como SVM, LDA, arboles de clasificacion, KNN, y ensambles de arboles fueron entrenados.
+Relacionadas con sistemas de clasificación de múltiples frutas, es posible ecnontrar algunas aplicaciones en la literatura. En \cite{khoje}, , una transformación curvelet para la clasificación de guayaba y limón es propuesta. Medidas de texturas basadas en la transformación curvelet como la energía, entropía, media y desviación estándar son usadas para caracterizar la textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales Probabilísticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Basándose en una Transformación de Características Invariantes a Escalamiento (SIFT) se obtuvieron características de las frutas presentadas, y un clasificador de tipo Bosque Aeatorio fue utilizado como clasificador. En \cite{5254804},  un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, plátanos y fresas. En  \cite{ROCHA201096}, descriptores de imágenes basados en apariencia, color, textura, y forma fueron obtenidos y distintas técnicas de ML como SVM, LDA, árboles de clasificación, KNN, y ensambles de árboles fueron entrenados para clasificar las imágenes."
 
 
 
 % DeepLearning- Un parrafor por separado
 
-Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrolladas para la clasificación de problemas complejos. Esos modelos son mostrados para entender mejor las caracteristicas en imágenes, y han sido usadas para afrontar con el rápido crecimiento de datos (big data). En \cite{8488544}, un clasificador basado en DL es propuesto. Algoritmos de DL requieren mucho tiempo entrenamiento de datos, una gran cantidad de datos de entrenamiento (conjunto de datos), y un poder de procesamiento enorme. Generan una solución muy especializada en un dominio especifico, donde la revaloración es necesaria para resolver problemas fuera del dominio.
+Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrollados para resolver problemas de clasificación complejos. Esos modelos han mostrado entender mejor las características presentes en imágenes, y se han desarrollado a la par del rápido crecimiento de datos (big data). En \cite{8488544} un clasificador basado en DL es propuesto. Los algoritmos de DL requieren un tiempo entrenamiento de datos muy grande, una gran cantidad de datos de entrenamiento (set de datos), y un poder de procesamiento enorme. Generan una solución muy especializada en un dominio específico, donde un reentrenamiento es necesario para resolver problemas fuera del dominio \cite{dptarda}.
 
 
 % Fin de las comparativas...
@@ -326,56 +331,50 @@ Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrollad
 
 % La necesidad de un sistema embebido tiempo real para c
 
-El diseño de un sistema de visión para clasificación automática de cítricos es altamente deseada para reducir el costo de la fuerza laboral y problemas de mantener la consistencia y uniformidad en la clasificación. Un clasificador automático de cítricos basada en visión de computadora afronta algunos problemas técnicos como, el procesamiento de imágenes en tiempo real, baja precisión de clasificación y alto costo computacional. Un FPGA es ideal para esta tarea, ya que provee de procesamiento paralelo.  En el enfoque presentado en \cite{josu}, una arquitectura para clasificación de cítricos es presentada. El pre-procesamiento requerido para la clasificación es implementada en hardware. La clasificación de cítricos fue basada en una umbralización global, convirtiendo al sistema sensible al ruido generado por los objetos en movimiento y un modelo de ML más robusto no fueron explorados.
+Un sistema de visión para la clasificación automática de cítricos es altamente deseado para reducir el costo de la fuerza laboral y mantener la consistencia y uniformidad en la clasificación. Un clasificador automático de cítricos basado en visión de computadora afronta algunos problemas técnicos como, el procesamiento de imágenes en tiempo real, baja precisión de clasificación y alto costo computacional. Un FPGA es ideal para esta tarea, ya que permite paralelizar operaciones. En el enfoque presentado en \cite{josu}, una arquitectura para clasificación de cítricos es presentada. El pre-procesamiento requerido para la clasificación es implementado en hardware. La clasificación de cítricos fue basada en una umbralización global, haciendo que el sistema fuera sensible al ruido generado por los objetos en movimiento y un modelo de ML más robusto no fue explorado.
 
 
 % Porque un DT
 
-Algunos algoritmos de clasificación para frutas como ANN, SVN requieren mucha cantidad de memoria para almacenar diferentes coeficientes y complejos cálculos no lineales. Los arboles de decisión (AD), son uno de los mejores algoritmos para implementación de hardware, ya que no requieren cálculos aritméticos, que son computacionalmente costosos, si no que solamente usa comparadores \cite{6636881}. Los AD han sido aplicados exitosamente en algunos dominios, como reconocimiento de objetos \cite{10.1007/978-3-540-32256-6_52}, identificación de gas \cite{li}, y reconocimiento de cantar de aves \cite{5986215}.
+Algunos algoritmos de clasificación para frutas, como ANN y SVN, requieren una gran cantidad de memoria para almacenar diferentes coeficientes, además de requerir complejos cálculos no lineales. Los árboles de decisión (AD), son uno de los mejores algoritmos para implementación de hardware, ya que no requieren cálculos aritméticos y no son computacionalmente costosos, ya que solamente usa comparadores \cite{6636881}. . Los AD han sido aplicados exitosamente en el reconocimiento de objetos \cite{10.1007/978-3-540-32256-6_52}, identificación de gases \cite{li}, y reconocimiento del cantar de algunas aves \cite{5986215}.
 
 
 % Cierre - Luce que lo paso al final
 
-La comparación entre los sistemas de clasificación es difícil por su larga variedad y combinatoria de conjuntos de imágenes de frutas. Precisión, especificidad y sensibilidad de mediciones son a menudo reportadas en diversos trabajos, pero no hay una medida real para medir su desempeño en el area, ya que existen conjuntos de imágenes que son capturadas en entornos estáticos.
+La comparación entre los sistemas de clasificación es difícil por su gran variedad y las diferentes combinaciones de sets de imágenes de frutas que se pueden usar. Precisión, especificidad y sensibilidad de clasificación son a menudo reportadas en diversos trabajos, pero no hay una medida estandarizada para medir su desempeño. Además, existen sets de imágenes de prueba que son capturadas en entornos estáticos y no son representativos del tipo de imágenes que se encontraría en un entorno real.
 
-En esta tesis se propone una metodología para llegar al desarrollo de un clasificador de naranjas basado en AD, usado para la segmentación de la fruta y su clasificación. El enfoque está dirigido para realizar una implementación sencilla en hardware, donde las arquitecturas de los modelos AD se generan por medio de software.
 
-\section{Estado del arte}
-Por lo general los experimentos que se han realizado se usan fotografías (no video), de los cuales se extraen características, sin embargo las condiciones en las que se toman las fotografías son escenarios poco probables y poco prácticos para un problema real como lo es en un escenario industrial tal y como se ve en la figura \ref{chafa} \cite{chafafrut}, donde la fruta está inmóvil en una escena fácil de segmentar.
 
- \begin{figure}[!tbh]
-\centering
-\includegraphics*[scale=0.5]{datchafa} 
-\caption{Condiciones poco probables \cite{chafafrut}.}
-\label{chafa}
-\end{figure}
+El espacio de colores Tono, Saturación y Valor (HSV, por sus siglas en inglés) es pieza clave en la clasificación por color \cite{analis,chokun,rgbhisto,huehue,sugarhue}, ya que permite separar la información de color presente en los canales $H$ y $S$, de la información de intensidad (canal $V$).
 
-El canal de colores Tono, Saturación y Valor (HSV) es pieza clave en la clasificación por color \cite{analis,chokun,rgbhisto,huehue,sugarhue} ya que se obtiene mucha información de uno de los canales ya que tanto H como S no son muy afectados por la iluminación.
+La clasificación por umbrales fijos resulta poco práctica en ambientes reales, puesto que requiere mucha experimentación y que las condiciones de adquisición de imágenes sean fijas \cite{huehue,josu}. Los problemas de este tipo de clasificación pueden ser evitados usando técnicas de clasificación más avanzadas.
 
-La clasificación por umbrales fijos es difícil de lograr ya que se necesita mucha experimentación y desarrollo \cite{huehue,josu}, por lo que la implementación de un clasificador es necesaria.
+En \cite{analis,chokun} se extraen ciertas características de las imágenes para saber el estado de la fruta. En estos trabajos, inicialmente calculan el espacio de colores HSV de la imagen a procesar y extraen características sobre el color y la iluminación específica. Enseguida, obtienen la media de los valores de intensidad y el histograma de los 3 canales correspondientes. Este análisis permite detectar si la fruta se encuentra en mal estado, pero no la clasifican por color.
 
-Para la extracción de características para saber el estado de la fruta se utilizan ciertas características, tal es el caso de obtener desde el espacio de colores HSV de la imagen a procesar para obtener características sobre el color y la iluminación especifica. De esto anterior obtener la media, y el histograma de los 3 canales correspondientes \cite{analis,chokun}, por otra parte el análisis es solamente para detectar que se aprecia en mal estado, pero no se clasifica el color.
+El obtener características complejas no siempre es la mejor opción para un problema como el que se aborda en este trabajo. El desarrollo de un algoritmo sofisticado puede ser costoso en recursos computacionales, tiempo de desarrollo y tiempo de procesamiento\cite{khoje}. Sin embargo, es posible programar sistemas similares en FPGA, donde la velocidad de cómputo se mejora hasta 100 veces \cite{faste} y donde es posible reducir la complejidad de cálculo mediante clasificadores basados en árboles de decisión \cite{friend}.
 
-El obtener características complicadas de computar no siempre es la mejor opción para un problema como este, ya que el obtener una precisión de 90\% es aceptable, sin embargo el tiempo de procesamiento o el desarrollo de un algoritmo sofisticado puede ser costoso en recursos y tiempo de desarrollo \cite{khoje}. Sin embargo, existen sistemas similares, los cuales están montados en FPGA, donde la velocidad de computo se mejora hasta 100 veces \cite{faste} además de también poder ser implementados clasificadores por arboles de decisión \cite{friend}.
+En la clasificación de naranjas, diferentes clasificadores han sido propuestos. Por ejemplo, en \cite{classi,analis}, mientras que en \cite{analis,rfrf} los clasificadores utilizados son árboles de decisión y Random Forest. 
 
-El uso de diferentes clasificadores para la clasificación de naranjas están los perceptrones multicapa (analizando histogramas sobre el canal RGB) \cite{classi,analis}, arboles de decisión, Random Forest \cite{analis,rfrf}. 
+Por otra parte, para entrenar adecuadamente un clasificador automático es necesario tener un set de imágenes con fotografías lo suficientemente variadas para que las características de interés en diferentes situaciones sean aprendidas. Debido a lo anterior, se construyó un hardware industrial como en \cite{machineorang,machinefruit} para tomar video y capturar un set de entrenamiento y prueba con un número adecuado de imágenes.
 
-Por otra parte, en la mayoría de los casos se tiene un conjunto de datos muy reducidos, es por eso la elección de preparar un hardware industrial como en \cite{machineorang,machinefruit} para tomar video, y obtener un conjunto de datos más grande, a cambio de un poco de tiempo de desarrollo para el procesamiento del mismo y obtener fotografías variadas.
+Un clasificador automático de fruta programado en un FPGA tendría un buen poder de cómputo y tendría la capacidad de funcionar en tiempo real \cite{josu}, ya que no utiliza memoria para almacenar las imágenes para post-procesamiento y se tiene la posibilidad de no utilizar clasificadores supervisados.
 
-Como se ha mencionado antes, un sistema como este, montado en un FPGA tiene resultados interesantes dado el poder de computo y la capacidad de funcionar en tiempo real \cite{josu}, sin embargo el no utilizar algún tipo de memoria para almacenar las imágenes para un post-procesamiento, así como también el no utilizar clasificadores supervisados.
+Con el fin de mejorar el hardware existente en velocidad, usar un arreglo de compuertas lógicas programables (\textbf{FPGA} por sus siglas en inglés), parece una opción prometedora, ya que estos se destacan por su procesamiento en paralelo, y flexibilidad de construcción de hardware.
 
+En esta tesis se propone una metodología para desarrollar un clasificador de naranjas basado en AD, utilizable en la segmentación y clasificación de fruta. Se propone una implementación sencilla en hardware, donde las arquitecturas de los modelos AD se generan por medio de software.
 
 \section{Objetivos}
 \subsection*{Objetivo general}
 \begin{itemize}[noitemsep]
- \item Desarrollar una simulación de hardware en FPGA capaz de clasificar naranjas con una precisión del 90\% con una rapidez de 1 naranja por segundo.
+ \item Desarrollar un sistema en FPGA capaz de clasificar naranjas con una precisión del 90\% con una rapidez de al menos 1 naranja por segundo.
 \end{itemize}
 
 \subsection*{Objetivos específicos}
 \begin{itemize}[noitemsep]
- \item Simulación en FPGA de un clasificador por AD para segmentación y clasificación de color.
- \item Simulación en FPGA de un procesador de video extractor de características.
- \item Simulación de módulo de comunicación externo para hardware auxiliar de control de proceso.
+ \item Generar conjunto de datos de videos, imágenes y pixeles para el entrenamiento de ADs de segmentación y clasificación de color.
+ \item Diseñar y programar en FPGA un clasificador por AD para la segmentación y clasificación por color.
+ \item Diseñar y programar en FPGA un procesador de video para la extracción de características de interés.
+ %\item Desarrollar un módulo de comunicación externo para hardware auxiliar en el control del proceso de de control de proceso.
 
 \end{itemize}
 
@@ -413,7 +412,7 @@ Como se ha mencionado antes, un sistema como este, montado en un FPGA tiene resu
 %\begin{chapter}{Marco Teórico}
 \chapter{Marco Teórico} \label{chap:marcoteori} 
 
-En esta sección se abordan temas relacionados al trabajo realizado.
+En este capítulo se tratan los conceptos técnicos relacionados con la realización del proyecto, los principios y la naturaleza de la solución propuesta.
 
 % Inteligencia artificial
 % -Machine learning
@@ -435,22 +434,22 @@ En esta sección se abordan temas relacionados al trabajo realizado.
 
 \section{Inteligencia artificial}
 
-La inteligencia artificial en ciencia, es una rama que estudia desde un punto de vista de la ingeniería, la inteligencia en elementos artificiales, y que estos sean capaz de demostrar un comportamiento inteligente. Pretende construir sistemas que presenten un comportamiento que se pueda decir que es inteligente.
+La inteligencia artificial es una rama de las ciencias computacionales cuyo objetivo es la construcción de algoritmos capaces de mostrar comportamiento inteligente mediante herramientas y técnicas computacionales.
 
 
-La inteligencia es un concepto difícil de definir, por lo que los consensos científicos no han establecido completamente su definición e identificación de un caso de inteligencia, osease, decir cuando algo es inteligente o no, sea artificial o no.
+La inteligencia es un concepto difícil de definir y no existe una definición unitaria aceptada por todos los campos de la ciencia. Debido a lo anterior, tampoco existe un consenso para definir cuando una entidad es inteligente o no, ya sea natural o artificial.
 
-En el año de 1950, el padre de la computación Alan Turing, publicó un articulo relacionado a la computación y y la inteligencia llamado ``Maquinaria computacional e inteligencia'', donde él argumentaba que siempre y cuando una máquina puede actuar como un humano, entonces es inteligente \cite{iabook}. En el articulo se propuso una prueba llamada Prueba de Turing, que permitiría afirmar si una máquina es inteligente o no. El prueba es compuesto por 2 partes (individuos o cosas) donde se comunicarán por un medio informático, la primera parte debe ser un humano, y la segunda puede ser una máquina o un humano, la prueba consiste en que la primera parte defina si la segunda es una máquina o un humano. Si la primera parte identifica a una máquina como humano entonces esta máquina es considerada inteligente. Hoy en día con los avances de la tecnología para que una máquina sea identificada como inteligente debe tener como características el reconocimiento del lenguaje natural, el razonamiento, el aprendizaje o la representación del conocimiento.
+En el año de 1950, el padre de la computación Alan Turing, publicó un articulo relacionado a la computación y y la inteligencia llamado ``Maquinaria computacional e inteligencia'', donde él argumentaba que siempre y cuando una máquina pueda actuar como un humano, entonces es inteligente \cite{iabook}. En el artículo se propuso una prueba llamada Prueba de Turing, que permitiría afirmar si una máquina es inteligente o no. La prueba está compuesto por 2 partes (individuos o cosas), las cuales se comunicarán por un medio informático. La primera parte debe ser un humano, y la segunda puede ser una máquina o un humano. La prueba consiste en que la primera parte defina si la segunda es una máquina o un humano. Si la primera parte identifica a una máquina como humano entonces esta máquina es considerada inteligente. Hoy en día, con los avances de la tecnología, para que una máquina sea identificada como inteligente debe tener como características el reconocimiento del lenguaje natural, el razonamiento, el aprendizaje o la representación del conocimiento.
 
 
-El \textbf{aprendizaje automático} se refiere a la capacidad de la máquina para aprender cosas nuevas, de otro modo, no será capaz de adaptarse al medio o condiciones que exige el entorno. Las lineas de investigación que se revisan hoy en día se busca hacer que las máquinas capten generalizaciones a partir de ejemplos sacados del entorno. Como ejemplo, un niño pequeño al aprender a caminar, tiene caer muchas veces antes de calcular de manera exacta las instrucciones motrices para dar un paso, hasta lograr dar pasos con soltura.
+El \textbf{aprendizaje automático} se refiere a la capacidad de la máquina para aprender cosas nuevas, de otro modo, no será capaz de adaptarse al medio o condiciones que exige el entorno. Las líneas de investigación modernas en el campo de la inteligencia artificial buscan hacer que las máquinas capten generalizaciones a partir de ejemplos obtenidos del entorno. Por ejemplo, un niño pequeño al aprender a caminar, tiene que caer muchas veces antes de ser capaz de calcular de manera exacta las instrucciones motrices para dar un paso, hasta que puede lograr dar pasos con soltura.
 
 
 \section{Machine learning}
 
-Machine learning es una rama de la inteligencia artificial. Se define como la ciencia de hacer que sistemas de cómputo, aprendan y actúen como los humanos, mejorar su aprendizaje sobre el tiempo de forma autónoma, alimentándolos con datos e información que significan interacciones del mundo real \cite{supervisadobook}.
+Machine learning es una rama de la inteligencia artificial que busca que los sistemas de cómputo aprendan y actúen como los humanos, mejorando su aprendizaje en función del tiempo de forma autónoma, alimentándose con datos e información provenientes de interacciones con el mundo real \cite{supervisadobook}.
 
-Una máquina de aprendizaje es un modelo matemático o algoritmo capaz de predecir algún comportamiento a partir de datos que caracterizan el sistema (figura \ref{fml}), los datos por lo general son clusters de características de que definen el comportamiento de un sistema, cada característica se administra en el modelo como una entrada. Después el modelo calcula una predicción y esta es su salida.
+Una máquina de aprendizaje es un modelo matemático o algoritmo capaz de predecir algún comportamiento a partir de datos que caracterizan el sistema (figura \ref{fml}). Los datos por lo general son clusters de características que definen el comportamiento de un sistema y cada característica es administrada en el modelo como una entrada. Después, el modelo calcula una predicción y esta es su salida..
 
 \begin{figure}[!tbh] 
 	\centering 
@@ -459,8 +458,8 @@ Una máquina de aprendizaje es un modelo matemático o algoritmo capaz de predec
 	\label{fml} 
 \end{figure}
 
-Las máquinas aprendizaje sirven para clasificar o realizar una regresión. En la figura \ref{fig:clplot} se puede ver el ejemplo de un conjunto de datos, donde los ejes representan características de un sistema, por ejemplo: temperatura y humedad. Supongamos que se selecciona el 90\% de los datos para entrenar el modelo, el cual dependiendo del modelo se entrenará con uno u otro algoritmo.
-La linea punteada dibuja el resultado del entrenamiento el cual define la separación entre clases. Cuando un nuevo dato no conocido por el sistema ingresa al modelo, este será capaz de predecir la clase, entre más difícil sea de separar los datos se necesitan diferentes modelos.
+Las máquinas de aprendizaje sirven para clasificar o realizar una regresión. En la figura \ref{fig:clplot} se puede ver el ejemplo de un conjunto de datos, donde los ejes representan características de un sistema, por ejemplo: temperatura y humedad. Supongamos que se selecciona el 90\% de los datos para entrenar el modelo, el cual dependiendo del modelo se entrenará con uno u otro algoritmo.
+La línea punteada dibuja el resultado del entrenamiento el cual define la separación entre clases. Cuando un nuevo dato no conocido por el sistema ingresa al modelo, éste será capaz de predecir la clase. Entre más difícil sea la separación de los datos, mayor será la complejidad de los modelos de clasificación a usar.
 
 
 \begin{figure}  
@@ -500,14 +499,14 @@ La linea punteada dibuja el resultado del entrenamiento el cual define la separa
 
 
 
-Existen 3 tipos de máquinas de aprendizaje: máquinas de aprendizaje supervisado, máquinas de aprendizaje no supervisado, máquinas de aprendizaje por refuerzo \cite{supervisadobook}.
+Existen 3 tipos de máquinas de aprendizaje: máquinas de aprendizaje supervisado, máquinas de aprendizaje no supervisado y máquinas de aprendizaje por refuerzo \cite{supervisadobook}.
 
 
 \subsection{Aprendizaje supervisado}
 
-En ellas la entrada y la salida deseada son administradas para el entrenamiento del modelo  \cite{classifs}. Los datos de entrada y salida son etiquetadas para la clasificación y con ellas se forma la base del entrenamiento para el procesamiento futuro de los datos tal y como se explicó en la sección anterior.
+En estas máquinas la entrada y la salida deseada son administradas durante el entrenamiento del modelo  \cite{classifs}. Los datos de entrada y salida son etiquetados para la clasificación y con ellos se forma la base del entrenamiento para el procesamiento futuro de los datos."
 
-Algunos modelos de este tipo son el Árbol de decisión (AD), regresión lineal, regresión logistica, máquinas de soporte vectorial (SVM), modelo Naive Bayes, algoritmo K-vecinos más cercanos, algoritmo de bosque aleatorio, etc.
+Algunos algoritmos con los que comúnmente se construyen este tipo de máquinas son el Árbol de decisión (AD), la regresión lineal, la regresión logística, las máquinas de soporte vectorial (SVM), el modelo Naive Bayes, el algoritmo K-vecinos más cercanos y algoritmo de bosque aleatorio.
 
 
 \subsection{Aprendizaje no supervisado}
@@ -771,8 +770,8 @@ Esta componente de luminancia corresponde a una imagen en escala de grises tal y
 \begin{figure}[!tbh]
 \centering
 \begin{tabular}{cc}
-\subfloat[Imagen a color (RGB) \label{lena}]{\includegraphics[scale=0.25]{ima/lena}} & \hspace{10mm}
-\subfloat[Canal de luminancia de la imagen \label{lenabn}]{\includegraphics[scale=0.7]{ima/lenabn}}  
+\subfloat[Imagen a color (RGB). \label{lena}]{\includegraphics[scale=0.25]{ima/lena}} & \hspace{10mm}
+\subfloat[Canal de luminancia de la imagen. \label{lenabn}]{\includegraphics[scale=0.7]{ima/lenabn}}  
 \end{tabular}
 
 \caption{Conversión de imagen a color a escala de grises.}
@@ -818,11 +817,11 @@ El efecto de este método de segmentación da un realce de todos aquellos pixele
 \begin{figure}[!tbh]
 \centering
 \begin{tabular}{cc}
-\subfloat[Binarización de \ref{lenabn} \label{th}]{\includegraphics[scale=0.25]{ima/th}} & \hspace{10mm}
-\subfloat[Binarización inversa de \ref{lenabn} \label{thinv}]{\includegraphics[scale=0.25]{ima/thinv}}  
+\subfloat[Binarización de \ref{lenabn}. \label{th}]{\includegraphics[scale=0.25]{ima/th}} & \hspace{10mm}
+\subfloat[Binarización inversa de \ref{lenabn}. \label{thinv}]{\includegraphics[scale=0.25]{ima/thinv}}  
 \end{tabular}
 
-\caption{Binarización de imágenes usando un umbral $t=127$}
+\caption{Binarización de imágenes usando un umbral $t=127$.}
 \label{lumiprueb}
 \end{figure}
 
@@ -882,79 +881,82 @@ El usuario puede configurar los \fs   para implementar funciones que el mismo de
 
 %En tiempos pasados solo había unos pocos ingenieros con grandes conocimientos los que podían trabajar con \fs pero conforme pasa el tiempo se van creando herramientas diseñadas en bloques las cuales permiten hacer un diseño en alto nivel haciendo más fácil generar los HDLs.
 
-\subsection*{Utilización en la industria}
+%\subsection*{Utilización en la industria}
+%
+%Los \fs en la industria han sido pilar importante en el desarrollo de nuevos semiconductores (procesadores, Application-Specific-Integrated-Circuits o ASICs, etc.), ya que los \fs combinan lo mejor de los ASICs y de los sistemas en los que se basan procesadores ya que estos ofrecen frecuencias de reloj administradas por hardware, sin requerir altos volúmenes de requerimientos para poder fabricar un ASIC. %\\\\Para fabricar ASICs antes de que existieran los \fs significaba un verdadero problema, ya que no se contaba con algo flexible para primero hacer pruebas y después manufacturar la pieza de silicio. Las pruebas por lo general se realizan en tarjetas de desarollo comerciales %como se puede mostrar en la figura \ref{faltera}, 
+%%las cuales están formadas por un \f o más y tienen elementos que digitalizan todo el entorno del \f como pueden ser conversores analógicos-digitales (ADCs), ICs manejadores de puertos de comunicación (tal es el caso de un FTDI) y algunos conversores de voltaje, ya que por lo general un \f rápido, utiliza valores digitales de 3.3V para ahorrar energía y calentamiento en el chip. \\
+%
+%A diferencia de un procesador convencional que funcionan con una serie de instrucciones o pasos, los \fs funcionan en paralelo ya que están construidos solo por bloques lógicos o en más bajo nivel, solo están fabricados por compuertas lógicas las cuales están dispuestas de tal modo que se pueden fabricar series de bloques que ejecutan diversas tareas al mismo tiempo tal es la función de un procesador con más de un núcleo. Por otra parte, en los procesadores modernos existen hasta 8 o más núcleos, sin embargo en un \f se pueden hacer tantos bloques sean posibles físicamente dentro del \f que equivaldrían a núcleos que se dedican específicamente a una tarea en particular y no a tareas de distintos tipos lo cual es lo que mismamente desarrolla un procesador convencional de computadora. 
+%
+%%Algunas veces, ciertos semiconductores cuando son manufacturados, una parte de ellos es un FPGA, generalmente las partes más problemáticas, más complicadas o aquellas que puede ser que con el tiempo necesiten ser modificadas. Esto se hace con el objetivo de que en un futuro el semiconducor pueda ser reprogramado para hacer una actualización. En algunos casos, puede ocurrir que alguna parte del semiconductor esté en desarollo, o se haya desarrollado anteriormente un sistema que es menos eficiente que uno que esté en pleno desarrollo, tal es el caso de algunas computadoras que tienen un BIOS que puede ser actualizado y por ende mejorar las capacidades de entrada y salida de una computadora.\\
+%
+%
+%La diferencia entre un ASIC y un \f es básicamente que un ASIC no puede cambiar su funcionamiento. Un ASIC como lo dice su nombre es un IC que tiene una aplicación en específico (por lo que su estructura no es flexible), su arquitectura es definida y finita. Los ASIC son ICs que son personalizables en su construcción, pero una vez manufacturados no pueden cambiar su arquitectura, por lo que para probar y hacer diseños de ASICs con otros ASICs es algo que los \fs han desplazado por completo. En un principio los \fs eran de baja potencia de computación, para desarrollar grandes volúmenes de diseño, pero hoy en día un \f puede llegar a tener un total de 500 millones de operaciones por segundo (un reloj de 500MHz) sin ningún problema y son capaces de almacenar diseños mucho más grandes comparándolos con los \fs de hace un par de décadas.
 
-Los \fs en la industria han sido pilar importante en el desarrollo de nuevos semiconductores (procesadores, Application-Specific-Integrated-Circuits o ASICs, etc.), ya que los \fs combinan lo mejor de los ASICs y de los sistemas en los que se basan procesadores ya que estos ofrecen frecuencias de reloj administradas por hardware, sin requerir altos volúmenes de requerimientos para poder fabricar un ASIC. %\\\\Para fabricar ASICs antes de que existieran los \fs significaba un verdadero problema, ya que no se contaba con algo flexible para primero hacer pruebas y después manufacturar la pieza de silicio. Las pruebas por lo general se realizan en tarjetas de desarollo comerciales %como se puede mostrar en la figura \ref{faltera}, 
-%las cuales están formadas por un \f o más y tienen elementos que digitalizan todo el entorno del \f como pueden ser conversores analógicos-digitales (ADCs), ICs manejadores de puertos de comunicación (tal es el caso de un FTDI) y algunos conversores de voltaje, ya que por lo general un \f rápido, utiliza valores digitales de 3.3V para ahorrar energía y calentamiento en el chip. \\
+%\subsection{Historia de los FPGAs}
+%En 1984 Xilinx creó el primer modelo de FPGA, el modelo XC2046. Ellos no les llamaban como tal hasta que Actel popularizó el término en 1988. Desde entonces los fabricantes de \fs han incrementado las prestaciones increíblemente, tales son su capacidad, velocidad costo y consumo de energia.
+%
+%
+%
+%%\begin{figure}[h]
+%%\centering
+%%\includegraphics[scale=0.3]{ima/xc2064}
+%%\caption{Fotografía del primer \f de Xilinx.% Tomado de \cite{xc2064}. 
+%%\label{ffpga}}
+%%\end{figure}
+%
+%%\subsection*{FPGAs contra ASICs}
+%%A principios de los años 80's las compañías que se dedicaban a fabricar ASICs vieron una buena oportunidad de negocio en la actividad. A mediados de los 80's muchas compañías se encontraban vendiendo ASICs, la competencia era dura en esos entonces. Los clientes buscaban al mejor postor, ya sea que el vendedor de ASICs mantuviera en sus productos a un costo bajo, alta capacidad del dispositivo y alta velocidad del semiconductor. \\
+%
+%Cuando los \fs aparecieron, eran mucho más lentos, caros y pequeños (en capacidad) que cualquier ASIC en el mercado. Los \fs prosperaron debido a que en la fabricación de ASICs había mucha ingeniería de por medio que podía ser reducida usando un FPGA en el campo del diseño de circuitos digitales. Esta ingeniería de por medio resultaba algo cara, ya que se tenia que investigar, contratar personal capacitado y además algunas máquinas para la manufactura. Algunos fabricantes empezaron a usar los \fs, y se dieron cuenta que a cierto volumen de ventas, resultaba mucho más rentable usarlos en sus proyectos ya que se gastaban muchos recursos en la ingeniería. Cuando otros fabricantes empezaron a ver estos beneficios el volumen de ventas de ASICs ya no era justificable, volviendo así una tendencia el uso de FPGAs en el desarrollo de semiconductores.
+%
+%%Aquellos fabricantes que con el tiempo que se aferraron a la forma primitiva de fabricar ASICs empezaron a decaer, mucho del dinero invertido en algunos ASICs se perdían por errores de diseño, lotes mal manufacturados y carencia de clientes con demandas de altos volúmenes de dispositivos. Por otra parte, existían pequeños fabricantes los cuales generaban ingresos desarrollando pequeños volúmenes de ventas, solo por el hecho de usar FPGAs en sus procesos de diseño, por lo que ahorraban mucho en los errores de diseño que se pueden evitar en un FPGA, o que pueden ser reparados en un futuro.
+%
+%%\subsection*{FPGAs contra PALs}% \cite{trimberger,my,floyd}}
+%
+%%Antes de los FPGA existieron otro tipos de arreglos logicos programables llamados 
+%PAL (Programmable Array Logic) los cuales eran programables con memorias EPROM. Estos fueron introducidos a principios de los años 80's. Algunos otros les llamaban PLA (Programmable Logic Array).
+%
 
-A diferencia de un procesador convencional que funcionan con una serie de instrucciones o pasos, los \fs funcionan en paralelo ya que están construidos solo por bloques lógicos o en más bajo nivel, solo están fabricados por compuertas lógicas las cuales están dispuestas de tal modo que se pueden fabricar series de bloques que ejecutan diversas tareas al mismo tiempo tal es la función de un procesador con más de un núcleo. Por otra parte, en los procesadores modernos existen hasta 8 o más núcleos, sin embargo en un \f se pueden hacer tantos bloques sean posibles físicamente dentro del \f que equivaldrían a núcleos que se dedican específicamente a una tarea en particular y no a tareas de distintos tipos lo cual es lo que mismamente desarrolla un procesador convencional de computadora. 
-
-%Algunas veces, ciertos semiconductores cuando son manufacturados, una parte de ellos es un FPGA, generalmente las partes más problemáticas, más complicadas o aquellas que puede ser que con el tiempo necesiten ser modificadas. Esto se hace con el objetivo de que en un futuro el semiconducor pueda ser reprogramado para hacer una actualización. En algunos casos, puede ocurrir que alguna parte del semiconductor esté en desarollo, o se haya desarrollado anteriormente un sistema que es menos eficiente que uno que esté en pleno desarrollo, tal es el caso de algunas computadoras que tienen un BIOS que puede ser actualizado y por ende mejorar las capacidades de entrada y salida de una computadora.\\
-
-
-La diferencia entre un ASIC y un \f es básicamente que un ASIC no puede cambiar su funcionamiento. Un ASIC como lo dice su nombre es un IC que tiene una aplicación en específico (por lo que su estructura no es flexible), su arquitectura es definida y finita. Los ASIC son ICs que son personalizables en su construcción, pero una vez manufacturados no pueden cambiar su arquitectura, por lo que para probar y hacer diseños de ASICs con otros ASICs es algo que los \fs han desplazado por completo. En un principio los \fs eran de baja potencia de computación, para desarrollar grandes volúmenes de diseño, pero hoy en día un \f puede llegar a tener un total de 500 millones de operaciones por segundo (un reloj de 500MHz) sin ningún problema y son capaces de almacenar diseños mucho más grandes comparándolos con los \fs de hace un par de décadas.
-
-\subsection{Historia de los FPGAs}
-En 1984 Xilinx creó el primer modelo de FPGA, el modelo XC2046. Ellos no les llamaban como tal hasta que Actel popularizó el término en 1988. Desde entonces los fabricantes de \fs han incrementado las prestaciones increíblemente, tales son su capacidad, velocidad costo y consumo de energia.
-
-
-
-%\begin{figure}[h]
+%Estos consistian en dos niveles lógicos de estructura, en la figura \ref{pal} se puede una estructura simple de un PAL, en el fondo podemos ver que están marcadas las entradas, en la parte izquierda se encuentra un arreglo AND programable, que produce operaciones AND de cualquier combinación incluyendo sus inversos. El bloque azul de la derecha corresponde a una compuerta de operación OR que completa la operación combinacional de la función lógica programada en el PAL. De esta manera es fácil de implementar máquinas de estados finitos en una versión muy primitiva.
+%
+%\begin{figure}[!tbh]
 %\centering
-%\includegraphics[scale=0.3]{ima/xc2064}
-%\caption{Fotografía del primer \f de Xilinx.% Tomado de \cite{xc2064}. 
-%\label{ffpga}}
+%\includegraphics[scale=0.45]{ima/pal.png}
+%\caption{Arquitectura de un PAL.}% Tomado de \cite{trimberger}. 
+%\label{pal}
 %\end{figure}
 
-%\subsection*{FPGAs contra ASICs}
-%A principios de los años 80's las compañías que se dedicaban a fabricar ASICs vieron una buena oportunidad de negocio en la actividad. A mediados de los 80's muchas compañías se encontraban vendiendo ASICs, la competencia era dura en esos entonces. Los clientes buscaban al mejor postor, ya sea que el vendedor de ASICs mantuviera en sus productos a un costo bajo, alta capacidad del dispositivo y alta velocidad del semiconductor. \\
-
-Cuando los \fs aparecieron, eran mucho más lentos, caros y pequeños (en capacidad) que cualquier ASIC en el mercado. Los \fs prosperaron debido a que en la fabricación de ASICs había mucha ingeniería de por medio que podía ser reducida usando un FPGA en el campo del diseño de circuitos digitales. Esta ingeniería de por medio resultaba algo cara, ya que se tenia que investigar, contratar personal capacitado y además algunas máquinas para la manufactura. Algunos fabricantes empezaron a usar los \fs, y se dieron cuenta que a cierto volumen de ventas, resultaba mucho más rentable usarlos en sus proyectos ya que se gastaban muchos recursos en la ingeniería. Cuando otros fabricantes empezaron a ver estos beneficios el volumen de ventas de ASICs ya no era justificable, volviendo así una tendencia el uso de FPGAs en el desarrollo de semiconductores.
-
-%Aquellos fabricantes que con el tiempo que se aferraron a la forma primitiva de fabricar ASICs empezaron a decaer, mucho del dinero invertido en algunos ASICs se perdían por errores de diseño, lotes mal manufacturados y carencia de clientes con demandas de altos volúmenes de dispositivos. Por otra parte, existían pequeños fabricantes los cuales generaban ingresos desarrollando pequeños volúmenes de ventas, solo por el hecho de usar FPGAs en sus procesos de diseño, por lo que ahorraban mucho en los errores de diseño que se pueden evitar en un FPGA, o que pueden ser reparados en un futuro.
-
-%\subsection*{FPGAs contra PALs}% \cite{trimberger,my,floyd}}
-
-%Antes de los FPGA existieron otro tipos de arreglos logicos programables llamados 
-PAL (Programmable Array Logic) los cuales eran programables con memorias EPROM. Estos fueron introducidos a principios de los años 80's. Algunos otros les llamaban PLA (Programmable Logic Array).
-
-Estos consistian en dos niveles lógicos de estructura, en la figura \ref{pal} se puede una estructura simple de un PAL, en el fondo podemos ver que están marcadas las entradas, en la parte izquierda se encuentra un arreglo AND programable, que produce operaciones AND de cualquier combinación incluyendo sus inversos. El bloque azul de la derecha corresponde a una compuerta de operación OR que completa la operación combinacional de la función lógica programada en el PAL. De esta manera es fácil de implementar máquinas de estados finitos en una versión muy primitiva.
-
-Los PAL fueron muy eficientes desde un punto de vista de manufactura, ya que su estructura es bastante parecida a la de un arreglo de memorias EPROM. Gracias a esta arquitectura en un tiempo se tuvieron ideas nuevas sobre como expander las memorias, y expander los procesos de sus lineas de producción. El problema principal de esta arquitectura es bastante evidente, ya que para expander las funcionalidades de un PAL, este necesita convertirse en arreglos de PALs, dando como resultado una complicada programación por la cantidad exageradas de puntos que se debían de programar. Los arreglos de ANDs terminaban siendo demasiado grandes que la manufacturarlo el tamaño del dispositivo rebasaba a lo convencional. 
-
-\begin{figure}[!tbh]
-\centering
-\includegraphics[scale=0.45]{ima/pal.png}
-\caption{Arquitectura de un PAL.}% Tomado de \cite{trimberger}. 
-\label{pal}
-\end{figure}
-
-%El aumento de los arreglos en los PAL, causaban que los transistores usados en esos sistemas fueran más pequeños, por lo que la resistencia de cada uno bajaba, y por ende la capacitancia total aumentaba. Esto hacia que la velocidad y la potencia de consumo fueran opuestos en este tipo de arquitectura. \\\\
-
-%\subsection*{Principales fabricantes}
-
-%El primer \f fue creado por Xilinx la cuál se encuentra hoy en día aún como vendedor más exitoso de FPGAs. Los principales vendedores de FPGA son: % según \cite{guan} son: \\
+%Los PAL fueron muy eficientes desde un punto de vista de manufactura, ya que su estructura es bastante parecida a la de un arreglo de memorias EPROM. Gracias a esta arquitectura en un tiempo se tuvieron ideas nuevas sobre como expander las memorias, y expander los procesos de sus lineas de producción. El problema principal de esta arquitectura es bastante evidente, ya que para expander las funcionalidades de un PAL, este necesita convertirse en arreglos de PALs, dando como resultado una complicada programación por la cantidad exageradas de puntos que se debían de programar. Los arreglos de ANDs terminaban siendo demasiado grandes que la manufacturarlo el tamaño del dispositivo rebasaba a lo convencional. 
 %
-%\textbf{\fs basados en tecnología SRAM:}
-%\begin{itemize}
-%\itemsep 0em
-%\item Xilinx, Inc.
-%\item Intel (Antes llamado Altera Corp.)
-%\item Atmel
-%\item Lattice Semiconductor
+
 %
-%\end{itemize}
+%%El aumento de los arreglos en los PAL, causaban que los transistores usados en esos sistemas fueran más pequeños, por lo que la resistencia de cada uno bajaba, y por ende la capacitancia total aumentaba. Esto hacia que la velocidad y la potencia de consumo fueran opuestos en este tipo de arquitectura. \\\\
 %
+%%\subsection*{Principales fabricantes}
 %
-%\textbf{\fs basados en tecnología Flash y Antifuse:}
-%
-%\begin{itemize}
-%\itemsep 0em
-%\item Actel Corp.
-%\item Quick Logic Corp
-%\end{itemize}
-%
-%Xilinx e Intel comparten el 60\% de las ventas.
+%%El primer \f fue creado por Xilinx la cuál se encuentra hoy en día aún como vendedor más exitoso de FPGAs. Los principales vendedores de FPGA son: % según \cite{guan} son: \\
+%%
+%%\textbf{\fs basados en tecnología SRAM:}
+%%\begin{itemize}
+%%\itemsep 0em
+%%\item Xilinx, Inc.
+%%\item Intel (Antes llamado Altera Corp.)
+%%\item Atmel
+%%\item Lattice Semiconductor
+%%
+%%\end{itemize}
+%%
+%%
+%%\textbf{\fs basados en tecnología Flash y Antifuse:}
+%%
+%%\begin{itemize}
+%%\itemsep 0em
+%%\item Actel Corp.
+%%\item Quick Logic Corp
+%%\end{itemize}
+%%
+%%Xilinx e Intel comparten el 60\% de las ventas.
 
 
 \subsection{Arquitectura general de un FPGA}
@@ -2480,18 +2482,16 @@ Hay una posibilidad de optimización en los módulos de AD dado que se podría u
 
 \chapter{Conclusiones}
 
-La clasificación de fruta asistida por sistemas embebidos es una forma de apoyo para la industria local de alimentos, esto para lograr una aceleración en la clasificación de la misma y lograr metas comerciales como la exportación y ventas en aumento.
+Mediante la clasificación de fruta asistida por sistemas embebidos la industria local de alimentos podría acelerar la clasificación de la misma, lo que podría aumentar sus ventas y exportaciones.
+
+Los resultados experimentales demostraron que la implementación de un clasificador de fruta en FPGA es completamente viable, consumiendo menos energía que el procesamiento en computadora personal y con la ventaja de permitir una gran paralelización de operaciones en la clasificación. Si el FPGA es lo suficientemente grande, es posible implementar múltiples líneas con el mismo dispositivo funcionando en paralelo.
 
 
-El uso de un FPGA para la clasificación por medio de una cámara permite una implementación de alto desempeño un clasificador de fruta, ya que permite un menor consumo de energía y paralelismo en la clasificación, ya que si el FPGA es suficientemente grande se pueden implementar múltiples lineas con el mismo dispositivo funcionando en paralelo.
+Mediante modelos de aprendizaje supervisado es posible lograr tareas complejas como segmentación y clasificación de color, basadas en operaciones sencillas realizadas en paralelo. Para esto se propuso una arquitectura de 4 etapas: la primera, para la extracción de características para la segmentación; la segunda, para el cómputo del modelo de segmentación; la tercera, para la extracción de características para la clasificación por tamaño y color; y por último, la etapa de clasificación por tamaño y obtención del modelo de clasificación por color.
 
+En este trabajo se utilizó un modelo de clasificación basado en un árbol de decisión. La arquitectura propuesta puede ser implementada con un circuito combinacional, donde cada rama del árbol se calcula en paralelo. Esto permite obtener una respuesta en tiempo real.
 
-Mediante modelos de aprendizaje supervisado, es posible implementar tareas complejas como la segmentación y la clasificación de color mediante operaciones sencillas realizadas en paralelo. Para ello se propuso una arquitectura de 4 etapas: la primera para extracción de características para segmentación, la segunda para el computo del modelo de segmentación, la tercera para extracción de características para clasificación de tamaño y color, y por último la etapa de clasificación de tamaño y computo del modelo de clasificación de color.
-
-Para este trabajo, el modelo utilizado es el árbol de decisión ya que por medio de la arquitectura propuesta, ésta puede ser representada mediante un circuito combinacional, ya que cada rama del árbol se computa en paralelo, obteniendo así, un computo orientado a obtener una respuesta en tiempo real. 
-
-
-La arquitectura propuesta en este proyecto, clasifica por tamaño y color por medio de una segmentación de la fruta, en una escena tomada por una cámara colocada en una maquinara que transporta fruta a través de la escena. La clasificación por color es realizada mediante árboles de decisión, cuyos resultados muestran que ser entrenado con pocas muestras y obtener resultados por encima del 90\% de precisión para ambas tareas, obteniendo como resultado una precisión del 97\% para la segmentación, un 94\% para la clasificación de color y un 90\% para la clasificación de tamaño.
+La arquitectura de clasificación por tamaño y color propuesta en este proyecto recibe como entrada una imagen tomada por una cámara colocada sobre la banda transportadora de fruta que forma parte de una máquina de gran tamaño. Sobre esta imagen, las regiones correspondientes a las frutas deben ser segmentadas. Sobre las zonas segmentadas, se aplica un clasificador por color, el cual es implementado mediante árboles de decisión. Durante la parte experimental de esta tesis se observó que este modelo puede ser entrenado con pocas muestras y obtener resultados de clasificación correcta por encima del 90\% para ambas tareas, obteniendo como resultado una precisión del 97\% para la segmentación, un 94\% para la clasificación por color y un 90\% para la clasificación por tamaño.
 
 Gracias al SCHAD es posible implementar mejores modelos de AD con facilidad en este proyecto, que sean más cortos para el ahorro de recursos, y que estos puedan mejorar los resultados ya obtenidos.
 
@@ -2499,7 +2499,7 @@ Una mejora que se desea implementar para futuro, es una mejor clasificación a p
 
 Además se plantea un SCHAD mejorado, para generar ADs con más de 2 clases. Se puede utilizar los productos de este trabajo, para la clasificación de otras frutas de forma esférica, esto debido a la naturaleza los mecanismos de la maquinaria, por otra parte, la metodología presentada, puede ser útil para la clasificación de otro tipo de frutas no necesariamente esféricas.
 
-Se plantean pruebas en campo con la implementación propuesta en el proyecto, usando el mejor modelo obtenido en este trabajo, donde se realizarán pruebas con la maquinaria completa, siendo controlada por el MCU, siendo encargado de la clasificación el FPGA, midiendo tiempo de clasificación  que se estima rondar a los 16 ms por muestra debido al muestreo de la cámara.
+Se plantea realizar pruebas de campo con la implementación propuesta, usando el mejor modelo obtenido en este trabajo. Se realizarán pruebas con la maquinaria completa, cuyo funcionamiento será controlado por un MCU, el cual deberá interactuar con el FPGA donde se programó el clasificador. Se medirá el tiempo de clasificación por imagen, el cual se estima será de aproximadamente 16ms por muestra debido a la velocidad de muestreo de la cámara.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
