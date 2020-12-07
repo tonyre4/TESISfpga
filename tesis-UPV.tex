@@ -304,8 +304,8 @@ En la literatura, algunos autores han reportado algunos sistemas de clasificaci�
 
 \begin{enumerate}
 	\itemsep 0em
-	\item Sistemas enfocados a la identificación de múltiples frutas (por lo que no se revisa la calidad de la misma), alimentada con sets de miles de imágenes de una serie de diferentes frutas. 
-	\item Sistemas enfocados en una fruta específica, usando un set de imágenes de un solo tipo de fruta para entrenar y probar el clasificador. Aun y cuando el primer enfoque es más general, el segundo es más adecuado para máquinas clasificadoras de una sola fruta.
+	\item Sistemas enfocados a la identificación de múltiples frutas (por lo que no se revisa la calidad de la misma), alimentada con conjuntos de miles de imágenes de una serie de diferentes frutas. 
+	\item Sistemas enfocados en una fruta específica, usando un conjunto de imágenes de un solo tipo de fruta para entrenar y probar el clasificador. Aún y cuando el primer enfoque es más general, el segundo es más adecuado para máquinas clasificadoras de una sola fruta.
 \end{enumerate}
 
 % Clasificadores de naranjas 
@@ -313,15 +313,15 @@ Para sistemas específicamente diseñadas para clasificación de cítricos, una 
 
 Sistemas para clasificación de frutas que no son cítricos también han sido propuestos. En \cite{rgbhisto}, un clasificador Bayes y un clasificador de manzanas basado en el espacio de colores de Ohta es presentado. En \cite{UNAY2007597}, un método para reconocer las regiones de tallo o cáliz en manzanas es propuesto. Eliminación de fondo y segmentación de objetos por umbralización son usadas para aislar el objetivo. Después por características estadísticas, texturas y forma son extraídas de cada objeto segmentado y usado para el entrenamiento de los modelos: lineal discriminante, vecino más cercano (KNN), vecino más cecano difuso (KNNF), máquinas de soporte vectorial (SVM) y clasificador adaboost.
 
-En \cite{ALOHALI201129}, un prototipo para clasificar fruta con base en la fecha de cosecha es propuesto. RNAs son entrenadas con un set de datos de 1800 frutas para obtener características como debilidad, tamaño, forma, intensidad de color y defectos.
+En \cite{ALOHALI201129}, un prototipo para clasificar fruta con base en la fecha de cosecha es propuesto. RNAs son entrenadas con un conjunto de datos de 1800 frutas para obtener características como debilidad, tamaño, forma, intensidad de color y defectos.
 
-Relacionadas con sistemas de clasificación de múltiples frutas, es posible ecnontrar algunas aplicaciones en la literatura. En \cite{khoje}, , una transformación curvelet para la clasificación de guayaba y limón es propuesta. Medidas de texturas basadas en la transformación curvelet como la energía, entropía, media y desviación estándar son usadas para caracterizar la textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales Probabilísticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Basándose en una Transformación de Características Invariantes a Escalamiento (SIFT) se obtuvieron características de las frutas presentadas, y un clasificador de tipo Bosque Aeatorio fue utilizado como clasificador. En \cite{5254804},  un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, plátanos y fresas. En  \cite{ROCHA201096}, descriptores de imágenes basados en apariencia, color, textura, y forma fueron obtenidos y distintas técnicas de ML como SVM, LDA, árboles de clasificación, KNN, y ensambles de árboles fueron entrenados para clasificar las imágenes."
+Relacionadas con sistemas de clasificación de múltiples frutas, es posible ecnontrar algunas aplicaciones en la literatura. En \cite{khoje}, una transformación curvelet para la clasificación de guayaba y limón es propuesta. Medidas de texturas basadas en la transformación curvelet como la energía, entropía, media y desviación estándar son usadas para caracterizar la textura de la superficie de la fruta. Modelos como SVM, y Redes Neuronales Artificiales Probabilísticas (RNAP) fueron entrenadas para distinguir entre frutas en buen estado y con defectos. En \cite{7086191}, un sistema para clasificar manzanas, frutas y naranjas es presentado. Basándose en una Transformación de Características Invariantes a Escalamiento (SIFT) se obtuvieron características de las frutas presentadas, y un clasificador de tipo Bosque Aleatorio fue utilizado como clasificador. En \cite{5254804},  un algoritmo KNN para clasificar frutas basado en su color, forma y tamaño es reportado. El enfoque propuesto fue aplicado para manzanas, limones, plátanos y fresas. En  \cite{ROCHA201096}, descriptores de imágenes basados en apariencia, color, textura, y forma fueron obtenidos y distintas técnicas de ML como SVM, LDA, árboles de clasificación, KNN, y ensambles de árboles fueron entrenados para clasificar las imágenes."
 
 
 
 % DeepLearning- Un parrafor por separado
 
-Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrollados para resolver problemas de clasificación complejos. Esos modelos han mostrado entender mejor las características presentes en imágenes, y se han desarrollado a la par del rápido crecimiento de datos (big data). En \cite{8488544} un clasificador basado en DL es propuesto. Los algoritmos de DL requieren un tiempo entrenamiento de datos muy grande, una gran cantidad de datos de entrenamiento (set de datos), y un poder de procesamiento enorme. Generan una solución muy especializada en un dominio específico, donde un reentrenamiento es necesario para resolver problemas fuera del dominio \cite{dptarda}.
+Recientemente, modelos de Deep Learning (DL) han sido intensivamente desarrollados para resolver problemas de clasificación complejos. Esos modelos han mostrado entender mejor las características presentes en imágenes, y se han desarrollado a la par del rápido crecimiento de datos (big data). En \cite{8488544} un clasificador basado en DL es propuesto. Los algoritmos de DL requieren un tiempo entrenamiento de datos muy grande, una gran cantidad de datos de entrenamiento (conjunto de datos), y un poder de procesamiento enorme. Generan una solución muy especializada en un dominio específico, donde un reentrenamiento es necesario para resolver problemas fuera del dominio \cite{dptarda}.
 
 
 % Fin de las comparativas...
@@ -336,12 +336,12 @@ Un sistema de visión para la clasificación automática de cítricos es altamen
 
 % Porque un DT
 
-Algunos algoritmos de clasificación para frutas, como ANN y SVN, requieren una gran cantidad de memoria para almacenar diferentes coeficientes, además de requerir complejos cálculos no lineales. Los árboles de decisión (AD), son uno de los mejores algoritmos para implementación de hardware, ya que no requieren cálculos aritméticos y no son computacionalmente costosos, ya que solamente usa comparadores \cite{6636881}. . Los AD han sido aplicados exitosamente en el reconocimiento de objetos \cite{10.1007/978-3-540-32256-6_52}, identificación de gases \cite{li}, y reconocimiento del cantar de algunas aves \cite{5986215}.
+Algunos algoritmos de clasificación para frutas, como ANN y SVN, requieren una gran cantidad de memoria para almacenar diferentes coeficientes, además de requerir complejos cálculos no lineales. Los árboles de decisión (AD), son uno de los mejores algoritmos para implementación de hardware, ya que no requieren cálculos aritméticos y no son computacionalmente costosos, ya que solamente usa comparadores \cite{6636881}. Los AD han sido aplicados exitosamente en el reconocimiento de objetos \cite{10.1007/978-3-540-32256-6_52}, identificación de gases \cite{li}, y reconocimiento del cantar de algunas aves \cite{5986215}.
 
 
 % Cierre - Luce que lo paso al final
 
-La comparación entre los sistemas de clasificación es difícil por su gran variedad y las diferentes combinaciones de sets de imágenes de frutas que se pueden usar. Precisión, especificidad y sensibilidad de clasificación son a menudo reportadas en diversos trabajos, pero no hay una medida estandarizada para medir su desempeño. Además, existen sets de imágenes de prueba que son capturadas en entornos estáticos y no son representativos del tipo de imágenes que se encontraría en un entorno real.
+La comparación entre los sistemas de clasificación es difícil por su gran variedad y las diferentes combinaciones de conjuntos de imágenes de frutas que se pueden usar. Precisión, especificidad y sensibilidad de clasificación son a menudo reportadas en diversos trabajos, pero no hay una medida estandarizada para medir su desempeño. Además, existen conjuntos de imágenes de prueba que son capturadas en entornos estáticos y no son representativos del tipo de imágenes que se encontraría en un entorno real.
 
 
 
@@ -355,9 +355,18 @@ El obtener características complejas no siempre es la mejor opción para un pro
 
 En la clasificación de naranjas, diferentes clasificadores han sido propuestos. Por ejemplo, en \cite{classi,analis}, mientras que en \cite{analis,rfrf} los clasificadores utilizados son árboles de decisión y Random Forest. 
 
-Por otra parte, para entrenar adecuadamente un clasificador automático es necesario tener un set de imágenes con fotografías lo suficientemente variadas para que las características de interés en diferentes situaciones sean aprendidas. Debido a lo anterior, se construyó un hardware industrial como en \cite{machineorang,machinefruit} para tomar video y capturar un set de entrenamiento y prueba con un número adecuado de imágenes.
+Por otra parte, para entrenar adecuadamente un clasificador automático es necesario tener un conjunto de imágenes con fotografías lo suficientemente variadas para que las características de interés en diferentes situaciones sean aprendidas. Debido a lo anterior, se construyó un hardware industrial como en \cite{machineorang,machinefruit} para tomar video y capturar un conjunto de entrenamiento y prueba con un número adecuado de imágenes.
 
 Un clasificador automático de fruta programado en un FPGA tendría un buen poder de cómputo y tendría la capacidad de funcionar en tiempo real \cite{josu}, ya que no utiliza memoria para almacenar las imágenes para post-procesamiento y se tiene la posibilidad de no utilizar clasificadores supervisados.
+
+En conclusión, la metodología que se muestra en la literatura encontrada se resume en el diagrama presentado en la Figura \ref{metodos}, donde por medio de una plataforma sea estática o móvil, se captura la escena en donde se encuentra la fruta, para posteriormente se procesada y realzar todas las características de la imagen que pueda ayudar en la clasificación del estado de la fruta, se extraen las características mediante la información de la imagen, para posteriormente generar conjuntos de datos de prueba y entrenamiento, para de última instancia realizar un entrenamiento de un modelo conveniente para la aplicación y la plataforma, y probar su desempeño. 
+
+\begin{figure}[!tbh] 
+	\centering 
+	\includegraphics[width=\linewidth]{edrawimas/metodosedo} 
+	\caption{Metodología usual para clasificación de fruta.} 
+	\label{metodos} 
+\end{figure}
 
 Con el fin de mejorar el hardware existente en velocidad, usar un arreglo de compuertas lógicas programables (\textbf{FPGA} por sus siglas en inglés), parece una opción prometedora, ya que estos se destacan por su procesamiento en paralelo, y flexibilidad de construcción de hardware.
 
@@ -1413,7 +1422,7 @@ A continuación se explica de manera particular cada parte de la maquinaria.
 
 %<FOTO>
 
-\checkmark\textbf{Bloque de fruta clasificada.} Es una zona que aun no se construye. Su función será recolectar la fruta ya clasificada, en diferentes rieles, se tiene un diseño preliminar.
+\checkmark\textbf{Bloque de fruta clasificada.} Es una zona que aún no se construye. Su función será recolectar la fruta ya clasificada, en diferentes rieles, se tiene un diseño preliminar.
 
 
 \begin{figure}[!tbh]
